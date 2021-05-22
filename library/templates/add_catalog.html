@@ -1,0 +1,41 @@
+{% extends 'dash.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% include 'navbar.html'%}
+<div class="dashboard-wrapper">
+    <div class="container-fluid dashboard-content">
+      <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="page-header">
+                  <h2 class="pageheader-title">Catalogs Items</h2>
+                  <div class="page-breadcrumb">
+                      <nav aria-label="breadcrumb">
+                          <ol class="breadcrumb">
+                              <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
+                              <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Catalog Item</a></li>
+                          </ol>
+                      </nav>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="section-block" id="basicform">
+                <h3 class="section-title">Add Catalog</h3>
+            </div>
+            <div class="card">
+                <h5 class="card-header">Manual add Catalog</h5>
+                <div class="card-body">
+                    <form method='POST'>
+                      {% csrf_token %}
+                        <div class="form-group">
+                            {{form | crispy }}
+                        </div>
+                        <button class="btn btn-primary btn-sm" type="submit">Submit</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+{% endblock %}
