@@ -6,5 +6,5 @@ app_name = 'main'
 urlpatterns = [
 
     path('',views.home,name='home'),
-    # path('libraries/',views.libraries, name='libraries'),
+    path('libraries/',views.libraries, name='libraries'),
 ]
