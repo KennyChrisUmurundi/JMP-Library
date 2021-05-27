@@ -10,6 +10,7 @@ def libraries(request):
     admin = request.user
     print(admin)
     libraries = Library.objects.filter(library_admin = admin)
+    print(libraries)
     context = {
     'libraries':libraries
     }
