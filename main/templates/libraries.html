@@ -61,7 +61,7 @@
                                               {% if libraries  %}
                                               {% for library in libraries %}
                                                 <tr>
-                                                  <td><a href="{% url 'entities:lib' library.pk %}">localhost:8000/lib/{{library.pk}}</a></td>
+                                                  <td><a href="{% url 'entities:lib' library.pk %}">http://youronlinelib.herokuapp.com/lib/{{library.pk}}</a></td>
                                                   <td>{{library.library_name}}</td>
                                                   <td><a href="{% url 'library:dashboard'  library.pk %}" class="btn btn-success btn-sm">Access Library</a></td>
                                                 </tr>
