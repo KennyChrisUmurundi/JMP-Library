@@ -11,26 +11,117 @@
                         Navigation
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'library:dashboard' pk%}"><i class="fa fa-fw fa-user-circle"></i>Dashboard(Not functional yet)</a>
+                        <a class="nav-link" href="{% url 'library:dashboard' pk%}"><i class="fa fa-fw fa-user-circle"></i>Dashboard </a>
                     </li>
 
                     <li class="nav-item ">
-                        <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fa fa-fw fa-book"></i>Catalogs <span class="badge badge-success">6</span></a>
+                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1">
+                          <i class="fa fa-fw fa-book"></i>Catalogs</a>
                         <div id="submenu-1" class="collapse submenu" style="">
                             <ul class="nav flex-column">
 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'library:catalog_items' pk%}">Catalog Items</a>
+
+                                    <a class="nav-link" href="{% url 'library:catalog_items' pk%}"><i class="fa fa-fw fa-file"></i>Catalog Items</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'library:ebook_items' pk%}">Ebooks</a>
+                                    <a class="nav-link" href="{% url 'library:ebook_items' pk%}"><i class="fa fa-fw fa-file-pdf"></i>Ebooks</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'library:categories' pk%}">Categories</a>
+                                    <a class="nav-link" href="{% url 'library:categories' pk%}"><i class="fa fa-fw fa-align-justify"></i>Categories</a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'library:authors' pk%}">Authors</a>
+                                    <a class="nav-link" href="{% url 'library:authors' pk%}"><i class="fa fa-fw fa-user"></i>Authors</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item ">
+                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-1">
+                          <i class="fa fa-fw fa-sync"></i>Circulations </a>
+                        <div id="submenu-2" class="collapse submenu" style="">
+                            <ul class="nav flex-column">
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'library:members' pk%}"><i class="fa fa-fw fa-user"></i>Members</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'library:borrow' pk%}"><i class="fa fa-fw fa-address-book"></i>Register new borrower</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'library:reports' pk%}"><i class="fa fa-fw fa-file"></i>Reports</a>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item ">
+                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-1">
+                          <i class="fa fa-fw fa-user-plus"></i>Procurements </a>
+                        <div id="submenu-3" class="collapse submenu" style="">
+                            <ul class="nav flex-column">
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'library:suppliers' pk %}"><i class="fa fa-fw fa-user"></i>Suppliers</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'library:purchases' pk%}"><i class="fa fa-fw fa-address-book"></i>Purchases</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item ">
+                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4">
+                          <i class="fa fa-fw fa-users"></i>Human Ressource </a>
+                        <div id="submenu-4" class="collapse submenu" style="">
+                            <ul class="nav flex-column">
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'library:employee' pk %}"><i class="fa fa-fw fa-user"></i>Employees</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'library:department' pk%}"><i class="fa fa-fw fa-building"></i>Departments</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'library:designation' pk%}"><i class="fa fa-fw fa-id-badge"></i>Designations</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-divider">
+                        Settings
+                    </li>
+
+                    <li class="nav-item ">
+                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5">
+                          <i class="fa fa-fw fa-wrench"></i>Manage</a>
+                        <div id="submenu-5" class="collapse submenu" style="">
+                            <ul class="nav flex-column">
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'library:plan' pk %}"><i class="fa fa-fw fa-money-bill-alt"></i>My Plan</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'library:department' pk%}"><i class="fa fa-fw fa-info"></i>Library Information</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'library:designation' pk%}"><i class="fa fa-fw fa-bug"></i>Report a Bug</a>
                                 </li>
 
                             </ul>

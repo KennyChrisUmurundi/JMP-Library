@@ -8,14 +8,14 @@
 
       <a href="index.html" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" alt="">
-        <span>LMS</span>
+        <span>JMP Library</span>
       </a>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#features">Features</a></li>
-          <li><a class="nav-link scrollto" href="#pricing">Plans</a></li>
+          <li><a class="nav-link scrollto active" href="/">Home</a></li>
+          <li><a class="nav-link scrollto" href="/s">Features</a></li>
+          <li><a class="nav-link scrollto" href="/">Discover</a></li>
           <li><a class="nav-link scrollto" href="#faq">F.A.Q</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
           {% if request.user.is_authenticated %}
@@ -58,14 +58,18 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                              {% if libraries  %}
                                               {% for library in libraries %}
                                                 <tr>
-                                                  <td>#</td>
+                                                  <td><a href="{% url 'entities:lib' library.pk %}">localhost:8000/lib/{{library.pk}}</a></td>
                                                   <td>{{library.library_name}}</td>
                                                   <td><a href="{% url 'library:dashboard'  library.pk %}" class="btn btn-success btn-sm">Access Library</a></td>
                                                 </tr>
 
                                                 {% endfor %}
+                                                {% else %}
+                                                <td colspan="3">No Libraries Yet, <a href="{% url 'library:create_library'%}">Create one</a>
+                                                {% endif %}
                                             </tbody>
                                           </table>
                                         </div>

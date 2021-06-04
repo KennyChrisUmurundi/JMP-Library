@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'main',
     'account',
     'library',
+    'entities',
     'crispy_forms',
     'django_countries'
 ]
@@ -137,6 +138,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-LOGIN_REDIRECT_URL = 'main:home'
+LOGIN_REDIRECT_URL = 'main:libraries'
 
 django_heroku.settings(locals())

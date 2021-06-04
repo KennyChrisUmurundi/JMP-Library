@@ -10,6 +10,7 @@ urlpatterns = [
 
     # ADD LIBRARY
     path('new_library/',views.CreateLibrary.as_view(),name='create_library'),
+    # path('create_category/',views.create_category,name='create_category'),
 
     # CATALOGS
     path('items/<int:pk>/',views.CatalogItems,name='catalog_items'),
@@ -37,6 +38,60 @@ urlpatterns = [
     path('update_author/<int:pk>/',views.UpdateAuthor.as_view(),name='update_author'),
     path('delete_author/<int:id>/',views.DeleteAuthor,name='delete_author'),
 
+    # Members
+
+    path('members/<int:pk>/',views.members,name='members'),
+    path('add_member/<int:pk>/',views.addMember,name='add_member'),
+    path('update_member/<int:pk>/',views.UpdateMember.as_view(),name='update_member'),
+    path('delete_member/<int:id>/',views.DeleteMember,name='delete_member'),
+
+    # Borrowing
+
+    path('borrow/<int:pk>',views.Borrow,name='borrow'),
+    path('items/<int:pk>',views.register_borrower,name='register_borrower'),
+    path('reports/<int:pk>',views.borrow_report,name='reports'),
+    path('Checkout/<int:pk>/',views.Checkout.as_view(),name='checkout'),
+    path('over_due/<int:pk>',views.over_due,name='over_due'),
+
+    # Suppliers
+
+    path('suppliers/<int:pk>',views.suppliers,name='suppliers'),
+    path('add_suppliers/<int:pk>/',views.add_suppliers,name='add_suppliers'),
+    path('update_supplier/<int:pk>/',views.UpdateSupplier.as_view(),name='update_supplier'),
+    path('delete_supplier/<int:id>/',views.DeleteSupplier,name='delete_supplier'),
+
+
+    # Purchases
+
+    path('purchases/<int:pk>',views.purchases,name='purchases'),
+    path('add_purchases/<int:pk>/',views.add_purchase,name='add_purchase'),
+    path('update_purchase/<int:pk>/',views.UpdatePurchase.as_view(),name='update_purchase'),
+    path('delete_purchase/<int:id>/',views.DeletePurchase,name='delete_purchase'),
+
+    # Employees
+
+    path('employees/<int:pk>',views.employees,name='employee'),
+    path('add_employee/<int:pk>/',views.add_employee,name='add_employee'),
+    path('update_employee/<int:pk>/',views.UpdateEmployee.as_view(),name='update_employee'),
+    path('delete_employee/<int:id>/',views.DeleteEmployee,name='delete_employee'),
+
+    # Designations
+
+    path('designations/<int:pk>',views.designations,name='designation'),
+    path('add_designation/<int:pk>/',views.add_designation,name='add_designation'),
+    path('update_designation/<int:pk>/',views.UpdateDesignation.as_view(),name='update_designation'),
+    path('delete_designation/<int:id>/',views.DeleteDesignation,name='delete_designation'),
+
+    # Department
+
+    path('department/<int:pk>',views.department,name='department'),
+    path('add_department/<int:pk>/',views.add_department,name='add_department'),
+    path('update_department/<int:pk>/',views.UpdateDepartment.as_view(),name='update_department'),
+    path('delete_department/<int:id>/',views.DeleteDepartment,name='delete_department'),
+
+    # Plans
+
+    path('plan/<int:pk>',views.plan,name='plan')
 
 
 ]

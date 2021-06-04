@@ -1,0 +1,94 @@
+{% extends 'dash.html' %}
+{% block content %}
+{% include 'navbar.html' %}
+<div class="dashboard-wrapper">
+    <div class="container-fluid dashboard-content">
+      <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="page-header">
+                  <h2 class="pageheader-title">Reports</h2>
+                  <div class="page-breadcrumb">
+                      <nav aria-label="breadcrumb">
+                          <ol class="breadcrumb">
+                              <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
+                              <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Reports</a></li>
+                              <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Over Due</a></li>
+                          </ol>
+                      </nav>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="row">
+          <!-- ============================================================== -->
+          <!-- basic table  -->
+          <!-- ============================================================== -->
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="card">
+                  <h5 class="card-header">Reports
+                    <a href="{% url 'library:create_library' %}" class="btn btn-success btn-xs float-right ml-2">Create Library</a>
+                    <a href="{% url 'library:borrow' pk %}" class="btn btn-primary btn-xs float-right ml-2">Register new Borrower</a>
+                    <!-- <a href="{% url 'library:add_catalog' pk %}" class="btn btn-danger btn-xs float-right ml-2">Over Due</a> -->
+                    <!-- <a href="#" class="btn btn-success btn-xs float-right ml-2">Create Library</a> -->
+                  </h5>
+
+                  <div class="card-body">
+                      <div class="table-responsive">
+                          <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                              <thead>
+                                  <tr>
+                                      <th>Member No</th>
+                                      <th>Catalog</th>
+                                      <th>Borrowed Date</th>
+                                      <th>Due return</th>
+                                      <th>Status</th>
+                                      <th>Action</th>
+
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                {% for borrowed in borrowed %}
+                                  <tr>
+                                    {% if borrowed.due_return < borrowed.day_borrowed and borrowed.status == 'Not Returned' %}
+                                      <td>{{borrowed.member_no}}</td>
+                                      <td>{{borrowed.catalog}}</td>
+                                      <td>{{borrowed.day_borrowed|date:"M d, Y"}}</td>
+                                      <td>{{borrowed.due_return|date:"M d, Y"}}</td>
+                                      <td>{{borrowed.status}}
+
+                                      <span class='badge badge-pill badge-danger'>Late</span>
+
+                                      </td>
+                                      {% if not borrowed.status == 'Not Returned' %}
+                                      <td>
+                                        <span class='badge '>Checked Out</span>
+                                      </td>
+                                      {% else %}
+                                      <td>
+                                        <a href="{% url 'library:checkout' borrowed.pk %}"><span class='badge badge-success'>Check Out</span></a>
+                                      </td>
+                                      {% endif %}
+                                      {% endif %}
+                                  </tr>
+                                {% endfor %}
+
+
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <script>
+                    $(document).ready(function() {
+      $('#datatable').dataTable();
+
+       $("[data-toggle=tooltip]").tooltip();
+
+  } );
+
+                    </script>
+
+{% endblock %}

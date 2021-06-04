@@ -1,5 +1,5 @@
 from django import forms
-from .models import Library, Catalog, Category, Ebook, Author
+from .models import Library, Catalog, Category, Ebook, Author, Member, Borrowed, Supplier, Purchase, Employee, Designation, Department
 from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
 from django.utils.translation import ugettext as _
@@ -248,17 +248,26 @@ COUNTRIES = (
 
 LIBRARY_TYPES = (
 
-('Personal Library','Personal Library'),
-('College Library','College Library'),
-('Government ministry or Agency','Government ministry or Agency'),
-('Higher Education Institution Library','Higher Education Institution Library'),
-('Local, National or Regional NGO','Local, National or Regional NGO'),
-('Office Library','Office Library'),
-('Parliamentary Library','Parliamentary Library'),
-('Public Library','Public Library'),
-('School Library','school Library'),
-('Family Library','Family Library'),
+('Entertainment','Entertainment'),
+('Legal','Legal'),
+('Politics/Government','Politics/Government'),
+('Business','Business'),
+('Sports','Sports'),
+('Education','Education'),
+('Tech','Tech'),
+('Art','Art'),
+('History','History'),
+('Litterature','Litterature'),
+('Medical','Medical'),
+('Religion','Religion'),
 )
+
+STATUS = (('Active','Active'),('Inactive','Inactive'))
+
+CHECKING = (('Not Returned','Not Returned'),('Returned','Returned'))
+
+TYPE    =   (('Academic','Academic'),('Administative','Administative'))
+
 
 class AddLibraryForm(forms.ModelForm):
 
@@ -284,11 +293,17 @@ class AddLibraryForm(forms.ModelForm):
     'placeholder':'Type',
     }))
 
+    library_phone         =   forms.CharField(max_length=300,widget=forms.TextInput(attrs={
+    'class': 'form-control',
+    'placeholder': 'Tel'
+    }))
+
 
 
     class Meta:
         model   =  Library
-        fields  =  ['library_name','library_type','library_email','library_country']
+        fields  =  ['library_name','library_type','library_email','library_country','library_phone',]
+
 
 class AddCatalogForm(forms.ModelForm):
 
@@ -349,3 +364,135 @@ class UpdateAuthorForm(forms.ModelForm):
     class Meta:
         model   = Author
         exclude =('library',)
+
+class AddMemberForm(forms.ModelForm):
+    status  =   forms.ChoiceField(choices=STATUS,widget=forms.Select(attrs={
+    'class': 'form-select',
+    'placeholder':'Type',
+    }))
+    class Meta:
+        model   = Member
+        exclude =('library',)
+
+class UpdateMemberForm(forms.ModelForm):
+
+    status  =   forms.ChoiceField(choices=STATUS,widget=forms.Select(attrs={
+    'class': 'form-select',
+    'placeholder':'Type',
+    }))
+
+    class Meta:
+        model   = Member
+        exclude =('library',)
+
+class AddBorrowForm(forms.ModelForm):
+    due_return = forms.CharField(max_length=200,widget=forms.TextInput(attrs={
+    'class': 'form-select',
+    'placeholder':'Type',
+    'type':'date'
+    }))
+    class Meta:
+        model   = Borrowed
+        fields =('member_no','catalog','due_return')
+
+class CheckoutForm(forms.ModelForm):
+
+    status  =   forms.ChoiceField(choices=CHECKING,widget=forms.Select(attrs={
+    'class': 'form-select',
+    'placeholder':'Type',
+    }))
+
+    class Meta:
+        model   = Member
+        fields =('status',)
+
+
+class AddSupplierForm(forms.ModelForm):
+
+    country     =       forms.ChoiceField(choices=COUNTRIES,widget=forms.Select(attrs={
+    'class': 'form-select',
+    'placeholder':'Type',
+    }))
+
+
+    class Meta:
+        model = Supplier
+        exclude = ('library',)
+
+class AddPurchaseForm(forms.ModelForm):
+
+    purchase_date = forms.CharField(max_length=200,widget=forms.TextInput(attrs={
+    'class': 'form-select',
+    'placeholder':'Type',
+    'type':'date'
+    }))
+
+    class Meta:
+        model   =   Purchase
+        exclude =   ('library',)
+
+class UpdateSupplierForm(forms.ModelForm):
+
+    class Meta:
+        model   = Supplier
+        exclude =('library',)
+
+class UpdatePurchaseForm(forms.ModelForm):
+
+    class Meta:
+        model   = Purchase
+        exclude =('library',)
+
+
+class AddEmployeeForm(forms.ModelForm):
+
+    status  =   forms.ChoiceField(choices=STATUS,widget=forms.Select(attrs={
+    'class': 'form-select',
+    'placeholder':'Type',
+    }))
+
+    class Meta:
+        model   =   Employee
+        exclude =   ('library',)
+
+class UpdateEmployee(forms.ModelForm):
+
+    class Meta:
+        model   =   Employee
+        exclude =   ('library',)
+
+class AddDesignationForm(forms.ModelForm):
+
+    status  =   forms.ChoiceField(choices=STATUS,widget=forms.Select(attrs={
+    'class': 'form-select',
+    'placeholder':'Type',
+    }))
+
+
+    class Meta:
+        model   =   Designation
+        exclude =   ('library',)
+
+class UpdateDesignation(forms.ModelForm):
+
+    class Meta:
+        model   =   Designation
+        exclude =   ('library',)
+
+class AddDepartmentForm(forms.ModelForm):
+
+    type  =   forms.ChoiceField(choices=TYPE,widget=forms.Select(attrs={
+    'class': 'form-select',
+    'placeholder':'Type',
+    }))
+
+
+    class Meta:
+        model   =   Department
+        exclude =   ('library',)
+
+class UpdateDepartment(forms.ModelForm):
+
+    class Meta:
+        model   =   Department
+        exclude =   ('library',)

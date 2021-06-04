@@ -1,0 +1,111 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+<header id="header" class="header fixed-top">
+  <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+    <a href="index.html" class="logo d-flex align-items-center">
+      <img src="assets/img/logo.png" alt="">
+      <span>JMP Library</span>
+    </a>
+    <!-- <div class="cc-selector">
+      <form>
+      <input id="entertainment" type="radio" name="entertainment" value="entertainment" />
+      <label class="drinkcard-cc entertainment" for="visa">
+       </label>
+     </form> -->
+
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li><a class="nav-link scrollto active" href="/">Home</a></li>
+        <li><a class="nav-link scrollto" href="#features">Features</a></li>
+        <li><a class="nav-link scrollto" href="#">Discover</a></li>
+        <li><a class="nav-link scrollto" href="#faq">F.A.Q</a></li>
+        <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+        {% if request.user.is_authenticated %}
+        <li class="dropdown"><a href="#"><span>Profile</span> <i class="bi bi-person-square"></i></a>
+              <ul>
+                <li><a href="{% url 'main:libraries'%}">My Libraries</a></li>
+                <li><a href="{% url 'library:create_library'%}">Create Library</a></li>
+                <li><a href="{% url 'account:logout'%}">Logout</a></li>
+
+              </ul>
+            </li>
+        {% else %}
+        <li><a class="getstarted scrollto" href="{% url 'account:login' %}">Get Started</a></li>
+        {% endif %}
+
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav><!-- .navbar -->
+
+  </div>
+</header><!-- End Header -->
+<style>
+.cc-selector input{
+    margin:0;padding:0;
+    -webkit-appearance:none;
+       -moz-appearance:none;
+            appearance:none;
+}
+.entertainment{background-image:url({% static 'img/entertainment.png' %});}
+.legal{background-image:url({% static 'img/legal.png' %});}
+
+.cc-selector input:active +.drinkcard-cc{opacity: .9;}
+.cc-selector input:checked +.drinkcard-cc{
+    -webkit-filter: none;
+       -moz-filter: none;
+            filter: none;
+}
+.drinkcard-cc{
+    cursor:pointer;
+    background-size:contain;
+    background-repeat:no-repeat;
+    display:inline-block;
+    width:100px;height:70px;
+    -webkit-transition: all 100ms ease-in;
+       -moz-transition: all 100ms ease-in;
+            transition: all 100ms ease-in;
+    -webkit-filter: brightness(1.8) grayscale(1) opacity(.7);
+       -moz-filter: brightness(1.8) grayscale(1) opacity(.7);
+            filter: brightness(1.8) grayscale(1) opacity(.7);
+}
+.drinkcard-cc:hover{
+    -webkit-filter: brightness(1.2) grayscale(.5) opacity(.9);
+       -moz-filter: brightness(1.2) grayscale(.5) opacity(.9);
+            filter: brightness(1.2) grayscale(.5) opacity(.9);
+}
+
+/* Extras */
+a:visited{color:#888}
+a{color:#444;text-decoration:none;}
+p{margin-bottom:.3em;}
+</style>
+<section class="ftco-section mt-3">
+  <div class="container">
+    <div class="row justify-content-center">
+				<div class="col-md-7 col-lg-5">
+            <div class="card  border-success">
+					<div class="login-wrap p-4 p-md-5">
+      <form>
+          <p>Choose category: </p>
+          <div class='row'>
+            <div class="cc-selector">
+
+                <input id="entertainment" type="radio" name="credit-card" value="visa" />
+                <label class=" entertainment" for="entertainment">Entertainment</label>
+
+                <input id="legal" type="radio" name="credit-card" value="mastercard" />
+                <label class="drinkcard-cc legal"for="legal"></label>
+
+              	<input id="mastercard" type="radio" name="credit-card" value="mastercard" />
+              	<label class="drinkcard-cc legal"for="mastercard"></label>
+
+                <button class="btn btn-success " type='submit'>Next</button>
+            </div>
+          </div>
+      </form>
+
+
+
+{% endblock %}

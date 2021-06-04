@@ -22,7 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('main.urls')),
     path('account/',include('account.urls')),
-    path('library/',include('library.urls'))
+    path('library/',include('library.urls')),
+    path('lib/',include('entities.urls'))
 
 ]
 if settings.DEBUG:
