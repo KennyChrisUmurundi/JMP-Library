@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Library, Catalog, Category, Ebook, Author, Member, Borrowed, Supplier, Purchase, Department, Designation, Employee
+from .models import Library, Catalog, Category, Ebook, Author, Member, Borrowed, Supplier, Purchase, Department, Designation, Employee, Media
 # Register your models here.
 
 admin.site.register(Library)
@@ -14,3 +14,4 @@ admin.site.register(Purchase)
 admin.site.register(Designation)
 admin.site.register(Department)
 admin.site.register(Employee)
+admin.site.register(Media)

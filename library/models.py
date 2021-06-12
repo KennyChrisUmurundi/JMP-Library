@@ -197,3 +197,17 @@ class Employee(models.Model):
 
     def get_absolute_url(self):
         return reverse('library:employee', kwargs={'pk': self.library.pk})
+
+
+class Media(models.Model):
+
+    library             =   models.ForeignKey(Library,on_delete=models.CASCADE)
+    title               =   models.CharField(max_length=200)
+    description         =   models.TextField(null=True,blank=True)
+    image               =   models.ImageField(upload_to='images/media',null=True,blank=True)
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('library:media',kwargs={'pk':self.library.pk})

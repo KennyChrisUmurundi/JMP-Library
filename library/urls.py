@@ -89,6 +89,13 @@ urlpatterns = [
     path('update_department/<int:pk>/',views.UpdateDepartment.as_view(),name='update_department'),
     path('delete_department/<int:id>/',views.DeleteDepartment,name='delete_department'),
 
+
+    # Media
+    path('media/<int:pk>',views.media,name='media'),
+    path('add_media/<int:pk>/',views.add_media,name='add_media'),
+    path('update_media/<int:pk>/',views.UpdateMedia.as_view(),name='update_media'),
+    path('delete_dmedia/<int:id>/',views.DeleteMedia,name='delete_media'),
+
     # Plans
 
     path('plan/<int:pk>',views.plan,name='plan')

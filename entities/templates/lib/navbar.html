@@ -1,0 +1,53 @@
+{% extends 'lib/lib.html' %}
+{% block content %}
+<header class="header-area">
+        <div class="header-top">
+            <div class="container">
+                <div class="header-top-wrapper d-flex flex-wrap justify-content-sm-between">
+                    <div class="header-top-left mt-10">
+                        <ul class="header-meta">
+                            <li><a href="mailto://infoedumate@example.com">{{library.library_email}}</a></li>
+                        </ul>
+                    </div>
+                    <div class="header-top-right mt-10">
+                        <div class="header-link">
+                            <a class="notice" href="notice.html">Notice</a>
+                            <a class="login" href="login.html">Login</a>
+                            <a class="register" href="register.html">Register</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="navigation" class="navigation navigation-landscape">
+            <div class="container position-relative">
+                <div class="row align-items-center">
+                    <div class="col-lg-3">
+                        <div class="header-logo">
+                            <a href="index.html"><img src="assets/images/logo.png" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 position-static">
+                        <div class="nav-toggle"></div>
+                        <nav class="nav-menus-wrapper">
+                            <ul class="nav-menu">
+                                <li><a href="{% url 'entities:lib' pk %}">Home</a></li>
+                                <li><a href="{% url 'entities:items' pk%}">Catalogues</a></li>
+                                <li><a href="contact.html">Ebooks</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    {% comment %} <div class="col-lg-2 position-static">
+                        <div class="header-search">
+                            <form action="#">
+                                <input type="text" placeholder="Search">
+                                <button><i class="fas fa-search"></i></button>
+                            </form>
+                        </div>
+                    </div> {% endcomment %}
+                </div>
+            </div>
+        </div>
+    </header>
+    {% endblock %}

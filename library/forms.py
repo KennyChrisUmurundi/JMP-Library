@@ -496,3 +496,15 @@ class UpdateDepartment(forms.ModelForm):
     class Meta:
         model   =   Department
         exclude =   ('library',)
+
+class AddMediaForm(forms.ModelForm):
+
+    class Meta:
+        model   =   Department
+        exclude =   ('library',)
+
+class UpdateMedia(forms.ModelForm):
+
+    class Meta:
+        model   =   Department
+        exclude =   ('library',)

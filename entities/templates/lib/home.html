@@ -1,568 +1,292 @@
-{% extends 'lib/lib.html' %}
+{% extends 'lib/lib.html'%}
 {% load static %}
 {% block content %}
-  {% for library in library %}
-        <!-- Start: Header Section -->
-        <header id="header" class="navbar-wrapper">
+{% for library in libraries %}
+    {% include 'lib/navbar.html'%}
+
+    <!--====== Header Ends ======-->
+
+    <!--====== Page Banner Start ======-->
+
+    <!-- <section class="page-banner">
+        <div class="page-banner-bg bg_cover" style="background-image: url(assets/images/page-banner.jpg);">
             <div class="container">
-                <div class="row">
-                    <nav class="navbar navbar-default">
-                        <div class="col-sm-12">
-                            <!-- Header Topbar -->
-                            <div class="header-topbar hidden-sm hidden-xs">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="topbar-info">
-                                            <a href="tel:+61-3-8376-6284"><i class="fa fa-phone"></i>{{library.library_phone}}</a>
-                                            <span>/</span>
-                                            <a href="mailto:{{library.library_email}}"><i class="fa fa-envelope"></i>{{library.library_email}}</a>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="topbar-links">
-                                            <!-- <a href="signin.html"><i class="fa fa-lock"></i>Login / Register</a> -->
-                                            <span>|</span>
-                                            <div class="header-cart dropdown">
-                                                <!-- <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                                    <i class="fa fa-shopping-cart"></i>
-                                                    <small>0</small>
-                                                </a> -->
-                                                <!-- <div class="dropdown-menu cart-dropdown">
-                                                    <ul>
-                                                        <li class="clearfix">
-                                                            <img src="{% static 'lib/images/header-cart-image-01.jpg' %}" alt="cart item" />
-                                                            <div class="item-info">
-                                                                <div class="name">
-                                                                    <a href="#">The Great Gatsby</a>
-                                                                </div>
-                                                                <div class="author"><strong>Author:</strong> F. Scott Fitzgerald</div>
-                                                                <div class="price">1 X $10.00</div>
-                                                            </div>
-                                                            <a class="remove" href="#"><i class="fa fa-trash-o"></i></a>
-                                                        </li>
-                                                        <li class="clearfix">
-                                                            <img src="images/header-cart-image-02.jpg" alt="cart item" />
-                                                            <div class="item-info">
-                                                                <div class="name">
-                                                                    <a href="#">The Great Gatsby</a>
-                                                                </div>
-                                                                <div class="author"><strong>Author:</strong> F. Scott Fitzgerald</div>
-                                                                <div class="price">1 X $10.00</div>
-                                                            </div>
-                                                            <a class="remove" href="#"><i class="fa fa-trash-o"></i></a>
-                                                        </li>
-                                                        <li class="clearfix">
-                                                            <img src="images/header-cart-image-03.jpg" alt="cart item" />
-                                                            <div class="item-info">
-                                                                <div class="name">
-                                                                    <a href="#">The Great Gatsby</a>
-                                                                </div>
-                                                                <div class="author"><strong>Author:</strong> F. Scott Fitzgerald</div>
-                                                                <div class="price">1 X $10.00</div>
-                                                            </div>
-                                                            <a class="remove" href="#"><i class="fa fa-trash-o"></i></a>
-                                                        </li>
-                                                    </ul>
-                                                    <div class="cart-total">
-                                                        <div class="title">SubTotal</div>
-                                                        <div class="price">$30.00</div>
-                                                    </div>
-                                                    <div class="cart-buttons">
-                                                        <a href="cart.html" class="btn btn-dark-gray">View Cart</a>
-                                                        <a href="checkout.html" class="btn btn-primary">Checkout</a>
-                                                    </div>
-                                                </div> -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bg-light">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <div class="navbar-header">
-                                            <div class="navbar-brand">
-                                                <h1>
-                                                    <a href="index-2.html">
-                                                        <img src="{% static 'lib/images/libraria-logo-v2.png' %}" alt="LIBRARIA" />
-                                                    </a>
-                                                </h1>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div class="navbar-collapse hidden-sm hidden-xs">
-                                            <ul class="nav navbar-nav">
-                                                <li class='active'><a href="services.html">Home</a></li>
-                                                <li><a href="{% url 'entities:items' pk %}">Books & Media</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mobile-menu hidden-lg hidden-md">
-                        <a href="#mobile-menu"><i class="fa fa-navicon"></i></a>
-                            <div id="mobile-menu">
-                                <ul>
-                                    <li class="mobile-title">
-                                        <h4>Navigation</h4>
-                                        <a href="#" class="close"></a>
-                                    </li>
-                                    <li>
-                                        <a href="index-2.html">Home</a>
-                                        <ul>
-                                            <li><a href="index-2.html">Home V1</a></li>
-                                            <li><a href="home-v2.html">Home V2</a></li>
-                                            <li><a href="home-v3.html">Home V3</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="books-media-list-view.html">Books &amp; Media</a>
-                                        <ul>
-                                            <li><a href="books-media-list-view.html">Books &amp; Media List View</a></li>
-                                            <li><a href="books-media-gird-view-v1.html">Books &amp; Media Grid View V1</a></li>
-                                            <li><a href="books-media-gird-view-v2.html">Books &amp; Media Grid View V2</a></li>
-                                            <li><a href="books-media-detail-v1.html">Books &amp; Media Detail V1</a></li>
-                                            <li><a href="books-media-detail-v2.html">Books &amp; Media Detail V2</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="news-events-list-view.html">News &amp; Events</a>
-                                        <ul>
-                                            <li><a href="news-events-list-view.html">News &amp; Events List View</a></li>
-                                            <li><a href="news-events-detail.html">News &amp; Events Detail</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="#">Pages</a>
-                                        <ul>
-                                            <li><a href="cart.html">Cart</a></li>
-                                            <li><a href="checkout.html">Checkout</a></li>
-                                            <li><a href="signin.html">Signin/Register</a></li>
-                                            <li><a href="404.html">404/Error</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="blog.html">Blog</a>
-                                        <ul>
-                                            <li><a href="blog.html">Blog Grid View</a></li>
-                                            <li><a href="blog-detail.html">Blog Detail</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="services.html">Services</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </nav>
+                <div class="banner-content text-center">
+                    <h2 class="title">Our Courses</h2>
                 </div>
             </div>
-        </header>
-        <!-- End: Header Section -->
-
-        <!-- Start: Slider Section -->
-        <div data-ride="carousel" class="carousel slide" id="home-v1-header-carousel">
-            <!-- Carousel slides -->
-            <div class="carousel-inner">
-                <div class="item active">
-                    <figure>
-                        <img alt="Home Slide" src="{% static 'lib/images/header-slider/home-v2/header-slide.jpg'%}" />
-                    </figure>
-                    <div class="container">
-                        <div class="carousel-caption">
-
-                            <h2>{{library.library_name}}</h2>
-                            <p>Powered by JMP Library</p>
-                            <div class="slide-buttons hidden-sm hidden-xs">
-                                <a href="{% url 'entities:items' pk %}" class="btn btn-primary">Check our Library</a>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- <div class="item">
-                    <figure>
-                        <img alt="Home Slide" src="{% static 'lib/images/header-slider/home-v2/header-slide.jpg'%}" />
-                    </figure>
-                    <div class="container">
-                        <div class="carousel-caption">
-                            <h3>Online Learning Anytime, Anywhere!</h3>
-                            <h2>Discover Your Roots</h2>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humor, or randomized words.</p>
-                            <div class="slide-buttons hidden-sm hidden-xs">
-                                <a href="#" class="btn btn-primary">Read More</a>
-                                <a href="#" class="btn btn-default">Purchase</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <figure>
-                        <img alt="Home Slide" src="{% static 'lib/images/header-slider/home-v2/header-slide.jpg'%}" />
-                    </figure>
-                    <div class="container">
-                        <div class="carousel-caption">
-                            <h3>Online Learning Anytime, Anywhere!</h3>
-                            <h2>Discover Your Roots</h2>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humor, or randomized words.</p>
-                            <div class="slide-buttons hidden-sm hidden-xs">
-                                <a href="#" class="btn btn-primary">Read More</a>
-                                <a href="#" class="btn btn-default">Purchase</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-            <!-- Indicators -->
-            <ol class="carousel-indicators">
-                <li data-target="#home-v1-header-carousel" data-slide-to="0" class="active"></li>
-                <li data-target="#home-v1-header-carousel" data-slide-to="1"></li>
-                <li data-target="#home-v1-header-carousel" data-slide-to="2"></li>
-            </ol>
         </div>
-        <!-- End: Slider Section -->
+    </section> -->
 
-        <!-- Start: Search Section -->
-        <section class="search-filters">
-            <div class="container">
-                <div class="filter-box">
-                    <h3>What are you looking for at the library?</h3>
-                    <form action="http://libraria.demo.presstigers.com/index.html" method="get">
-                        <div class="col-md-4 col-sm-6">
-                            <div class="form-group">
-                                <label class="sr-only" for="keywords">Search by Keyword</label>
-                                <input class="form-control" placeholder="Search by Keyword" id="keywords" name="keywords" type="text">
-                            </div>
+    <!--====== Page Banner Ends ======-->
+
+    <!--====== Campus Start ======-->
+
+    <section class="campus-visit-area-2">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5">
+                    <div class="about-content mt-40">
+                        <h2 class="about-title">{{library.library_name}} library</h2><span>Powered by JMP Library</span>
+                        <span class="line"></span>
+                        <p>{{library.description}}<br>Libraries are full of ideas – perhaps the most dangerous and powerful of all weapons.</p>
+                        <a href="#" class="main-btn">Explore</a>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="campus-image-2 mt-50">
+                        {% comment %} <h4 class="campus-title-2">Image Gallery</h4> {% endcomment %}
+                        <div class="image-1">
+                            <img src="{% static 'img/pexels-cottonbro-2925307.jpg'%}" alt="campus">
                         </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="form-group">
-                                <select name="catalog" id="catalog" class="form-control">
-                                    <option>Search the Catalog</option>
-                                    <option>Catalog 01</option>
-                                    <option>Catalog 02</option>
-                                    <option>Catalog 03</option>
-                                    <option>Catalog 04</option>
-                                    <option>Catalog 05</option>
-                                </select>
-                            </div>
+                        <div class="image-2">
+                            <img src="{% static 'img/pexels-wallace-chuck-3744195.jpg'%}" alt="">
                         </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="form-group">
-                                <select name="category" id="category" class="form-control">
-                                    <option>All Categories</option>
-                                    <option>Category 01</option>
-                                    <option>Category 02</option>
-                                    <option>Category 03</option>
-                                    <option>Category 04</option>
-                                    <option>Category 05</option>
-                                </select>
-                            </div>
+                        <div class="image-3">
+                            <img src="#" alt="">
                         </div>
-                        <div class="col-md-2 col-sm-6">
-                            <div class="form-group">
-                                <input class="form-control" type="submit" value="Search">
-                            </div>
-                        </div>
-                    </form>
+                        {% comment %} <a href="gallery-masonry.html" class="more">View more <i class="fal fa-long-arrow-right"></i></a> {% endcomment %}
+                    </div>
                 </div>
             </div>
-        </section>
-        <!-- End: Search Section -->
+        </div>
+    </section>
 
-        <!-- Start: Features -->
-        <section class="features">
-            <div class="container">
-                <ul>
-                    <li class="yellow-hover">
-                        <div class="feature-box">
-                            <i class="yellow"></i>
-                            <h3>Books</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dolor turpis, pulvinar varius dui id, convallis iaculis eros.</p>
-                            <a class="yellow" href="#">
-                                View Selection <i class="fa fa-long-arrow-right"></i>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="light-green-hover">
-                        <div class="feature-box">
-                            <i class="light-green"></i>
-                            <h3>eBooks</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dolor turpis, pulvinar varius dui id, convallis iaculis eros.</p>
-                            <a class="light-green" href="#">
-                                View Selection <i class="fa fa-long-arrow-right"></i>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="blue-hover">
-                        <div class="feature-box">
-                            <i class="blue"></i>
-                            <h3>DVDs</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dolor turpis, pulvinar varius dui id, convallis iaculis eros.</p>
-                            <a class="blue" href="#">
-                                View Selection <i class="fa fa-long-arrow-right"></i>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="red-hover">
-                        <div class="feature-box">
-                            <i class="red"></i>
-                            <h3>Magazines</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dolor turpis, pulvinar varius dui id, convallis iaculis eros.</p>
-                            <a class="red" href="#">
-                                View Selection <i class="fa fa-long-arrow-right"></i>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="violet-hover">
-                        <div class="feature-box">
-                            <i class="violet"></i>
-                            <h3>Audio</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dolor turpis, pulvinar varius dui id, convallis iaculis eros.</p>
-                            <a class="violet" href="#">
-                                View Selection <i class="fa fa-long-arrow-right"></i>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="green-hover">
-                        <div class="feature-box">
-                            <i class="green"></i>
-                            <h3>eAudio</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dolor turpis, pulvinar varius dui id, convallis iaculis eros.</p>
-                            <a class="green" href="#">
-                                View Selection <i class="fa fa-long-arrow-right"></i>
-                            </a>
-                        </div>
-                    </li>
-                </ul>
+    <!--====== Campus Ends ======-->
+
+    <!--====== Top Course Start ======-->
+
+    <section class="top-courses-area">
+    {% if ebook %}
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="section-title mt-40">
+                        <h2 class="title">Here is our <br> Top Ebooks</h2>
+                        <p>It's Cool to read on an ereader</p>
+                    </div>
+                </div>
             </div>
-        </section>
-        <!-- End: Features -->
+            <div class="courses-wrapper">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-6 courses-col">
+                    {% for ebook in ebook %}
+                        <div class="single-courses-2 mt-30">
+                            <div class="courses-image">
+                                <a href="courses-details.html"><img src="{{ebook.book_cover.url}}" alt="courses"></a>
+                            </div>
+                            <div class="courses-content">
+                                <a href="#" class="category">{{ebook.category}}</a>
+                                <h4 class="courses-title"><a href="courses-details.html">{{ebook.title}}</a></h4>
+                                <div class="duration-rating">
+                                    <div class="duration-fee">
+                                        <p class="duration">Duration: <span> 4 year</span></p>
+                                        <p class="fee">Fee: <span> $540</span></p>
+                                    </div>
+                                </div>
+                                <div class="courses-link">
+                                    <a class="apply" href="#">Available</a>
+                                    <a class="more" href="courses-details.html">Buy <i class="fal fa-chevron-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </section>
 
+    <!--====== Top Course Ends ======-->
 
+    <!--====== Counter Start ======-->
 
-        <!-- Start: Welcome Section -->
-        <section class="welcome-section">
+    <div class="counter-area-2">
+        <div class="container">
+            <div class="counter-wrapper-2 bg_cover" style="background-image: url(assets/images/counter-bg-2.jpg);">
+                <div class="row">
+                    <div class="col-sm-3 col-6 counter-col">
+                        <div class="single-counter mt-30">
+                            <span class="counter-count"><span class="count">{{library.catalog_set.all.count}}</span> +</span>
+                            <p>Books</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-6 counter-col">
+                        <div class="single-counter mt-30">
+                            <span class="counter-count"><span class="count">{{library.ebook_set.all.count}}</span> +</span>
+                            <p>Ebooks</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-6 counter-col">
+                        <div class="single-counter mt-30">
+                            <span class="counter-count"><span class="count">{{library.member_set.all.count}}</span> +</span>
+                            <p>Members</p>
+                        </div>
+                    </div>
+                    {% comment %} <div class="col-sm-3 col-6 counter-col">
+                        <div class="single-counter mt-30">
+                            <span class="counter-count"><span class="count">30</span> +</span>
+                            <p>Awards win</p>
+                        </div>
+                    </div> {% endcomment %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--====== Counter Ends ======-->
+
+    <!--====== Top Courses Start ======-->
+    
+    <section class="top-courses-area">
+    {% if catalogs %}
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="section-title mt-40">
+                        <h2 class="title">Here is our <br> Top Books</h2>
+                        <p>Even slightly believable. If you are going use a passage of Lorem Ipsum need</p>
+                    </div>
+                </div>
+            </div>
+            <div class="courses-wrapper">
+                <div class="row">
+                {% for catalog in catalogs %}
+                    <div class="col-lg-3 col-sm-6 courses-col">
+                        <div class="single-courses mt-30">
+                            <a href="#" class="category">{{catalog.category}}</a>
+                            <h4 class="courses-title"><a href="courses-details.html">{{catalog.title}}</a></h4>
+                            <div class="duration-fee">
+                                <p class="duration">Year: <span>{{catalog.year}}</span></p>
+                                <p class="fee">Author: <span>{{catalog.author}}</span></p>
+                            </div>
+                            {% comment %} <div class="rating">
+                                <span>Available</span>
+                                
+                            </div> {% endcomment %}
+                            <div class="courses-link">
+                                <a class="apply" href="#">Available</a>
+                                {% comment %} <a class="more" href="courses-details.html">Read more <i class="fal fa-chevron-right"></i></a> {% endcomment %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+    </section>
+    
+    <!--====== Top Courses Ends ======-->
+
+    <!--====== Newsletter Start ======-->
+
+    {% comment %} <section class="newsletter-area-2">
+        <div class="container">
+            <div class="newsletter-wrapper bg_cover" style="background-image: url(assets/images/newsletter-bg-1.jpg);">
+                <div class="row align-items-center">
+                    <div class="col-lg-5">
+                        <div class="section-title-2 mt-25">
+                            <h2 class="title">Subscribe our Newsletter</h2>
+                            <span class="line"></span>
+                            <p>Even slightly believable. If you are going use a passage of Lorem Ipsum need some</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="newsletter-form mt-30">
+                            <form action="#">
+                                <input type="text" placeholder="Enter your email here">
+                                <button class="main-btn main-btn-2">Subscribe now</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> {% endcomment %}
+
+    <!--====== Newsletter Ends ======-->
+
+    <!--====== Footer Start ======-->
+
+    
+<section class="footer-area footer-02 bg_cover mt-2" style="background-image: url(assets/images/counter-bg.jpg);">
+        <div class="footer-widget">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="welcome-wrap">
-                            <div class="welcome-text">
-                                <h2 class="section-title">Welcome to the libraria</h2>
-                                <span class="underline left"></span>
-                                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humor, or randomized words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humor, or non-characteristic words etc.</p>
-                                <a class="btn btn-primary" href="#">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="welcome-image">
-                            <img src="images/wellcome-image.jpg" class="algin-right" alt="" />
+                    
+                    <div class="col-md-3 col-sm-6">
+                        <div class="footer-link mt-45">
+                            <h4 class="footer-title">Contact Info</h4>
+                            <ul class="link-list">
+                                {% comment %} <li>
+                                    <p>{{library.library_country}}</p>
+                                </li> {% endcomment %}
+                                <li>
+                                    <p><a href="{{library.library_phone}}">{{library.library_phone}}</a></p>
+                                    {% comment %} <p><a href="tel:+32145857458">+32145 857 458</a></p> {% endcomment %}
+                                </li>
+                                <li>
+                                    <p><a href="mailto://{{library.library_email}}">{{library.library_email}}</a></p>
+                                    <p></p>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <!-- End: Welcome Section -->
-
-        <!-- Start: Facts Counter -->
-        <div class="layout-v2-counter">
-            <div class="facts-counter">
-                <div class="container">
-                    <div class="row">
-                        <ul>
-                            <li class="color-light-green">
-                                <div class="fact-item">
-                                    <div class="fact-icon">
-                                        <i class="ebook"></i>
-                                    </div>
-                                    <span>eBooks<strong class="fact-counter">45780</strong></span>
-                                </div>
-                            </li>
-                            <li class="color-green">
-                                <div class="fact-item">
-                                    <div class="fact-icon">
-                                        <i class="eaudio"></i>
-                                    </div>
-                                    <span>eAudio<strong class="fact-counter">32450</strong></span>
-                                </div>
-                            </li>
-                            <li class="color-red">
-                                <div class="fact-item">
-                                    <div class="fact-icon">
-                                        <i class="magazine"></i>
-                                    </div>
-                                    <span>Magazine<strong class="fact-counter">14450</strong></span>
-                                </div>
-                            </li>
-                            <li class="color-blue">
-                                <div class="fact-item">
-                                    <div class="fact-icon">
-                                        <i class="videos"></i>
-                                    </div>
-                                    <span>Videos<strong class="fact-counter">32450</strong></span>
-                                </div>
-                            </li>
+                <div class="footer-widget-wrapper">
+                    <div class="footer-social">
+                        <ul class="social">
+                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-menu">
+                        <ul class="menu">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="{% url 'entities:items' pk %}">Catalogues</a></li>
+                            <li><a href="#">Ebooks</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- End: Facts Counter -->
-
-
-
-        <!-- Start: Footer -->
-        <footer class="site-footer">
+        {% comment %} <div class="footer-copyright">
             <div class="container">
-                <div id="footer-widgets">
-                    <div class="row">
-                        <div class="col-md-2 widget-container">
-                            <div class="widget widget_social_icons">
-                                <ul>
-                                    <li>
-                                        <a class="facebook" href="#" target="_blank">
-                                            <span>
-                                                <i class="fa fa-facebook-f"></i>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="twitter" href="#" target="_blank">
-                                            <span>
-                                                <i class="fa fa-twitter"></i>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="google" href="#" target="_blank">
-                                            <span>
-                                                <i class="fa fa-google-plus"></i>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="rss" href="#" target="_blank">
-                                            <span>
-                                                <i class="fa fa-rss"></i>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="linkedin" href="#" target="_blank">
-                                            <span>
-                                                <i class="fa fa-linkedin"></i>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="youtube" href="#" target="_blank">
-                                            <span>
-                                                <i class="fa fa-youtube"></i>
-                                            </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6 widget-container">
-                            <div id="text-2" class="widget widget_text">
-                                <h3 class="footer-widget-title">About Libraria</h3>
-                                <span class="underline left"></span>
-                                <div class="textwidget">
-                                    It is a long established fact that a reader will be distracted by the readable content of a page when looking.
-                                </div>
-                                <address>
-                                    <div class="info">
-                                        <i class="fa fa-location-arrow"></i>
-                                        <span>21 King Street, Melbourne, Victoria 3000 Australia</span>
-                                    </div>
-                                    <div class="info">
-                                        <i class="fa fa-envelope"></i>
-                                        <span><a href="mailto:support@libraria.com">support@libraria.com</a></span>
-                                    </div>
-                                    <div class="info">
-                                        <i class="fa fa-phone"></i>
-                                        <span><a href="tel:012-345-6789">+ 012-345-6789</a></span>
-                                    </div>
-                                </address>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-6 widget-container">
-                            <div id="nav_menu-2" class="widget widget_nav_menu">
-                                <h3 class="footer-widget-title">Quick Links</h3>
-                                <span class="underline left"></span>
-                                <div class="menu-quick-links-container">
-                                    <ul id="menu-quick-links" class="menu">
-                                        <li><a href="#">Library News</a></li>
-                                        <li><a href="#">History</a></li>
-                                        <li><a href="#">Meet Our Staff</a></li>
-                                        <li><a href="#">Board of Trustees</a></li>
-                                        <li><a href="#">Budget</a></li>
-                                        <li><a href="#">Annual Report</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="clearfix hidden-lg hidden-md hidden-xs tablet-margin-bottom"></div>
-                        <div class="col-md-2 col-sm-6 widget-container">
-                            <div id="text-4" class="widget widget_text">
-                                <h3 class="footer-widget-title">Timing</h3>
-                                <span class="underline left"></span>
-                                <div class="timming-text-widget">
-                                    <time datetime="2017-02-13">Mon - Thu: 9 am - 9 pm</time>
-                                    <time datetime="2017-02-13">Fri: 9 am - 6 pm</time>
-                                    <time datetime="2017-02-13">Sat: 9 am - 5 pm</time>
-                                    <time datetime="2017-02-13">Sun: 1 pm - 6 pm</time>
-                                    <ul>
-                                        <li><a href="#">Closings</a></li>
-                                        <li><a href="#">Branches</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6 widget-container">
-                            <div class="widget twitter-widget">
-                                <h3 class="footer-widget-title">Latest Tweets</h3>
-                                <span class="underline left"></span>
-                                <div id="twitter-feed">
-                                    <ul>
-                                        <li>
-                                            <p><a href="#">@TemplateLibraria</a> Sed ut perspiciatis unde sit voluptatem. <a href="#">template-libraria.com</a></p>
-                                        </li>
-                                        <li>
-                                            <p><a href="#">@TemplateLibraria</a> Sed ut perspiciatis unde sit voluptatem. <a href="#">template-libraria.com</a></p>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="copyright text-center">
+                    <p>&copy; Copyright all right reserved by <a href="https://hasthemes.com/">Hasthemes</a></p>
                 </div>
             </div>
-            <div class="sub-footer">
-                <div class="container">
-                    <div class="row">
-                        <div class="footer-text col-md-3">
-                            <p><a target="_blank" href="https://www.templateshub.net">Templates Hub</a></p>
-                        </div>
-                        <div class="col-md-9 pull-right">
-                            <ul>
-                                <li><a href="index-2.html">Home</a></li>
-                                <li><a href="books-media-list-view.html">Books &amp; Media</a></li>
-                                <li><a href="news-events-list-view.html">News &amp; Events</a></li>
-                                <li><a href="#">Kids &amp; Teens</a></li>
-                                <li><a href="services.html">Services</a></li>
-                                <li><a href="#">Research</a></li>
-                                <li><a href="blog.html">Blog</a></li>
-                                <li><a href="contact.html">Contact</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- End: Footer -->
+        </div> {% endcomment %}
+    </section>
 
-        {% endfor %}
+    <!--====== Footer Ends ======-->
+
+    <!--====== BACK TOP TOP PART START ======-->
+
+    <a href="#" class="back-to-top"><i class="fal fa-chevron-up"></i></a>
+
+    <!--====== BACK TOP TOP PART ENDS ======-->
+
+    <!--====== Start ======-->
+
+<!--
+    <section class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-">
+
+                </div>
+            </div>
+        </div>
+    </section>
+-->
+
+    <!--====== Ends ======-->
+    {% endfor %}
 {% endblock %}

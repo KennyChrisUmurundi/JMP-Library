@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import AddLibraryForm, AddCatalogForm, UpdateCatalogForm, AddEbookForm, UpdateEbookForm, AddCategoryForm, UpdateCategoryForm, AddAuthorForm, UpdateAuthorForm, AddMemberForm, UpdateMemberForm,AddBorrowForm, CheckoutForm, AddSupplierForm, AddPurchaseForm, UpdateSupplierForm, UpdatePurchaseForm, AddEmployeeForm, UpdateEmployee, AddDesignationForm, UpdateDesignation, AddDepartmentForm, UpdateDepartment
+from .forms import AddLibraryForm, AddCatalogForm, UpdateCatalogForm, AddEbookForm, UpdateEbookForm, AddCategoryForm, UpdateCategoryForm, AddAuthorForm, UpdateAuthorForm, AddMemberForm, UpdateMemberForm,AddBorrowForm, CheckoutForm, AddSupplierForm, AddPurchaseForm, UpdateSupplierForm, UpdatePurchaseForm, AddEmployeeForm, UpdateEmployee, AddDesignationForm, UpdateDesignation, AddDepartmentForm, UpdateDepartment, AddMediaForm,UpdateMedia
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
-from .models import Library, Catalog, Ebook, Category, Author, Member, Borrowed, Supplier, Purchase, Employee, Designation, Department
+from .models import Library, Catalog, Ebook, Category, Author, Member, Borrowed, Supplier, Purchase, Employee, Designation, Department, Media
 from django.views.generic.detail import SingleObjectMixin
 # Create your views here.
 
@@ -609,6 +609,56 @@ def DeleteDepartment(request,id):
     object.delete()
     # messages.success(request,f'Deleted successfully')
     return redirect('library:department',pk=object.library_id)
+
+
+def media(request,pk):
+
+    pk=pk
+    media = Media.objects.filter(library=pk)
+
+    context = {
+    'pk':pk,
+    'media':media,
+
+    }
+    return render(request,'media/media.html',context)
+
+class UpdateMedia(LoginRequiredMixin,UpdateView):
+
+    model = Media
+    template_name = 'media/add_media.html'
+    form_class  = UpdateMedia
+    pk  =   'object.pk'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        con = self.object.pk
+        context["pk"] = con
+        return context
+
+def add_media(request,pk):
+    pk=pk
+    if request.method == 'POST':
+        form    =   AddMediaForm(request.POST,request.FILES)
+        if form.is_valid():
+            media = form.save(commit=False)
+            media.library_id = pk
+            media.save()
+            return redirect('library:media',pk=pk)
+    form = AddMediaForm()
+    context = {
+    'form':form,
+    'pk':pk,
+
+    }
+    return render(request,'media/add_media.html',context)
+
+def DeleteMedia(request,id):
+
+    object  =   get_object_or_404(Media,id=id)
+    object.delete()
+    # messages.success(request,f'Deleted successfully')
+    return redirect('library:media',pk=object.library_id)
 
 
 def plan(request,pk):
