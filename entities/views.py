@@ -28,3 +28,15 @@ def items(request,pk):
     'catalogs':catalogs
     }
     return render(request,'lib/items.html',context)
+
+def ebooks(request,pk):
+
+    pk = pk
+    library = Library.objects.filter(id=pk)
+    ebooks = Ebook.objects.filter(library_id=pk)
+    context = {
+    'pk':pk,
+    'libraries':library,
+    'ebooks':ebooks
+    }
+    return render(request,'lib/items.html',context)

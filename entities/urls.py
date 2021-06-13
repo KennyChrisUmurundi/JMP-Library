@@ -6,6 +6,7 @@ app_name    =  'entities'
 
 urlpatterns =[
     path('<int:pk>/',views.lib,name='lib'),
-    path('items/<int:pk>',views.items,name='items')
+    path('items/<int:pk>',views.items,name='items'),
+    path('ebooks/<int:pk>',views.ebooks,name='ebooks')
 
 ]
