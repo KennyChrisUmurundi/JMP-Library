@@ -8,9 +8,9 @@ import uuid
 # Create your models here.
 
 class Library(models.Model):
-
+    # libray_url          =       models.CharField(max_length=10,unique=True) # this will be used to create a tenant
     library_admin       =       models.ForeignKey(User,on_delete=models.CASCADE)
-    library_name        =       models.CharField(max_length=300)
+    library_name        =       models.CharField(max_length=300,unique=True)
     library_type        =       models.CharField(max_length=300)
     library_email       =       models.CharField(max_length=300)
     library_country     =       models.CharField(max_length=200,default='Others')
@@ -30,7 +30,8 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
-
+    def get_absolute_url(self):
+        return reverse('library:categories', kwargs={'pk': self.library.pk})
 
 class Catalog(models.Model):
 
@@ -63,6 +64,7 @@ class Ebook(models.Model):
     book_description    = models.TextField(null=True,blank=True)
     book_cover          = models.ImageField(upload_to='images',null=True,blank=True)
     book_pdf            = models.FileField(upload_to='books',null=False,blank=False)
+    book_price          = models.IntegerField()
 
     def __str__(self):
         return self.title

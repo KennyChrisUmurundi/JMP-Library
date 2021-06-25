@@ -4,9 +4,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from .models import Library, Catalog, Ebook, Category, Author, Member, Borrowed, Supplier, Purchase, Employee, Designation, Department, Media
 from django.views.generic.detail import SingleObjectMixin
+# from entities.models import Entity
 # Create your views here.
-
-
 
 def dashboard(request,pk):
     catalogs = Catalog.objects.filter(library=pk)
@@ -26,7 +25,15 @@ class CreateLibrary(LoginRequiredMixin,CreateView):
 
     def form_valid(self,form):
         form.instance.library_admin = self.request.user
+        print(form.instance.library_name)
+        # tenant = Entity(schema_name=form.instance.library_name,
+        #         name=form.instance.library_name,
+        #         )
+        # tenant.save()
+        print('it saved')
         return super(CreateLibrary,self).form_valid(form)
+
+
 
 # def create_category(request):
 #     return render(request,'category_select.html')
@@ -166,7 +173,7 @@ def addCategory(request,pk):
 class UpdateCategory(LoginRequiredMixin,UpdateView):
 
     model = Category
-    template_name = 'catalog/update_catalog.html'
+    template_name = 'category/update_category.html'
     form_class  = UpdateCategoryForm
     pk  =   'object.pk'
 
@@ -425,18 +432,18 @@ def purchases(request,pk):
     }
     return render(request,'purchase/purchases.html',context)
 
-class UpdatePurchase(LoginRequiredMixin,UpdateView):
+# class UpdatePurchase(LoginRequiredMixin,UpdateView):
 
-    model = Purchase
-    template_name = 'purchase/add_purchase.html'
-    form_class  = UpdatePurchaseForm
-    pk  =   'object.pk'
+#     model = Purchase
+#     template_name = 'purchase/add_purchase.html'
+#     form_class  = UpdatePurchaseForm
+#     pk  =   'object.pk'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        con = self.object.pk
-        context["pk"] = con
-        return context
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         con = self.object.pk
+#         context["pk"] = con
+#         return context
 
 def add_purchase(request,pk):
     pk=pk
@@ -478,7 +485,7 @@ def employees(request,pk):
 class UpdateEmployee(LoginRequiredMixin,UpdateView):
 
     model = Employee
-    template_name = 'employee/add_employee.html'
+    template_name = 'employee/update_employee.html'
     form_class  = UpdateEmployee
     pk  =   'object.pk'
 
@@ -527,7 +534,7 @@ def designations(request,pk):
 class UpdateDesignation(LoginRequiredMixin,UpdateView):
 
     model = Designation
-    template_name = 'designation/add_designation.html'
+    template_name = 'designation/update_designation.html'
     form_class  = UpdateDesignation
     pk  =   'object.pk'
 
@@ -576,7 +583,7 @@ def department(request,pk):
 class UpdateDepartment(LoginRequiredMixin,UpdateView):
 
     model = Department
-    template_name = 'department/add_department.html'
+    template_name = 'department/update_department.html'
     form_class  = UpdateDepartment
     pk  =   'object.pk'
 

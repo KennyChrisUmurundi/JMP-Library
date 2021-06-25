@@ -271,10 +271,9 @@ TYPE    =   (('Academic','Academic'),('Administative','Administative'))
 
 class AddLibraryForm(forms.ModelForm):
 
-
     library_name         =   forms.CharField(max_length=300,widget=forms.TextInput(attrs={
     'class': 'form-control',
-    'placeholder': 'Library name'
+    'placeholder': 'Library complete name'
     }))
 
     library_type         =   forms.ChoiceField(choices=LIBRARY_TYPES,widget=forms.Select(attrs={
@@ -366,6 +365,7 @@ class UpdateAuthorForm(forms.ModelForm):
         exclude =('library',)
 
 class AddMemberForm(forms.ModelForm):
+
     status  =   forms.ChoiceField(choices=STATUS,widget=forms.Select(attrs={
     'class': 'form-select',
     'placeholder':'Type',
@@ -386,6 +386,7 @@ class UpdateMemberForm(forms.ModelForm):
         exclude =('library',)
 
 class AddBorrowForm(forms.ModelForm):
+
     due_return = forms.CharField(max_length=200,widget=forms.TextInput(attrs={
     'class': 'form-select',
     'placeholder':'Type',

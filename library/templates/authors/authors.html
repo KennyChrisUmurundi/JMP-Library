@@ -6,7 +6,7 @@
       <div class="row">
           <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
               <div class="page-header">
-                  <h2 class="pageheader-title">Categories</h2>
+                  <h2 class="pageheader-title">Authors</h2>
                   <div class="page-breadcrumb">
                       <nav aria-label="breadcrumb">
                           <ol class="breadcrumb">
@@ -54,8 +54,8 @@
                                       <td><a
                                         style="color:#222;"
                                         href="{% url 'library:update_author' author.id %}"><i class="fas fa-edit mr-4 "></i></a>
-                                          <a onclick="return confirm('Are you sure You want to delete this Catalog?');"
-                                           href="{% url 'library:delete_author' author.id %}"<i class="fas fa-trash  "
+                                          <a onclick="return confirm('Are you sure You want to delete this Author?');"
+                                           href="{% url 'library:delete_author' author.id %}"><i class="fas fa-trash  "
                                            style="color:red;"
                                            ></i></a>
                                       </td>

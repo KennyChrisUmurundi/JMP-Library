@@ -43,19 +43,25 @@
                 <div class="tab-pane fade show active" id="grid" role="tabpanel">
                     <div class="courses-wrapper wrapper-2">
                         <div class="row">
-                        {% for ebook in ebooks %}
+                        {% for ebook in paginator %}
                             <div class="col-lg-3 col-sm-6 courses-col">
                                 <div class="single-courses-2 mt-30">
-                                    {% comment %} <div class="courses-image">
-                                        <a href="#"><img src="assets/images/courses/courses-5.jpg" alt="courses"></a>
-                                    </div> {% endcomment %}
+                                    <div class="courses-image">
+                                        <a href="{% url 'entities:single_ebook' ebook.library_id ebook.id %}">
+                                            <img style="border-radius: 0.3rem !important;
+                                            height: 200px;
+                                            object-fit: contain;"
+                                            src="{{ebook.book_cover.url}}" 
+                                            alt="courses">
+                                        </a>
+                                    </div>
                                     <div class="courses-content">
-                                        <a href="#" class="category">{{catalog.category}}</a>
-                                        <h4 class="courses-title"><a href="courses-details.html">{{catalog.title}}</a></h4>
+                                        <a href="#" class="category">{{ebook.category}}</a>
+                                        <h4 class="courses-title"><a href="courses-details.html">{{ebook.title}}</a></h4>
                                         <div class="duration-rating">
                                             <div class="duration-fee">
-                                                <p class="duration">Year: <span>{{catalog.year}}</span></p>
-                                                <p class="fee">Author: <span>{{catalog.author}}</span></p>
+                                                <p class="duration">Year: <span>{{ebook.publication_year}}</span></p>
+                                                <p class="fee">Author: <span>{{ebook.author}}</span></p>
                                             </div>
                                         </div>
                                         <div class="courses-link">
@@ -66,68 +72,6 @@
                                 </div>
                             </div>
                         {% endfor %}
-                            {% comment %} <div class="col-lg-3 col-sm-6 courses-col">
-                                <div class="single-courses-2 mt-30">
-                                    <div class="courses-image">
-                                        <a href="#"><img src="assets/images/courses/courses-6.jpg" alt="courses"></a>
-                                    </div>
-                                    <div class="courses-content">
-                                        <a href="#" class="category">#Technology</a>
-                                        <h4 class="courses-title"><a href="courses-details.html">Bachelor of Business Administration</a></h4>
-                                        <div class="duration-rating">
-                                            <div class="duration-fee">
-                                                <p class="duration">Duration: <span> 4 year</span></p>
-                                                <p class="fee">Fee: <span> $540</span></p>
-                                            </div>
-                                            <div class="rating">
-                                                <span>Rating: </span>
-                                                <ul class="star">
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="courses-link">
-                                            <a class="apply" href="#">Online Apply</a>
-                                            <a class="more" href="#">Read more <i class="fal fa-chevron-right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-6 courses-col">
-                                <div class="single-courses-2 mt-30">
-                                    <div class="courses-image">
-                                        <a href="#"><img src="assets/images/courses/courses-7.jpg" alt="courses"></a>
-                                    </div>
-                                    <div class="courses-content">
-                                        <a href="#" class="category">#Science</a>
-                                        <h4 class="courses-title"><a href="courses-details.html">Social & Digital Marketing</a></h4>
-                                        <div class="duration-rating">
-                                            <div class="duration-fee">
-                                                <p class="duration">Duration: <span> 4 year</span></p>
-                                                <p class="fee">Fee: <span> $540</span></p>
-                                            </div>
-                                            <div class="rating">
-                                                <span>Rating: </span>
-                                                <ul class="star">
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="courses-link">
-                                            <a class="apply" href="#">Online Apply</a>
-                                            <a class="more" href="#">Read more <i class="fal fa-chevron-right"></i></a>
-                                        </div>
-                                    </div> 
-                                </div>
-                            </div>{% endcomment %}
                         </div>
                     </div>
                 </div>

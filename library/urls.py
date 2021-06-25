@@ -65,7 +65,7 @@ urlpatterns = [
 
     path('purchases/<int:pk>',views.purchases,name='purchases'),
     path('add_purchases/<int:pk>/',views.add_purchase,name='add_purchase'),
-    path('update_purchase/<int:pk>/',views.UpdatePurchase.as_view(),name='update_purchase'),
+    # path('update_purchase/<int:pk>/',views.UpdatePurchase.as_view(),name='update_purchase'),
     path('delete_purchase/<int:id>/',views.DeletePurchase,name='delete_purchase'),
 
     # Employees

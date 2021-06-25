@@ -1,0 +1,310 @@
+{% extends 'lib/lib.html' %}
+{% block content %}
+{% include 'lib/navbar.html' %}
+
+<section class="product-details-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9">
+                	{% if ebook %}
+                    <div class="product-details-wrapper">
+                        <div class="product-details-content">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-6 col-md-8">
+                                    <div class="details-image mt-50">
+                                        <img src="{{ebook.book_cover.url}}" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="details-content mt-45">
+                                        <h4 class="product-title">{{ebook.title}}</h4>
+                                        <div class="price-rating">
+                                            <span class="price">Price: ${{ebook.book_price}}</span>
+                                            <ul class="rating">
+                                                <li class="rating-on"><i class="fas fa-star"></i></li>
+                                                <li class="rating-on"><i class="fas fa-star"></i></li>
+                                                <li class="rating-on"><i class="fas fa-star"></i></li>
+                                                <li class="rating-on"><i class="fas fa-star"></i></li>
+                                                <li class="rating-on"><i class="fas fa-star"></i></li>
+                                            </ul>
+                                        </div>
+                                        <div class="product-content-wrapper">
+                                            <div class="stock">
+                                                <p>Available in Stock</p>
+                                            </div>
+                                            <!-- <div class="colors">
+                                                <span>Color: </span>
+                                                <ul class="product-color">
+                                                    <li class="active" data-color="#07294D"></li>
+                                                    <li data-color="#199053"></li>
+                                                    <li data-color="#4B46D2"></li>
+                                                    <li data-color="#8C46D2"></li>
+                                                    <li data-color="#D2469F"></li>
+                                                </ul>
+                                            </div>
+                                            <div class="size">
+                                                <span>Size:</span>
+                                                <ul class="product-size">
+                                                    <li>
+                                                        <span>S</span>
+                                                    </li>
+                                                    <li class="active">
+                                                        <span>M</span>
+                                                    </li>
+                                                    <li>
+                                                        <span>L</span>
+                                                    </li>
+                                                    <li>
+                                                        <span>XL</span>
+                                                    </li>
+                                                    <li>
+                                                        <span>XXL</span>
+                                                    </li>
+                                                </ul>
+                                            </div> -->
+                                            <!-- <div class="quantity">
+                                                <span>Quantity:</span>
+                                                <div class="product-quantity d-inline-flex">
+                                                    <button type="button" class="sub"><i class="fal fa-minus"></i></button>
+                                                    <input type="text" value="1" />
+                                                    <button type="button" class="add"><i class="fal fa-plus"></i></button>
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                        <div class="product-btn">
+                                            <a href="#" class="main-btn main-btn-2 add-cart">Add to Cart</a>
+                                            <a href="#" class="wishlist"><i class="fal fa-heart"></i></a>
+                                            <a href="#" class="compare"><i class="fal fa-repeat"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="product-details-tab">
+                            <ul class="nav nav-justified" role="tablist">
+                                <li class="nav-item">
+                                    <a class="active" data-toggle="tab" href="#description" role="tab">Description</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a data-toggle="tab" href="#information" role="tab">Additional information</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a data-toggle="tab" href="#reviews" role="tab">Reviews</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="description" role="tabpanel">
+                                    <div class="product-description">
+                                        <p>{{ebook.book_description}}</p>
+
+                                        <!-- <ul class="product-list">
+                                            <li>
+                                                <i class="far fa-check-circle"></i>
+                                                <p>Bachelor of Business Administration(BBA) If you are going use a passage of blame belongs to those who fail in their duty through weakness </p>
+                                            </li>
+                                            <li>
+                                                <i class="far fa-check-circle"></i>
+                                                <p>Bachelor of Business Administration(BBA) If you are going use a passage of blame belongs to those who fail in their duty through weakness </p>
+                                            </li>
+                                            <li>
+                                                <i class="far fa-check-circle"></i>
+                                                <p>Bachelor of Business Administration(BBA) If you are going use a passage of blame belongs to those who fail in their duty through weakness </p>
+                                            </li>
+                                        </ul> -->
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="information" role="tabpanel">
+                                    <div class="product-information table-responsive">
+                                        <table class="table">                                        
+                                            <tbody>
+                                                <tr>
+                                                    <td class="table-title"><h4 class="title">Materisl</h4></td>
+                                                    <td class="table-content"><p>Plastic grade</p></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="table-title"><h4 class="title">Quality</h4></td>
+                                                    <td class="table-content"><p>Best quality</p></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="table-title"><h4 class="title">Cash on Delivery</h4></td>
+                                                    <td class="table-content"><p>Yes</p></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="table-title"><h4 class="title">Return Policy</h4></td>
+                                                    <td class="table-content"><p>30 days</p></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="table-title"><h4 class="title">Warranty</h4></td>
+                                                    <td class="table-content"><p>1 year</p></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="table-title"><h4 class="title">Dimension</h4></td>
+                                                    <td class="table-content"><p>10X6X12</p></td>
+                                                </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="reviews" role="tabpanel">
+                                    <div class="product-reviews">
+                                        <div class="review-wrapper">
+                                            <div class="review-star">
+                                                <div class="single-review">
+                                                    <span class="label">Stars 5</span>
+                                                    <div class="review-bar">
+                                                        <div class="bar-inner" style="width: 100%;"></div>
+                                                    </div>
+                                                    <span class="value">35</span>
+                                                </div>
+                                                <div class="single-review">
+                                                    <span class="label">Stars 4</span>
+                                                    <div class="review-bar">
+                                                        <div class="bar-inner" style="width: 80%;"></div>
+                                                    </div>
+                                                    <span class="value">10</span>
+                                                </div>
+                                                <div class="single-review">
+                                                    <span class="label">Stars 3</span>
+                                                    <div class="review-bar">
+                                                        <div class="bar-inner" style="width: 55%;"></div>
+                                                    </div>
+                                                    <span class="value">8</span>
+                                                </div>
+                                                <div class="single-review">
+                                                    <span class="label">Stars 2</span>
+                                                    <div class="review-bar">
+                                                        <div class="bar-inner" style="width: 0;"></div>
+                                                    </div>
+                                                    <span class="value">0</span>
+                                                </div>
+                                                <div class="single-review">
+                                                    <span class="label">Stars 1</span>
+                                                    <div class="review-bar">
+                                                        <div class="bar-inner" style="width: 0;"></div>
+                                                    </div>
+                                                    <span class="value">0</span>
+                                                </div>
+                                            </div>
+                                            <div class="review-point">
+                                                <span>4.9</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="review-form">
+                                            <div class="review-rating">
+                                                <h5 class="title">Write a Review</h5>
+
+                                                <ul id='stars'>
+                                                    <li class='star' title='Poor' data-value='1'>
+                                                    <i class='fas fa-star'></i>
+                                                    </li>
+                                                    <li class='star' title='Fair' data-value='2'>
+                                                    <i class='fas fa-star'></i>
+                                                    </li>
+                                                    <li class='star' title='Good' data-value='3'>
+                                                    <i class='fas fa-star'></i>
+                                                    </li>
+                                                    <li class='star' title='Excellent' data-value='4'>
+                                                    <i class='fas fa-star'></i>
+                                                    </li>
+                                                    <li class='star' title='WOW!!!' data-value='5'>
+                                                    <i class='fas fa-star'></i>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="review-form-wrapper">
+                                                <form action="#">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="single-form">
+                                                                <input type="text" placeholder="Name">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="single-form">
+                                                                <input type="email" placeholder="Email">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="single-form">
+                                                                <input type="text" placeholder="Phone">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="single-form">
+                                                                <input type="text" placeholder="Title">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="single-form">
+                                                                <textarea placeholder="Write here..."></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="single-form">
+                                                                <button class="main-btn">Submit now</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endif %}
+<section class="footer-area footer-02 bg_cover mt-2" style="background-image: url(assets/images/counter-bg.jpg);">
+        <div class="footer-widget">
+            <div class="container">
+                <div class="row">
+                    {% if library %}
+                    <div class="col-md-3 col-sm-6">
+                        <div class="footer-link mt-45">
+                            <h4 class="footer-title">Contact Info</h4>
+                            <ul class="link-list">
+                                {% comment %} <li>
+                                    <p>{{library.library_country}}</p>
+                                </li> {% endcomment %}
+                                <li>
+                                    <p><a href="{{library.library_phone}}">{{library.library_phone}}</a></p>
+                                    {% comment %} <p><a href="tel:+32145857458">+32145 857 458</a></p> {% endcomment %}
+                                </li>
+                                <li>
+                                    <p><a href="mailto://{{library.library_email}}">{{library.library_email}}</a></p>
+                                    <p></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-widget-wrapper">
+                    <div class="footer-social">
+                        <ul class="social">
+                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-menu">
+                        <ul class="menu">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="{% url 'entities:items' pk %}">Catalogues</a></li>
+                            <li><a href="#">Ebooks</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% endif %}
+
+
+{% endblock %}

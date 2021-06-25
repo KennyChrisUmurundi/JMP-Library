@@ -55,9 +55,7 @@
                                       <td>{{purchase.status}}</td>
 
 
-                                      <td><a
-                                        style="color:#222;"
-                                        href="{% url 'library:update_purchase' purchase.id %}"><i class="fas fa-edit mr-4 "></i></a>
+                                      <td><!-- -->
                                           <a onclick="return confirm('Are you sure You want to delete this Catalog?');"
                                            href="{% url 'library:delete_purchase' purchase.id %}"<i class="fas fa-trash  mr-4"
                                            style="color:red;"

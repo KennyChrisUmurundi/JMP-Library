@@ -50,12 +50,12 @@
                                       <td>{{catalog.title}}</td>
                                       <td>{{catalog.author}}</td>
                                       <td>{{catalog.publisher}}</td>
-                                      <td>{{catalog.year}}</td>
+                                      <td>{{catalog.publication_year}}</td>
                                       <td><a
                                         style="color:#222;"
                                         href="{% url 'library:update_ebook' catalog.id %}"><i class="fas fa-edit mr-4 "></i></a>
                                           <a onclick="return confirm('Are you sure You want to delete this Catalog?');"
-                                           href="{% url 'library:delete_ebook' catalog.id %}"<i class="fas fa-trash  "
+                                           href="{% url 'library:delete_ebook' catalog.id %}"><i class="fas fa-trash  "
                                            style="color:red;"
                                            ></i></a>
                                       </td>

@@ -28,11 +28,17 @@
                                     <option value="5">published 05</option>
                                 </select>
                             </div> {% endcomment %}
-                            <form method="POST">
+                            <form method="GET">
                             {% csrf_token %}
                             <div class="courses-search">
-                                <input type="text" name="book" placeholder="Search books">
-                                <i class="far fa-search"></i>
+                                <div class='row'>
+                                <input type="text" name="search" placeholder="Search books">
+                                <!-- <i type='submit'class="fas fa-search"></i> -->
+                                <button class = 'btn btn-success mt-1 btn-sm' type='submit'>submit</button>
+                                {% if query%}
+                                <button class = 'btn btn-warning ml-1 btn-sm'>back</button>
+                                {% endif%}
+                                </div>
                             </div>
                             </form>
                         </div>
@@ -43,14 +49,14 @@
                 <div class="tab-pane fade show active" id="grid" role="tabpanel">
                     <div class="courses-wrapper wrapper-2">
                         <div class="row">
-                        {% for catalog in catalogs %}
+                        {% for catalog in paginator %}
                             <div class="col-lg-3 col-sm-6 courses-col">
                                 <div class="single-courses-2 mt-30">
                                     {% comment %} <div class="courses-image">
                                         <a href="#"><img src="assets/images/courses/courses-5.jpg" alt="courses"></a>
                                     </div> {% endcomment %}
                                     <div class="courses-content">
-                                        <a href="#" class="category">{{catalog.category}}</a>
+                                        <!-- <a href="#" class="category">{{catalog.category}}</a> -->
                                         <h4 class="courses-title"><a href="courses-details.html">{{catalog.title}}</a></h4>
                                         <div class="duration-rating">
                                             <div class="duration-fee">
@@ -65,69 +71,39 @@
                                     </div>
                                 </div>
                             </div>
+
                         {% endfor %}
-                            {% comment %} <div class="col-lg-3 col-sm-6 courses-col">
-                                <div class="single-courses-2 mt-30">
-                                    <div class="courses-image">
-                                        <a href="#"><img src="assets/images/courses/courses-6.jpg" alt="courses"></a>
-                                    </div>
-                                    <div class="courses-content">
-                                        <a href="#" class="category">#Technology</a>
-                                        <h4 class="courses-title"><a href="courses-details.html">Bachelor of Business Administration</a></h4>
-                                        <div class="duration-rating">
-                                            <div class="duration-fee">
-                                                <p class="duration">Duration: <span> 4 year</span></p>
-                                                <p class="fee">Fee: <span> $540</span></p>
-                                            </div>
-                                            <div class="rating">
-                                                <span>Rating: </span>
-                                                <ul class="star">
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="courses-link">
-                                            <a class="apply" href="#">Online Apply</a>
-                                            <a class="more" href="#">Read more <i class="fal fa-chevron-right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-6 courses-col">
-                                <div class="single-courses-2 mt-30">
-                                    <div class="courses-image">
-                                        <a href="#"><img src="assets/images/courses/courses-7.jpg" alt="courses"></a>
-                                    </div>
-                                    <div class="courses-content">
-                                        <a href="#" class="category">#Science</a>
-                                        <h4 class="courses-title"><a href="courses-details.html">Social & Digital Marketing</a></h4>
-                                        <div class="duration-rating">
-                                            <div class="duration-fee">
-                                                <p class="duration">Duration: <span> 4 year</span></p>
-                                                <p class="fee">Fee: <span> $540</span></p>
-                                            </div>
-                                            <div class="rating">
-                                                <span>Rating: </span>
-                                                <ul class="star">
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="courses-link">
-                                            <a class="apply" href="#">Online Apply</a>
-                                            <a class="more" href="#">Read more <i class="fal fa-chevron-right"></i></a>
-                                        </div>
-                                    </div> 
-                                </div>
-                            </div>{% endcomment %}
+                        {% if not paginator %}
+                        <p>No book available</p>
+
+                        {% endif %}
+                    
+                    <div class='container mt-3'>
+                    <nav aria-label="Page navigation example">
+                        {% if items.has_other_pages %}
+                        
+                              <ul class="pagination">
+                                    {% if items.has_previous %}
+                                <li class="page-item"><a class="page-link" href="?page={{ users.previous_page_number }}">Previous</a></li>
+                                    {% else %}
+                                <li class="page-item"><a class="page-link disabled">Previous</a></li>
+                                    {% endif %}
+                                {% for i in items.paginator.page_range %}
+                                    {% if items.number == i %}
+                                <li class="page-item active"><a class="page-link" href="#">{{ i }}</a></li>
+                                    {% else %}
+                                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                                    {% endif %}
+                                {% endfor %}
+                                {% if items.has_next %}
+                                <li class="page-item"><a class="page-link" href="?page={{ items.next_page_number }}">Next</a></li>
+                                {% else %}
+                                <li class="page-item disabled"><a class="page-link">Next</a></li>
+                                {% endif %}
+                        {% endif %}
+                              </ul>
+                        </nav>
+                    </div>
                         </div>
                     </div>
                 </div>
