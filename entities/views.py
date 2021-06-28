@@ -3,7 +3,12 @@ from .utilities import get_library
 from library.models import Member, Library, Catalog, Ebook
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
+import stripe
+from django.http import JsonResponse
 # Create your views here.
+
+
+STRIPE_API_KEY = ''
 
 def lib(request,pk):
     pk          = pk
@@ -139,3 +144,31 @@ def single_ebook(request,pk,id):
 
     }
     return render(request,'lib/single_ebook.html',ctx)
+
+def checkout(request):
+        try:
+            checkout_session = stripe.checkout.Session.create(
+                payment_method_types=['card'],
+                line_items=[
+                    {
+                        'price_data': {
+                            'currency': 'usd',
+                            'unit_amount': 2000,
+                            'product_data': {
+                                'name': 'Stubborn Attachments',
+                                'images': ['https://i.imgur.com/EHyR2nP.png'],
+                            },
+                        },
+                        'quantity': 1,
+                    },
+
+                ],
+                mode='payment',
+                success_url='ebooks.html',
+                cancel_url='ebooks.html',
+
+            )
+            return JsonResponse({'id': checkout_session.id})
+        except Exception as e:
+            return JsonResponse(error=str(e)), 403
+
