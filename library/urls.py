@@ -10,6 +10,7 @@ urlpatterns = [
 
     # ADD LIBRARY
     path('new_library/',views.CreateLibrary.as_view(),name='create_library'),
+    path('update_library/<int:pk>',views.UpdateLibrary.as_view(),name='update_library'),
     # path('create_category/',views.create_category,name='create_category'),
 
     # CATALOGS
@@ -99,6 +100,8 @@ urlpatterns = [
     # Plans
 
     path('plan/<int:pk>',views.plan,name='plan')
+
+
 
 
 ]

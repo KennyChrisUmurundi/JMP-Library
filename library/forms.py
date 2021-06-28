@@ -1,5 +1,5 @@
 from django import forms
-from .models import Library, Catalog, Category, Ebook, Author, Member, Borrowed, Supplier, Purchase, Employee, Designation, Department
+from .models import Library, Catalog, Category, Ebook, Author, Member, Borrowed, Supplier, Purchase, Employee, Designation, Department, Additional_library_information
 from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
 from django.utils.translation import ugettext as _
@@ -287,14 +287,14 @@ class AddLibraryForm(forms.ModelForm):
     'type':'Email'
     }))
 
-    library_country = forms.ChoiceField(choices=COUNTRIES,widget=forms.Select(attrs={
-    'class': 'form-select',
-    'placeholder':'Type',
-    }))
-
     library_phone         =   forms.CharField(max_length=300,widget=forms.TextInput(attrs={
     'class': 'form-control',
     'placeholder': 'Tel'
+    }))
+
+    library_country = CountryField().formfield(widget=CountrySelectWidget(attrs={
+    'class': 'form-control',
+    
     }))
 
 
@@ -302,7 +302,26 @@ class AddLibraryForm(forms.ModelForm):
     class Meta:
         model   =  Library
         fields  =  ['library_name','library_type','library_email','library_country','library_phone',]
+        
 
+
+# class AddAdditionalLibraryInformationForm(forms.ModelForm):
+
+#     class Meta:
+#         model = Additional_library_information
+#         exclude = ('library',)
+
+
+class UpdateLibraryForm(forms.ModelForm):
+    library_type         =   forms.ChoiceField(choices=LIBRARY_TYPES,widget=forms.Select(attrs={
+    'class': 'form-select',
+    'placeholder':'Type',
+    }))
+
+    class Meta:
+        model   = Library
+        exclude =('library_admin',)
+        widgets = {'library_country': CountrySelectWidget(),'class': 'form-control',}
 
 class AddCatalogForm(forms.ModelForm):
 

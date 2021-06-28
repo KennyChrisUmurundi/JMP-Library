@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import AddLibraryForm, AddCatalogForm, UpdateCatalogForm, AddEbookForm, UpdateEbookForm, AddCategoryForm, UpdateCategoryForm, AddAuthorForm, UpdateAuthorForm, AddMemberForm, UpdateMemberForm,AddBorrowForm, CheckoutForm, AddSupplierForm, AddPurchaseForm, UpdateSupplierForm, UpdatePurchaseForm, AddEmployeeForm, UpdateEmployee, AddDesignationForm, UpdateDesignation, AddDepartmentForm, UpdateDepartment, AddMediaForm,UpdateMedia
+from .forms import AddLibraryForm, AddCatalogForm, UpdateCatalogForm, AddEbookForm, UpdateEbookForm, AddCategoryForm, UpdateCategoryForm, AddAuthorForm, UpdateAuthorForm, AddMemberForm, UpdateMemberForm,AddBorrowForm, CheckoutForm, AddSupplierForm, AddPurchaseForm, UpdateSupplierForm, UpdatePurchaseForm, AddEmployeeForm, UpdateEmployee, AddDesignationForm, UpdateDesignation, AddDepartmentForm, UpdateDepartment, AddMediaForm,UpdateMedia, UpdateLibraryForm
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from .models import Library, Catalog, Ebook, Category, Author, Member, Borrowed, Supplier, Purchase, Employee, Designation, Department, Media
@@ -16,6 +16,20 @@ def dashboard(request,pk):
     'libraries':libraries
     }
     return render(request,'dashboard.html',context)
+
+class UpdateLibrary(LoginRequiredMixin,UpdateView):
+
+    model = Library
+    template_name = 'library_info/additional_library_infos.html'
+    form_class  = UpdateLibraryForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        con = self.object.pk
+        context["pk"] = con
+        return context
+
+
 
 class CreateLibrary(LoginRequiredMixin,CreateView):
 

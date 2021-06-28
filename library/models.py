@@ -13,14 +13,28 @@ class Library(models.Model):
     library_name        =       models.CharField(max_length=300,unique=True)
     library_type        =       models.CharField(max_length=300)
     library_email       =       models.CharField(max_length=300)
-    library_country     =       models.CharField(max_length=200,default='Others')
+    library_country     =       CountryField()
+    sub_county          =       models.CharField(max_length=200,blank=True,null=True)
+    library_address     =       models.CharField(max_length=200,blank=True,null=True)
     library_phone       =       models.CharField(max_length=200,null=True,blank=True)
+    library_description =       models.TextField(blank=True,null=True)
+    
 
     def __str__(self):
         return self.library_name
 
     def get_absolute_url(self):
         return reverse('library:dashboard', kwargs={'pk': self.pk})
+
+class Additional_library_information(models.Model):
+
+    library = models.ForeignKey(Library,on_delete=models.CASCADE)
+    desctiption = models.TextField()
+    address = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.address
+
 
 class Category(models.Model):
 
