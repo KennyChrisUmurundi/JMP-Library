@@ -22,11 +22,11 @@ def discover(request):
     library = Library.objects.all()
 
 
-    if Library.objects.filter(library_type = 'Entertainment'):
-        img = 'img/librry_default.jpeg'
+    # if Library.objects.filter(library_type = 'Entertainment'):
+    #     img = 'img/librry_default.jpeg'
 
     ctx = {
-    'img':img,
+    # 'img':img,
     'libraries':library
     }
     return render(request,'discover.html',ctx)
