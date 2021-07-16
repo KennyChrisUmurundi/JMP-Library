@@ -128,3 +128,8 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'main:libraries'
 
 django_heroku.settings(locals())
+
+
+STRIPE_PUBLIC_KEY = 'pk_test_epUupxLsRwt7QNm2aiDE7Wa800fTNMCkBH'
+
+STRIPE_PRIVATE_KEY = 'sk_test_pNre034ewYPh6rm8OK5MPUYm005DbF1Ivd'

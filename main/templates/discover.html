@@ -140,7 +140,7 @@ section .section-title {
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
       <a href="index.html" class="logo d-flex align-items-center">
-        <img src="assets/img/logo.png" alt="">
+        <img src="{% static 'img/jmp_logo.png'%}" alt="">
         <span>JMP Library</span>
       </a>
       <!-- <div class="cc-selector">
@@ -239,8 +239,8 @@ section .section-title {
                                         </li>
                                         </br>
                                         <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="http://youronlinelib.herokuapp.com/lib/{{library.pk}}">
-                                                http://youronlinelib.herokuapp.com/lib/{{library.pk}}
+                                            <a class="social-icon text-xs-center" target="_blank" href="{% url 'entities:lib' library.pk %}">
+                                                JmpLibrary/{{library.library_name}}.com
                                             </a>
                                         </li>
                                     </ul>

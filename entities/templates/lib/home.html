@@ -69,11 +69,11 @@
             </div>
             <div class="courses-wrapper">
                 <div class="row">
-                    <div class="col-lg-3 col-sm-6 courses-col">
                     {% for ebook in ebook %}
+                    <div class="col-lg-3 col-sm-6 courses-col">
                         <div class="single-courses-2 mt-30">
                             <div class="courses-image">
-                                <a href="courses-details.html"><img src="{{ebook.book_cover.url}}" alt="courses"></a>
+                                <a href="courses-details.html"><img src="{{ebook.book_cover.url}}" style="height:300px;"alt="courses"></a>
                             </div>
                             <div class="courses-content">
                                 <a href="#" class="category">{{ebook.category}}</a>
@@ -90,8 +90,8 @@
                                 </div>
                             </div>
                         </div>
-                        {% endfor %}
                     </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -155,7 +155,7 @@
                 {% for catalog in catalogs %}
                     <div class="col-lg-3 col-sm-6 courses-col">
                         <div class="single-courses mt-30">
-                            <a href="#" class="category">{{catalog.category}}</a>
+                            <a href="{% url 'entities:single_ebook' catalog.library_id catalog.id %}" class="category">{{catalog.category}}</a>
                             <h4 class="courses-title"><a href="courses-details.html">{{catalog.title}}</a></h4>
                             <div class="duration-fee">
                                 <p class="duration">Year: <span>{{catalog.year}}</span></p>

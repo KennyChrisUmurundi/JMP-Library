@@ -8,7 +8,7 @@
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
       <a href="index.html" class="logo d-flex align-items-center">
-        <img src="assets/img/logo.png" alt="">
+        <img src="{% static 'img/jmp_logo.png'%}" alt="">
         <span>JMP Library</span>
       </a>
       <!-- <div class="cc-selector">
@@ -18,7 +18,7 @@
          </label>
        </form> -->
 
-      <nav  class="nav">
+      <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto active" href="/">Home</a></li>
           <li><a class="nav-link scrollto" href="#features">Features</a></li>
@@ -52,7 +52,7 @@
       <div class="row">
         <div class="col-lg-6 d-flex flex-column justify-content-center">
           <h1 data-aos="fade-up">Open a free library</h1>
-          <h2 data-aos="fade-up" data-aos-delay="400">Start managing your content</h2>
+          <h2 data-aos="fade-up" data-aos-delay="400">We are an informational technology service that support family archiving opportunities, businesses, county governments and more</h2>
           <div data-aos="fade-up" data-aos-delay="600">
             <div class="text-center text-lg-start mt-2">
               {% if request.user.is_authenticated %}
@@ -71,7 +71,7 @@
           </div>
         </div>
         <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
-          <img src="{% static 'img/pexels-cottonbro-2925307.jpg' %}" class="img-fluid" alt="">
+          <img src="{% static 'img/dreamstime_xxl_119990893.jpg' %}" class="img-fluid" alt="">
         </div>
       </div>
     </div>
@@ -80,35 +80,35 @@
 
   <main id="main">
     <!-- ======= About Section ======= -->
-    <!-- <section id="about" class="about">
+    <section id="about" class="about">
 
       <div class="container" data-aos="fade-up">
         <div class="row gx-0">
 
           <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
             <div class="content">
-              <h3>Who We Are</h3>
-              <h2>Expedita voluptas omnis cupiditate totam eveniet nobis sint iste. Dolores est repellat corrupti reprehenderit.</h2>
+              <!-- <h3>Who We Are</h3> -->
+              <h2>Library Administration Features and Functions</h2>
               <p>
-                Quisquam vel ut sint cum eos hic dolores aperiam. Sed deserunt et. Inventore et et dolor consequatur itaque ut voluptate sed et. Magnam nam ipsum tenetur suscipit voluptatum nam et est corrupti.
+                Our system helps you navigate through the administrative functions.You can hire a librarian to run your library, museum, and archiving system
               </p>
-              <div class="text-center text-lg-start">
+              <!-- <div class="text-center text-lg-start">
                 <a href="#" class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
                   <span>Read More</span>
                   <i class="bi bi-arrow-right"></i>
                 </a>
-              </div>
+              </div> -->
             </div>
           </div>
 
           <div class="col-lg-6 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
-            <img src="assets/img/about.jpg" class="img-fluid" alt="">
+            <img src="{% static 'img/pexels-cottonbro-4855370.jpg' %}" style="height:500px;"class="img-fluid" alt="">
           </div>
 
         </div>
       </div>
 
-    </section><!-- End About Section --> -->
+    </section><!-- End About Section -->
 
     <!-- ======= Values Section ======= -->
     <section id="values" class="values">
@@ -124,25 +124,26 @@
 
           <div class="col-lg-4">
             <div class="box" data-aos="fade-up" data-aos-delay="200">
-              <img src="assets/img/values-1.png" class="img-fluid" alt="">
+
+              <img src="{% static 'img/—Pngtree—vector mobile app icon_3788423.png' %}" class="img-fluid" alt="">
               <h3> Simple & User-friendly</h3>
-              <p>Designed to make it simple and create your online library</p>
+              <p>We make it simple for creative families, businesses and County Governments to open and run a Vibrant Online Library</p>
             </div>
           </div>
 
           <div class="col-lg-4 mt-4 mt-lg-0">
             <div class="box" data-aos="fade-up" data-aos-delay="400">
-              <img src="assets/img/values-2.png" class="img-fluid" alt="">
-              <h3>Search through books</h3>
-              <p>Your members can search and borrow books from our library</p>
+              <img src="{% static 'img/—Pngtree—hand drawn cartoon polygon library_5357151.png' %}" class="img-fluid" alt="">
+              <h3>Your Library-Museum-Archive-Print Center</h3>
+              <p>As a member you will display, search, print, borrow and lend books, art and artifacts Worldwide</p>
             </div>
           </div>
 
           <div class="col-lg-4 mt-4 mt-lg-0">
             <div class="box" data-aos="fade-up" data-aos-delay="600">
-              <img src="assets/img/values-3.png" class="img-fluid" alt="">
-              <h3>Cost Effective</h3>
-              <p>No hardware cost,no expensive software to buy, no installation and its safe and secure</p>
+              <img src="{% static 'img/favpng_computer-keyboard-computer-repair-technician-clip-art.png' %}" class="img-fluid mt-5" alt="">
+              <h3>Scalable Solutions</h3>
+              <p>Start your library services today and leave the programming to us. We manage all changes hardware, software, hosting and installation</p>
             </div>
           </div>
 
@@ -287,12 +288,12 @@
               <div class="accordion-item">
                 <h2 class="accordion-header">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-1">
-                    Non consectetur a erat nam at lectus urna duis?
+                    When can i start my library?
                   </button>
                 </h2>
                 <div id="faq-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
                   <div class="accordion-body">
-                    Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
+                    You can set up your library after registration. We have incorporated all the steps required to be up and running.You will upgrade to use additional features
                   </div>
                 </div>
               </div>
@@ -300,12 +301,12 @@
               <div class="accordion-item">
                 <h2 class="accordion-header">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-2">
-                    Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque?
+                  What are the benefits of joining this library?
                   </button>
                 </h2>
                 <div id="faq-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
                   <div class="accordion-body">
-                    Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+                    You will be part of a large creative private library system with the most unusual products and experiences outside of conventional libraries.
                   </div>
                 </div>
               </div>
@@ -313,12 +314,12 @@
               <div class="accordion-item">
                 <h2 class="accordion-header">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-3">
-                    Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi?
+                    Who can access the library and how?
                   </button>
                 </h2>
                 <div id="faq-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
                   <div class="accordion-body">
-                    Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
+                    Access from internet enabled device such as cellphone and computer
                   </div>
                 </div>
               </div>
@@ -334,12 +335,12 @@
               <div class="accordion-item">
                 <h2 class="accordion-header">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2-content-1">
-                    Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla?
+                    What skills do i need to start?
                   </button>
                 </h2>
                 <div id="faq2-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist2">
                   <div class="accordion-body">
-                    Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+                    You will need to register by completing a form. It is advisable to have your logo and products ready to upload.
                   </div>
                 </div>
               </div>
@@ -347,17 +348,17 @@
               <div class="accordion-item">
                 <h2 class="accordion-header">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2-content-2">
-                    Tempus quam pellentesque nec nam aliquam sem et tortor consequat?
+                    Can i try out the  services?
                   </button>
                 </h2>
                 <div id="faq2-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist2">
                   <div class="accordion-body">
-                    Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in
+                    Free for up to ten items or records. Upgrade anytime
                   </div>
                 </div>
               </div>
 
-              <div class="accordion-item">
+              <!-- <div class="accordion-item">
                 <h2 class="accordion-header">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2-content-3">
                     Varius vel pharetra vel turpis nunc eget lorem dolor?
@@ -368,7 +369,7 @@
                     Laoreet sit amet cursus sit amet dictum sit amet justo. Mauris vitae ultricies leo integer malesuada nunc vel. Tincidunt eget nullam non nisi est sit amet. Turpis nunc eget lorem dolor sed. Ut venenatis tellus in metus vulputate eu scelerisque. Pellentesque diam volutpat commodo sed egestas egestas fringilla phasellus faucibus. Nibh tellus molestie nunc non blandit massa enim nec.
                   </div>
                 </div>
-              </div>
+              </div> -->
 
             </div>
           </div>
@@ -398,21 +399,21 @@
                 <div class="info-box">
                   <i class="bi bi-geo-alt"></i>
                   <h3>Address</h3>
-                  <p>A108 Adam Street,<br>New York, NY 535022</p>
+                  <p>Global with in-country Managers</p>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="info-box">
                   <i class="bi bi-telephone"></i>
                   <h3>Call Us</h3>
-                  <p>+1 5589 55488 55<br>+1 6678 254445 41</p>
+                  <p>Due to the number of calls we get, we take calls after screening through your email</p>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="info-box">
                   <i class="bi bi-envelope"></i>
-                  <h3>Email Us</h3>
-                  <p>info@example.com<br>contact@example.com</p>
+                  <h3><a href="mailto:jmplibrary@gmail.com?subject=feedback">Email Us</a></h3>
+
                 </div>
               </div>
               <div class="col-md-6">
