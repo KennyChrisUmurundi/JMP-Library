@@ -9,8 +9,9 @@
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
       <a href="index.html" class="logo d-flex align-items-center">
-        <img src="assets/img/logo.png" alt="">
-        <span>LMS</span>
+        <img src="{% static 'img/jmp_logo.png'%}" style=" display: block;
+                                                          max-height: 150px !important;"alt="">
+        <!-- <span>LMS</span> -->
       </a>
 
       <nav id="navbar" class="navbar">
@@ -38,15 +39,15 @@
 
               {{  form|crispy  }}
 								<div class="w-50 text-md-right">
-									<a href="#">Forgot Password</a>
+									<a href="#">Forgot Password ?</a>
+                  </br>
                   <button class="btn btn-primary" type="submit">Login</button>
 								</div>
-	            </div>
 	          </form>
 	        </div>
+          </div>
 				</div>
 			</div>
-		</div>
 {% include 'footer.html'%}
       </body>
 {% endblock %}

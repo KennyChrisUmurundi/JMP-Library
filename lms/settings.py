@@ -32,7 +32,8 @@ INSTALLED_APPS = [
     'library',
     'entities',
     'crispy_forms',
-    'django_countries'
+    'django_countries',
+    'paypal.standard.ipn'
 ]
 
 MIDDLEWARE = [
@@ -133,3 +134,5 @@ django_heroku.settings(locals())
 STRIPE_PUBLIC_KEY = 'pk_test_epUupxLsRwt7QNm2aiDE7Wa800fTNMCkBH'
 
 STRIPE_PRIVATE_KEY = 'sk_test_pNre034ewYPh6rm8OK5MPUYm005DbF1Ivd'
+
+PAYPAL_TEST = True
