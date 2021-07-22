@@ -72,9 +72,40 @@
                                             </div> -->
                                         </div>
                                         <div class="product-btn">
-                                            <a href="#" id="buy_now_btn" class="main-btn main-btn-2 add-cart">Buy Book</a>
-                                            <a href="#" class="wishlist"><i class="fal fa-heart"></i></a>
-                                            <a href="#" class="compare"><i class="fal fa-repeat"></i></a>
+                                          <div id="paypal-button-container"></div>
+
+                                          <!-- Include the PayPal JavaScript SDK -->
+                                          <script src="https://www.paypal.com/sdk/js?client-id=AVAP-4PAutBAF8SET3oV1tk0lOB5ceMo0QQcyoiI6uI03Jy2nRNk8Dg11M4YKHgqDqEhoP8biIU5OniW&currency=USD"></script>
+
+                                          <script>
+                                            var amount = '{{ebook.book_price}}'
+                                              // Render the PayPal button into #paypal-button-container
+                                              paypal.Buttons({
+
+                                                  style: {
+                                                      color:  'blue',
+                                                      shape:  'pill',
+                                                      label:  'pay',
+                                                      height: 40
+                                                  },
+                                                  //set up transaction
+                                                  createOrder:function(data,actions){
+                                                    return actions.order.create({
+                                                      purchase_units:[{
+                                                        amount:{
+                                                          value:parseFloat(amount).toFixed(2)
+                                                        }
+                                                      }]
+                                                    });
+                                                  },
+                                                  onApprove:function(data,actions){
+                                                    return actions.order.capture().then(function(details){
+                                                      alert('transaction completed')
+                                                    });
+                                                  },
+
+                                              }).render('#paypal-button-container');
+                                          </script>
                                         </div>
                                     </div>
                                 </div>
@@ -116,7 +147,7 @@
                                 </div>
                                 <div class="tab-pane fade" id="information" role="tabpanel">
                                     <div class="product-information table-responsive">
-                                        <table class="table">                                        
+                                        <table class="table">
                                             <tbody>
                                                 <tr>
                                                     <td class="table-title"><h4 class="title">Materisl</h4></td>
@@ -304,7 +335,7 @@
             </div>
         </div>
 
-        
+
 
     <script src="https://js.stripe.com/v3/"></script>
 
@@ -312,7 +343,7 @@
 
         const buy_now_button = document.querySelector('#buy_now_btn')
 
-        buy_now_button.addEventListener('click', event => {   
+        buy_now_button.addEventListener('click', event => {
           fetch('/checkout/{{pk}}/{{ebook.id}}')
           .then((result) => { return result.json() })
           .then((data) => {
@@ -328,7 +359,7 @@
               // error, display the localized error message to your customer
               // using `result.error.message`.
             });
-          }) 
+          })
         })
       </script>
 {% endif %}
