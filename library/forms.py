@@ -248,6 +248,7 @@ COUNTRIES = (
 
 LIBRARY_TYPES = (
 
+('Museum','Museum'),
 ('Entertainment','Entertainment'),
 ('Legal','Legal'),
 ('Politics/Government','Politics/Government'),

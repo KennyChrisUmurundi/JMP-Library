@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 
 
 class Login(LoginView):
-    template_name = 'login.html'
+    template_name = "login.html"
 
 
 # def login_view(request):
@@ -44,27 +44,29 @@ class Login(LoginView):
 #     }
 #     return render(request,'login.html',context)
 
+
 def register(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = forms.UserRegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password1')
+            username = form.cleaned_data.get("username")
+            password = form.cleaned_data.get("password1")
             user = authenticate(username=username, password=password)
             if user is not None:
-                print('logged on succesfully')
-                login(request,user)
+                print("logged on succesfully")
+                login(request, user)
             else:
-                print('bado')
-                return HttpResponseRedirect(reverse('account:login'))
-            login(request,user)
-            #messages.success(request, f'Your account has been created! You are now able to log in')
-            return redirect('main:home')
+                print("bado")
+                return HttpResponseRedirect(reverse("account:login"))
+            login(request, user)
+            # messages.success(request, f'Your account has been created! You are now able to log in')
+            return redirect("main:home")
     else:
         form = forms.UserRegisterForm()
-    return render(request, 'register.html', {'form': form})
+    return render(request, "register.html", {"form": form})
+
 
 def logout_view(request):
     logout(request)
-    return redirect('main:home')
+    return redirect("main:home")
