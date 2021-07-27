@@ -180,6 +180,8 @@ def checkout(request, id, pk):
 
 
 def paypal_webhook(request):
-
-    data = request.data
-    return data 
+    if request.method == 'GET':
+        data = request.data
+        return data 
+    else:
+        return 1
