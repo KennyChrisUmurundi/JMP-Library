@@ -9,12 +9,14 @@ import stripe
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
+import logging
 
 # Create your views here.
 
 
 # stripe.api_key = settings.STRIPE_PRIVATE_KEY
 
+logger = logging.getLogger(__name__)
 
 def lib(request, pk):
     pk = pk
