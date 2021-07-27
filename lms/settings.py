@@ -33,7 +33,8 @@ INSTALLED_APPS = [
     'entities',
     'crispy_forms',
     'django_countries',
-    'paypal.standard.ipn'
+    'paypal.standard.ipn',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
