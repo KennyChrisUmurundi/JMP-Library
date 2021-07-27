@@ -8,6 +8,7 @@ from django.conf import settings
 import stripe
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+import json
 
 # Create your views here.
 
@@ -181,5 +182,6 @@ def checkout(request, id, pk):
 
 @csrf_exempt
 def paypal_webhook(request):
-
+    jsondata = request.body
+    data = json.loads(jsondata)
     return HttpResponse(request.data)
