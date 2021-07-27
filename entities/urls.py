@@ -9,6 +9,6 @@ urlpatterns = [
     path("items/<int:pk>", views.items, name="items"),
     path("ebooks/<int:pk>", views.ebooks, name="ebooks"),
     path("ebook/<int:pk>/<int:id>", views.single_ebook, name="single_ebook"),
-    path("checkout", views.checkout, name="checkout"),
+    # path("checkout", views.checkout, name="checkout"),
     path("Paypal-Webhook",views.paypal_webhook,name='webhook')
 ]

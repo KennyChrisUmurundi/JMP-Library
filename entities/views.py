@@ -155,38 +155,43 @@ def single_ebook(request, pk, id):
     return render(request, "lib/single_ebook.html", ctx)
 
 
-def checkout(request, id, pk):
-    pk = pk
-    print("seeing you")
-    library = Library.objects.get(id=id)
+# def checkout(request, id, pk):
+#     pk = pk
+#     print("seeing you")
+#     library = Library.objects.get(id=id)
 
-    session = stripe.checkout.Session.create(
-        payment_method_types=["card"],
-        line_items=[
-            {
-                "price": "price_1J8UOiEb6vVsn22vNYHKiyVc",
-                "quantity": 1,
-            }
-        ],
-        mode="payment",
-        success_url=request.build_absolute_uri(
-            reverse("entities:ebooks", kwargs={"pk": library, "pk": pk})
-        )
-        + "?session_id={CHECKOUT_SESSION_ID}",
-        cancel_url=request.build_absolute_uri(
-            reverse("entities:ebooks", kwargs={"pk": library, "pk": pk})
-        ),
-    )
+#     session = stripe.checkout.Session.create(
+#         payment_method_types=["card"],
+#         line_items=[
+#             {
+#                 "price": "price_1J8UOiEb6vVsn22vNYHKiyVc",
+#                 "quantity": 1,
+#             }
+#         ],
+#         mode="payment",
+#         success_url=request.build_absolute_uri(
+#             reverse("entities:ebooks", kwargs={"pk": library, "pk": pk})
+#         )
+#         + "?session_id={CHECKOUT_SESSION_ID}",
+#         cancel_url=request.build_absolute_uri(
+#             reverse("entities:ebooks", kwargs={"pk": library, "pk": pk})
+#         ),
+#     )
 
-    return JsonResponse(
-        {"session_id": session.id, "stripe_public_key": settings.STRIPE_PUBLIC_KEY}
-    )
+#     return JsonResponse(
+#         {"session_id": session.id, "stripe_public_key": settings.STRIPE_PUBLIC_KEY}
+#     )
 
 @csrf_exempt
 def paypal_webhook(request):
     jsondata = request.body
     data = json.loads(jsondata)
+    payment_detail = data.get("payments",None)
+    bill = data.get('seller_receivable_breakdown',None)
+    status = data.get("status",None)
 
+    if status == "COMPLETED":
+        pass
     print("daaaaaaaataaaaaaaa",data)
     logger.debug("Thissssssssss  :%s" % data)
-    return HttpResponse(data)
+    return HttpResponse(status=200)

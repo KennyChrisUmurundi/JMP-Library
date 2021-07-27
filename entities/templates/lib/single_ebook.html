@@ -79,6 +79,7 @@
 
                                           <script>
                                             var amount = '{{ebook.book_price}}'
+                                            var reference = '{{ebook.id}}'
                                               // Render the PayPal button into #paypal-button-container
                                               paypal.Buttons({
 
@@ -94,6 +95,9 @@
                                                       purchase_units:[{
                                                         amount:{
                                                           value:parseFloat(amount).toFixed(2)
+                                                        },
+                                                        reference_id:{
+                                                          value:reference
                                                         }
                                                       }]
                                                     });
