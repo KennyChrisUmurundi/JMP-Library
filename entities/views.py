@@ -184,5 +184,5 @@ def checkout(request, id, pk):
 def paypal_webhook(request):
     jsondata = request.body
     data = json.loads(jsondata)
-    logger.debug("Thissssssssss  :%s" data)
+    logger.debug("Thissssssssss  :%s" % data)
     return HttpResponse(data)
