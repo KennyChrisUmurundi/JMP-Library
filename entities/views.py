@@ -7,6 +7,7 @@ from django.db.models import Q
 from django.conf import settings
 import stripe
 from django.http import JsonResponse, HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
@@ -178,7 +179,7 @@ def checkout(request, id, pk):
         {"session_id": session.id, "stripe_public_key": settings.STRIPE_PUBLIC_KEY}
     )
 
-
+@csrf_exempt
 def paypal_webhook(request):
 
     return HttpResponse(request.data)
