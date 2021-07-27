@@ -11,7 +11,7 @@ from django.http import JsonResponse, HttpResponse
 # Create your views here.
 
 
-stripe.api_key = settings.STRIPE_PRIVATE_KEY
+# stripe.api_key = settings.STRIPE_PRIVATE_KEY
 
 
 def lib(request, pk):
@@ -177,3 +177,9 @@ def checkout(request, id, pk):
     return JsonResponse(
         {"session_id": session.id, "stripe_public_key": settings.STRIPE_PUBLIC_KEY}
     )
+
+
+def paypal_webhook(request):
+
+    data = request.data
+    return data 

@@ -6,9 +6,12 @@ from urllib3.exceptions import (
     TimeoutError,
 )
 
-
 logger = logging.getLogger(__name__)
 
+fedex_test_key = '3kWyadILwhnan9fW'
+Test_FedEx_Office_Integrator_ID=123
+Test_Client_Product_ID='TEST'
+Test_Client_Product_Version=9999 
 
 def get_api_urls():
     """
@@ -21,3 +24,9 @@ def get_api_urls():
 
 def paypal_pay():
     pass
+
+
+class FedexPlugin():
+
+    def fedex_print(file,url):
+        pass
