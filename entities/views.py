@@ -190,6 +190,9 @@ def paypal_webhook(request):
     bill = data.get('seller_receivable_breakdown',None)
     status = data.get("status",None)
 
+    book = data.get("custom_id",None)
+    print(book)
+
     if status == "COMPLETED":
         pass
     print("daaaaaaaataaaaaaaa",data)
