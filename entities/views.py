@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .utilities import get_library
 from library.models import Member, Library, Catalog, Ebook
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -10,6 +10,10 @@ from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 import logging
+from .models import bought_items
+from django.contrib.auth.views import LoginView
+from django.contrib.auth import authenticate, login
+from account.forms import UserRegisterForm
 
 # Create your views here.
 
@@ -17,6 +21,55 @@ import logging
 # stripe.api_key = settings.STRIPE_PRIVATE_KEY
 
 logger = logging.getLogger(__name__)
+
+
+
+class library_login(LoginView):
+    template_name = "auth/login.html"
+
+def library_login(request,path):    
+    path = path
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        print(username,password)
+        user = authenticate(request, username=username, password=password)
+        print("nakuonaaa")
+        if user is not None:
+            login(request, user)
+            return redirect(path)
+            print("egoooo")
+            # Redirect to a success page.
+        else:
+            # Return an 'invalid login' error message.
+            print("wapiiiiii")
+            # messages.warning(request, 'Username or Password Incorrect!')
+            return redirect(path)
+
+    return render(request,'auth/login.html',{'path':path})
+
+def account_register(request,path):
+    path = path
+    if request.method == "POST":
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get("username")
+            password = form.cleaned_data.get("password1")
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                print("logged on succesfully")
+                login(request, user)
+                return redirect(path)
+            else:
+                print("bado")
+                return HttpResponseRedirect(reverse("account:login"))
+            login(request, user)
+            # messages.success(request, f'Your account has been created! You are now able to log in')
+            return redirect(path)
+    else:
+        form =  UserRegisterForm()
+    return render(request, "auth/register.html", {"form": form,'path':path})
 
 def lib(request, pk):
     pk = pk
@@ -50,7 +103,7 @@ def items(request, pk):
         )
         result = Catalog.objects.filter(queryset, library_id=pk).distinct()
         page = request.GET.get("page")
-        paginator = Paginator(result, 20)
+        paginator = Paginator(result, 4)
         page_obj = paginator.get_page(page)
         try:
             items = paginator.page(page)
@@ -71,7 +124,7 @@ def items(request, pk):
     else:
 
         page = request.GET.get("page")
-        paginator = Paginator(catalogs, 20)
+        paginator = Paginator(catalogs, 12)
         page_obj = paginator.get_page(page)
         try:
             items = paginator.page(page)
@@ -123,7 +176,7 @@ def ebooks(request, pk):
             # 'catalogs':catalogs,
             "paginator": page_obj,
         }
-        return render(request, "lib/items.html", context)
+        return render(request, "lib/ebooks.html", context)
     else:
 
         page = request.GET.get("page")
@@ -186,15 +239,42 @@ def single_ebook(request, pk, id):
 def paypal_webhook(request):
     jsondata = request.body
     data = json.loads(jsondata)
-    payment_detail = data.get("payments",None)
-    bill = data.get('seller_receivable_breakdown',None)
-    status = data.get("status",None)
-
-    book = data.get("custom_id",None)
-    print(book)
-
-    if status == "COMPLETED":
-        pass
+    # purchase = data.get("resource")
+    # status = purchase["status"]
+    # details = purchase["payer"]["email_address"]
+    # print(details,'aaaaaaaaaaannnnnnnd','aaaaaaaaaaand',status)
+    # print(book)
     print("daaaaaaaataaaaaaaa",data)
     logger.debug("Thissssssssss  :%s" % data)
     return HttpResponse(status=200)
+
+def complete_order(request):
+    body = json.loads(request.body)
+    print('The Bodyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy',body)
+
+    item = Ebook.objects.get(id=body['productId'])
+    library = Library.objects.get(id=body['library'])
+    bought_items.objects.create(
+        buyer=request.user,
+        item = item.title,
+        item_file=item.book_pdf,
+        ebook = item,
+        library=library
+        )
+    return JsonResponse('Payment Complete',safe=False)
+
+
+def my_books(request,pk):
+    pk = pk
+    lib= Library.objects.get(id=pk)
+    libra = Library.objects.filter(id=pk)
+    my_book = bought_items.objects.filter(buyer=request.user,library=lib)
+
+    ctx = {
+        'my_book':my_book,
+        'libraries':libra,
+        'pk':pk
+    }
+    return render(request,'lib/my_books.html',ctx)
+
+

@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'home',
     'main',
     'account',
     'library',
@@ -127,7 +128,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-LOGIN_REDIRECT_URL = 'main:libraries'
+LOGIN_REDIRECT_URL = 'home:libraries'
 
 django_heroku.settings(locals())
 
@@ -137,6 +138,7 @@ STRIPE_PUBLIC_KEY = 'pk_test_epUupxLsRwt7QNm2aiDE7Wa800fTNMCkBH'
 STRIPE_PRIVATE_KEY = 'sk_test_pNre034ewYPh6rm8OK5MPUYm005DbF1Ivd'
 
 PAYPAL_TEST = True
+PAYPAL_RECEIVER_EMAIL = "jmplibrary@gmail.com"
 
 fedex_test_key = '3kWyadILwhnan9fW'
 Test_FedEx_Office_Integrator_ID=123

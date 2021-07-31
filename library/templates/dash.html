@@ -36,7 +36,7 @@
         <!-- ============================================================== -->
         <div class="dashboard-header">
             <nav class="navbar navbar-expand-lg bg-white fixed-top">
-                <a class="navbar-brand" href="/"> JMP Library</a>
+                <a class="navbar-brand" href="/"> {{library}}</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -50,7 +50,7 @@
                                 <div class="nav-user-info">
                                     <h5 class="mb-0 text-white nav-user-name">{{request.user}}</h5>
                                 </div>
-                                <a class="dropdown-item" href="{% url 'main:libraries' %}"><i class="fas fa-user mr-2"></i>My Libraries</a>
+                                <a class="dropdown-item" href="{% url 'home:libraries' %}"><i class="fas fa-user mr-2"></i>My Libraries</a>
                                 <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>Setting</a>
                                 <a class="dropdown-item" href="{% url 'account:logout'%}"><i class="fas fa-power-off mr-2"></i>Logout</a>
                             </div>
@@ -103,5 +103,4 @@
 
 
 </body>
-
 </html>

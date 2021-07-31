@@ -21,10 +21,11 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('main.urls')),
+    path('',include('home.urls')),
     path('account/',include('account.urls')),
     path('lib/',include('library.urls')),
     path('library/',include('entities.urls')),
+    path('paypal/', include('paypal.standard.ipn.urls')),
     # path('checkout/<int:id>/<int:pk>',checkout,name='checkout')
 
 ]

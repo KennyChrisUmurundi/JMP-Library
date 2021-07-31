@@ -61,7 +61,7 @@ def register(request):
                 return HttpResponseRedirect(reverse("account:login"))
             login(request, user)
             # messages.success(request, f'Your account has been created! You are now able to log in')
-            return redirect("main:home")
+            return redirect("home:home")
     else:
         form = forms.UserRegisterForm()
     return render(request, "register.html", {"form": form})
@@ -69,4 +69,9 @@ def register(request):
 
 def logout_view(request):
     logout(request)
-    return redirect("main:home")
+    return redirect("home:home")
+
+def entity_logout_view(request,path):
+    path=path
+    logout(request)
+    return redirect(path)

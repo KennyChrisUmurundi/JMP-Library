@@ -278,7 +278,7 @@ class AddLibraryForm(forms.ModelForm):
     }))
 
     library_type         =   forms.ChoiceField(choices=LIBRARY_TYPES,widget=forms.Select(attrs={
-    'class': 'form-select',
+    'class': 'form-control',
     'placeholder':'Type',
     }))
 
@@ -321,7 +321,7 @@ class UpdateLibraryForm(forms.ModelForm):
 
     class Meta:
         model   = Library
-        exclude =('library_admin',)
+        exclude =('library_admin','plan',)
         widgets = {'library_country': CountrySelectWidget(),'class': 'form-control',}
 
 class AddCatalogForm(forms.ModelForm):

@@ -1,19 +1,24 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.http.response import HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404, reverse
 from .forms import AddLibraryForm, AddCatalogForm, UpdateCatalogForm, AddEbookForm, UpdateEbookForm, AddCategoryForm, UpdateCategoryForm, AddAuthorForm, UpdateAuthorForm, AddMemberForm, UpdateMemberForm,AddBorrowForm, CheckoutForm, AddSupplierForm, AddPurchaseForm, UpdateSupplierForm, UpdatePurchaseForm, AddEmployeeForm, UpdateEmployee, AddDesignationForm, UpdateDesignation, AddDepartmentForm, UpdateDepartment, AddMediaForm,UpdateMedia, UpdateLibraryForm
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from .models import Library, Catalog, Ebook, Category, Author, Member, Borrowed, Supplier, Purchase, Employee, Designation, Department, Media
 from django.views.generic.detail import SingleObjectMixin
+from paypal.standard.forms import PayPalPaymentsForm
+
 # from entities.models import Entity
 # Create your views here.
 
 def dashboard(request,pk):
     catalogs = Catalog.objects.filter(library=pk)
     libraries= Library.objects.filter(id=pk)
+    library = Library.objects.get(id=pk)
     context={
     'pk':pk,
     'catalogs':catalogs,
-    'libraries':libraries
+    'libraries':libraries,
+    'library':library
     }
     return render(request,'dashboard.html',context)
 
@@ -27,6 +32,7 @@ class UpdateLibrary(LoginRequiredMixin,UpdateView):
         context = super().get_context_data(**kwargs)
         con = self.object.pk
         context["pk"] = con
+        context["library"] = Library.objects.get(id=con)
         return context
 
 
@@ -103,6 +109,7 @@ class UpdateEbook(LoginRequiredMixin,UpdateView):
         context = super().get_context_data(**kwargs)
         con = self.object.pk
         context["pk"] = con
+        context["library"] = Library.objects.get(id=con)
         return context
 
 def DeleteEbook(request,id):
@@ -143,6 +150,7 @@ class UpdateCatalog(LoginRequiredMixin,UpdateView):
         context = super().get_context_data(**kwargs)
         con = self.object.pk
         context["pk"] = con
+        context["library"] = Library.objects.get(id=con)
         return context
 
 def DeleteCatalog(request,id):
@@ -195,6 +203,7 @@ class UpdateCategory(LoginRequiredMixin,UpdateView):
         context = super().get_context_data(**kwargs)
         con = self.object.pk
         context["pk"] = con
+        context["library"] = Library.objects.get(id=con)
         return context
 
 def DeleteCategory(request,id):
@@ -245,6 +254,7 @@ class UpdateAuthor(LoginRequiredMixin,UpdateView):
         context = super().get_context_data(**kwargs)
         con = self.object.pk
         context["pk"] = con
+        context["library"] = Library.objects.get(id=con)
         return context
 
 def DeleteAuthor(request,id):
@@ -683,4 +693,70 @@ def DeleteMedia(request,id):
 
 
 def plan(request,pk):
-    return render(request,'plans/plan.html',{'pk':pk})
+    context = {
+        'pk':pk,
+        'premium':'premium',
+        'gold':'gold'
+    }
+    return render(request,'plans/plan.html',context)
+
+
+def process_subscription(request,plan,pk):
+
+    
+    PAYPAL_RECEIVER_EMAIL = 'jmplibrary@gmail.com'
+    # subscription_plan = request.session.get('subscription_plan')
+    host = request.get_host()
+
+    # basic_plan = request.POST.get("basic",None)
+    # premium_plan = request.POST.get("premium",None)
+    # gold_plan = request.POST.get("gold",None)
+    # print(premium_plan,gold_plan)
+    print(plan)
+
+    # if basic_plan:
+    #     price = "10"
+    #     billing_cycle = 1
+    #     billing_cycle_unit = "M"
+    if plan == 'premium':
+        price = "50"
+        billing_cycle = 1
+        billing_cycle_unit = "M"
+    # elif gold_plan:
+    #     price = "100"
+    #     billing_cycle = 1
+    #     billing_cycle_unit = "M"
+
+
+    paypal_dict  = {
+        "cmd": "_xclick-subscriptions",
+        'business': PAYPAL_RECEIVER_EMAIL,
+        "a3": price,  # monthly price
+        "p3": billing_cycle,  # duration of each unit (depends on unit)
+        "t3": billing_cycle_unit,  # duration unit ("M for Month")
+        "src": "1",  # make payments recur
+        "sra": "1",  # reattempt payment on payment error
+        "no_note": "1",  # remove extra notes (optional)
+        'item_name': 'Jmp subscription',
+        'custom': 1,     # custom data, pass something meaningful here
+        'currency_code': 'USD',
+        'plan':plan,
+        'library_id':pk,
+        'notify_url': 'http://{}{}'.format(host,
+                                           reverse('paypal-ipn')),
+        'return_url': 'http://{}{}'.format(host,
+                                           reverse('library:plan',kwargs={'pk':pk})),
+        # 'cancel_return': 'http://{}{}'.format(host,
+        #                                       reverse('payment:canceled')),
+    }
+
+    form = PayPalPaymentsForm(initial=paypal_dict, button_type="subscribe")
+
+    ctx = {
+        'pk':pk,
+        'form':form,
+        'plan':plan,
+        'price':price
+
+    }
+    return render(request,'plans/process_subscription.html',ctx)

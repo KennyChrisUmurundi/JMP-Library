@@ -20,6 +20,7 @@ class Library(models.Model):
     library_description =       models.TextField(blank=True,null=True)
     library_main_image  =       models.ImageField(upload_to='images/library',default='images/library/main_library.jpg',null=True,blank=True)
     library_logo        =       models.ImageField(upload_to='images/library/logo',null=True,blank=True)
+    plan                =       models.CharField(max_length=200, default='basic')
     
 
     def __str__(self):

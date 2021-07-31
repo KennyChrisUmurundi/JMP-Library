@@ -99,7 +99,8 @@ urlpatterns = [
 
     # Plans
 
-    path('plan/<int:pk>',views.plan,name='plan')
+    path('plan/<int:pk>',views.plan,name='plan'),
+    path('process_subscription/<plan>/<int:pk>', views.process_subscription, name='process_subscription'),
 
 
 

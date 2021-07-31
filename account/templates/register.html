@@ -1,30 +1,69 @@
-{% extends 'base.html' %}
+{% extends 'home/all.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
 <body>
+<!-- ======= Top Bar ======= -->
+  <section id="topbar" class="d-none d-lg-block">
+    <div class="container d-flex">
+      <div class="contact-info mr-auto">
+        <ul>
+          <li><i class="icofont-envelope"></i><a href="mailto:contact@example.com">jmplibrary@gmail.com</a></li>
+          <!-- <li><i class="icofont-phone"></i> +1 5589 55488 55</li>
+          <li><i class="icofont-clock-time icofont-flip-horizontal"></i> Mon-Fri 9am - 5pm</li> -->
+        </ul>
+
+      </div>
+      {% if user.is_authenticated %}
+      <div class="cta">
+        <a href="{% url 'account:logout'%}" class="scrollto">Logout</a>
+      </div>
+      {% else %}
+
+      <div class="cta">
+        <a href="{% url 'account:login' %}" class="scrollto">Login</a>
+      </div>
+
+      {% endif %}
+    </div>
+  </section>
 
   <!-- ======= Header ======= -->
-  <header id="header" class="header fixed-top">
-    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+  <header id="header">
+    <div class="container d-flex">
 
-      <a href="index.html" class="logo d-flex align-items-center">
-        <img src="{% static 'img/jmp_logo.png'%}" style=" display: block;
-                                                          max-height: 150px !important;"alt="">
-        <!-- <span>LMS</span> -->
-      </a>
+      <div class="logo mr-auto">
+        <!-- <h1 class="text-light"><a href="index.html"><span>Flexor</span></a></h1> -->
+        <!-- Uncomment below if you prefer to use an image logo -->
+         <a href="index.html"><img src="{% static 'img/jmp_logo.png'%}" loading="lazy"style="
+                                                          height: 400px;
+                                                          "alt=""></a>
+      </div>
 
-      <nav id="navbar" class="navbar">
+      <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li><a class="nav-link scrollto active" href="{% url 'main:home' %}">Home</a></li>
-          <li><a class="getstarted nav-link scrollto active" href="{% url 'account:login'%}">Sign In</a></li>
+          <li class="active"><a href="/">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">F.A.Q</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="{% url 'home:discover' %}">Discover</a></li>
+          {% if user.is_authenticated %}
+          <li class="drop-down"><a href="">Profile</a>
+            <ul>
+              <li><a href="{% url 'home:libraries'%}">My Libraries</a></li>
+              <li><a href="{% url 'library:create_library'%}">Create Library</a></li>
+              <li><a href="{% url 'account:logout'%}">Logout</a></li>
+            </ul>
+          </li>
+          {% endif %}
+          
+
         </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
+      </nav><!-- .nav-menu -->
 
     </div>
   </header><!-- End Header -->
-  <section class="ftco-section">
+  <section class="services section-bg">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-7 col-lg-5">
