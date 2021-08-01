@@ -2,8 +2,30 @@
 {% load static %}
 {% block content %}
 {% include 'lib/navbar.html' %}
+
 <section class="event-page">
+
         <div class="container">
+            <div class="col-md-6">
+                        <div class="shop-bar-form">                           
+                            <div class="shop-search">
+                                <form method="GET">
+                                    {% csrf_token %}
+                                    <div class="courses-search">
+                                        <div class='row'>
+                                        <input type="text" name="search" placeholder="Search Ebook">
+                                        <!-- <i type='submit'class="fas fa-search"></i> -->
+                                        <button class = 'btn btn-success mt-1 btn-sm' type='submit'>submit</button>
+                                        {% if query%}
+                                        <button class = 'btn btn-warning ml-1 btn-sm'>back</button>
+                                        {% endif%}
+                                        </div>
+                                    </div>
+                            </form>
+                                <i class="far fa-search"></i>
+                            </div>
+                        </div>
+                    </div>
             <div class="row">
             {% for catalog in paginator %}
                 <div class="col-lg-3 col-sm-6">
