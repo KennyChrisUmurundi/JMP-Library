@@ -1,14 +1,30 @@
-from django.shortcuts import get_object_or_404
-from .models import Library
+from paypal.standard.models import ST_PP_COMPLETED
 from paypal.standard.ipn.signals import valid_ipn_received
-from django.dispatch import receiver
-# from paypal.standard.models import PayPalStandardBase
-from paypal.standard.ipn.signals import payment_was_successful
 
-
-def process_subscription(sender, **kwargs):
+@receiver(valid_ipn_received)
+def paypal_payment_received(sender, **kwargs):
     ipn_obj = sender
-    # Undertake some action depending upon `ipn_obj`.
     print(ipn_obj)
+    if ipn_obj.payment_status == ST_PP_COMPLETED:
+        # WARNING !
+        # Check that the receiver email is the same we previously
+        # set on the `business` field. (The user could tamper with
+        # that fields on the payment form before it goes to PayPal)
+        if ipn_obj.receiver_email != 'jmplibrary@gmail.com':
+            # Not a valid payment
+            return -1
 
-payment_was_successful.connect(process_subscription)
+        # ALSO: for the same reason, you need to check the amount
+        # received, `custom` etc. are all what you expect or what
+        # is allowed.
+        try:
+            my_pk = ipn_obj.invoice
+            mytransaction = MyTransaction.objects.get(pk=my_pk)
+            assert ipn_obj.mc_gross == mytransaction.amount and ipn_obj.mc_currency == 'EUR'
+        except Exception:
+            logger.exception('Paypal ipn_obj data not valid!')
+        else:
+            mytransaction.paid = True
+            mytransaction.save()
+    else:
+        logger.debug('Paypal payment status not completed: %s' % ipn_obj.payment_status)
