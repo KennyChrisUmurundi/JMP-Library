@@ -9,4 +9,5 @@ from paypal.standard.models import PayPalStandardBase
 def payment_notification(sender, **kwargs):
     print("sooooooooooooooooooooooooooooooooomeeeeeeeeeeeeeeee")
     ipn_obj = sender
-    print(ipn_obj.custom)
+    lib = PayPalStandardBase.objects.get(ipn_obj)
+    print("the liiib",lib)
