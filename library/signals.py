@@ -8,6 +8,7 @@ from django.dispatch import receiver
 def payment_notification(sender, **kwargs):
     print("sooooooooooooooooooooooooooooooooomeeeeeeeeeeeeeeee")
     ipn = sender
+    print('the senderrrrrrr',sender)
     print('theeeeeeeippppnnnn',ipn)
     if ipn.payment_status == 'Completed':
         # payment was successful

@@ -722,10 +722,10 @@ def process_subscription(request,plan,pk):
         price = "50"
         billing_cycle = 1
         billing_cycle_unit = "M"
-    # elif gold_plan:
-    #     price = "100"
-    #     billing_cycle = 1
-    #     billing_cycle_unit = "M"
+    elif plan == 'gold':
+        price = "100"
+        billing_cycle = 1
+        billing_cycle_unit = "M"
 
 
     paypal_dict  = {

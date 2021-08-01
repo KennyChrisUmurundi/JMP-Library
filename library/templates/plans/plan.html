@@ -102,7 +102,11 @@
                                     <li>Technical Suport</li>
                                     <li>Library added on the discover page</li>
                                 </ul>
-                                <a href="#" name="Gold" class="btn btn-outline-secondary btn-block btn-lg">Subscribe</a>
+                                <form method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="gold" value="gold">
+                                <a href="{% url 'library:process_subscription' gold pk %}" type="submit" name="gold" value="gold" class="btn btn-outline-secondary btn-block btn-lg">Subscribe</a>
+                                </form>
                             </div>
                         </div>
                     </div>
