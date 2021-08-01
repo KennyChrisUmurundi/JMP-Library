@@ -727,7 +727,9 @@ def process_subscription(request,plan,pk):
         billing_cycle = 1
         billing_cycle_unit = "M"
 
-
+    library = Library.objects.get(id=pk)
+    uniq_id = library.library_name+plan
+    print(uniq_id)
     paypal_dict  = {
         "cmd": "_xclick-subscriptions",
         'business': PAYPAL_RECEIVER_EMAIL,
@@ -742,6 +744,7 @@ def process_subscription(request,plan,pk):
         'currency_code': 'USD',
         'plan':plan,
         'library_id':pk,
+        'rp_invoice_id':uniq_id,
         'notify_url': 'http://{}{}'.format(host,
                                            reverse('paypal-ipn')),
         'return_url': 'http://{}{}'.format(host,
