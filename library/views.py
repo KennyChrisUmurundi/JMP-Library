@@ -740,11 +740,11 @@ def process_subscription(request,plan,pk):
         "sra": "1",  # reattempt payment on payment error
         "no_note": "1",  # remove extra notes (optional)
         'item_name': 'Jmp subscription',
-        'custom': 1,     # custom data, pass something meaningful here
+        'custom': uniq_id,     # custom data, pass something meaningful here
         'currency_code': 'USD',
-        'plan':plan,
-        'library_id':pk,
-        'rp_invoice_id':uniq_id,
+        # 'plan':plan,
+        # 'library_id':pk,
+        # 'rp_invoice_id':uniq_id,
         'notify_url': 'http://{}{}'.format(host,
                                            reverse('paypal-ipn')),
         'return_url': 'http://{}{}'.format(host,
