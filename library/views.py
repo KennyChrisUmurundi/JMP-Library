@@ -742,9 +742,6 @@ def process_subscription(request,plan,pk):
         'item_name': 'Jmp subscription',
         'custom': uniq_id,     # custom data, pass something meaningful here
         'currency_code': 'USD',
-        # 'plan':plan,
-        # 'library_id':pk,
-        # 'rp_invoice_id':uniq_id,
         'notify_url': 'http://{}{}'.format(host,
                                            reverse('paypal-ipn')),
         'return_url': 'http://{}{}'.format(host,
