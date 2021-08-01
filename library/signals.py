@@ -13,5 +13,6 @@ def payment_notification(sender, **kwargs):
     print(ipn.invoice)
     if ipn.payment_status == 'Completed':
         # payment was successful
-        library = get_object_or_404(Library, id=ipn.library_id)
-        library.plan = ipn.plan
+        # library = get_object_or_404(Library, id=ipn.library_id)
+        # library.plan = ipn.plan
+        print('success')
