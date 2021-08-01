@@ -8,11 +8,11 @@
         <div class="container">
             <div class="shop-bar">
                 <div class="row align-items-end">
-                    <div class="col-md-6">
+                    <!-- <div class="col-md-6">
                         <div class="shop-showing">                            
                             <p>Showing 1 - 16 of 36 results</p>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="col-md-6">
                         <div class="shop-bar-form">                           
                             <div class="shop-search">
@@ -55,13 +55,20 @@
                 </div>
             </div>
 
+            {% if items.has_other_pages %}
             <ul class="pagination-items text-center">
-                <li><a class="active" href="#">01</a></li>
-                <li><a href="#">02</a></li>
-                <li><a href="#">03</a></li>
-                <li><a href="#">04</a></li>
-                <li><a href="#">05</a></li>
+                {% if items.has_previous %}
+                    <li><a class="active"href="?page={{ users.previous_page_number }}"><i class="fa-solid fa-backward"></i></a></li>
+                {% endif %}
+                {% for i in items.paginator.page_range %}
+                    {% if items.number == i %}
+                        <li><a class="active"href="#">{{ i }}</a></li>
+                            {% else %}
+                        <li><a href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
             </ul>
+            {% endif %}
         </div>
     </section>
 
