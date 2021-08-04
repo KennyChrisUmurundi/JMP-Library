@@ -1,5 +1,5 @@
 from django import forms
-from .models import Library, Catalog, Category, Ebook, Author, Member, Borrowed, Supplier, Purchase, Employee, Designation, Department, Additional_library_information
+from .models import Library, Catalog, Category, Ebook, Author, Member, Borrowed, Supplier, Purchase, Employee, Designation, Department, Additional_library_information, Media
 from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
 from django.utils.translation import ugettext as _
@@ -529,3 +529,27 @@ class UpdateMedia(forms.ModelForm):
     class Meta:
         model   =   Department
         exclude =   ('library',)
+
+class AddMp3Form(forms.ModelForm):
+
+    class Meta:
+        model   =   Media
+        exclude =   ('library','video',)
+
+class AddVideoForm(forms.ModelForm):
+
+    class Meta:
+        model   =   Media
+        exclude =   ('library','mp3',)
+
+class UpdateMp3Form(forms.ModelForm):
+
+    class Meta:
+        model   =   Media
+        exclude =   ('library','video')
+
+class UpdateVideoForm(forms.ModelForm):
+
+    class Meta:
+        model   =   Media
+        exclude =   ('library','mp3')

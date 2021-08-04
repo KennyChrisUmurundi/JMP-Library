@@ -1,9 +1,9 @@
 from django.http.response import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404, reverse
-from .forms import AddLibraryForm, AddCatalogForm, UpdateCatalogForm, AddEbookForm, UpdateEbookForm, AddCategoryForm, UpdateCategoryForm, AddAuthorForm, UpdateAuthorForm, AddMemberForm, UpdateMemberForm,AddBorrowForm, CheckoutForm, AddSupplierForm, AddPurchaseForm, UpdateSupplierForm, UpdatePurchaseForm, AddEmployeeForm, UpdateEmployee, AddDesignationForm, UpdateDesignation, AddDepartmentForm, UpdateDepartment, AddMediaForm,UpdateMedia, UpdateLibraryForm
+from .forms import AddLibraryForm, AddCatalogForm, UpdateCatalogForm, AddEbookForm, UpdateEbookForm, AddCategoryForm, UpdateCategoryForm, AddAuthorForm, UpdateAuthorForm, AddMemberForm, UpdateMemberForm,AddBorrowForm, CheckoutForm, AddSupplierForm, AddPurchaseForm, UpdateSupplierForm, UpdatePurchaseForm, AddEmployeeForm, UpdateEmployee, AddDesignationForm, UpdateDesignation, AddDepartmentForm, UpdateDepartment, AddMediaForm,UpdateMedia, UpdateLibraryForm,AddMp3Form,AddVideoForm,UpdateMp3Form,UpdateMp3Form
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
-from .models import Library, Catalog, Ebook, Category, Author, Member, Borrowed, Supplier, Purchase, Employee, Designation, Department, Media
+from .models import Library, Catalog, Ebook, Category, Author, Member, Borrowed, Supplier, Purchase, Employee, Designation, Department, Media, Event
 from django.views.generic.detail import SingleObjectMixin
 from paypal.standard.forms import PayPalPaymentsForm
 
@@ -61,7 +61,7 @@ class CreateLibrary(LoginRequiredMixin,CreateView):
 def CatalogItems(request,pk):
     pk=pk
     catalogs = Catalog.objects.filter(library=pk)
-    library  = Library.objects.filter(pk=pk)
+    library  = Library.objects.get(pk=pk)
     context = {
     'pk':pk,
     'catalogs':catalogs,
@@ -76,6 +76,7 @@ def EbookItems(request,pk):
     context = {
     'pk':pk,
     'ebooks':Ebooks,
+    'library' :Library.objects.get(id=pk)
 
     }
     return render(request,'ebook/ebook_items.html',context)
@@ -165,7 +166,7 @@ def Categories(request,pk):
 
     pk=pk
     categories = Category.objects.filter(library=pk)
-    library  = Library.objects.filter(pk=pk)
+    library  = Library.objects.get(pk=pk)
     context = {
     'pk':pk,
     'category':categories,
@@ -221,6 +222,7 @@ def authors(request,pk):
     context = {
     'pk':pk,
     'authors':authors,
+    'library' :Library.objects.get(id=pk)
 
     }
     return render(request,'authors/authors.html',context)
@@ -268,10 +270,12 @@ def members(request,pk):
 
     pk=pk
     members = Member.objects.filter(library=pk)
+    library = Library.objects.get(id=pk)
 
     context = {
     'pk':pk,
     'members':members,
+    'library':library
 
     }
     return render(request,'member/members_list.html',context)
@@ -333,6 +337,7 @@ def Borrow(request,pk):
     context = {
     'form':form,
     'pk':pk,
+    'library' : Library.objects.get(id=pk)
 
     }
     return render(request,'borrow/borrow.html',context)
@@ -340,7 +345,7 @@ def Borrow(request,pk):
 def register_borrower(request,pk):
     pk=pk
     catalogs = Catalog.objects.filter(library=pk)
-    library  = Library.objects.filter(pk=pk)
+    library  = Library.objects.get(pk=pk)
     context = {
     'pk':pk,
     'catalogs':catalogs,
@@ -351,7 +356,7 @@ def register_borrower(request,pk):
 def borrow_report(request,pk):
     pk = pk
     catalogs = Catalog.objects.filter(library=pk)
-    library  = Library.objects.filter(pk=pk)
+    library  = Library.objects.get(pk=pk)
     borrowed    = Borrowed.objects.filter(library=pk)
     checked_out =   Borrowed.objects.filter(status='Not Returned')
     print(checked_out)
@@ -397,10 +402,12 @@ def suppliers(request,pk):
 
     pk=pk
     suppliers = Supplier.objects.filter(library=pk)
+    library = Library.objects.get(id=pk)
 
     context = {
     'pk':pk,
     'suppliers':suppliers,
+    'library':library
 
     }
     return render(request,'supplier/supplier.html',context)
@@ -448,10 +455,12 @@ def purchases(request,pk):
 
     pk=pk
     purchases = Purchase.objects.filter(library=pk)
+    library = Library.objects.get(id=pk)
 
     context = {
     'pk':pk,
     'purchases':purchases,
+    'library' :library
 
     }
     return render(request,'purchase/purchases.html',context)
@@ -497,10 +506,12 @@ def employees(request,pk):
 
     pk=pk
     employees = Employee.objects.filter(library=pk)
+    library = Library.objects.get(id=pk)
 
     context = {
     'pk':pk,
     'employees':employees,
+    'library':library
 
     }
     return render(request,'employee/employee.html',context)
@@ -547,10 +558,12 @@ def designations(request,pk):
 
     pk=pk
     designations = Designation.objects.filter(library=pk)
+    library = Library.objects.get(id=pk)
 
     context = {
     'pk':pk,
     'designations':designations,
+    'library':library
 
     }
     return render(request,'designation/designation.html',context)
@@ -596,10 +609,12 @@ def department(request,pk):
 
     pk=pk
     departments = Department.objects.filter(library=pk)
+    library = Library.objects.get(id=pk)
 
     context = {
     'pk':pk,
     'departments':departments,
+    'library':library
 
     }
     return render(request,'department/department.html',context)
@@ -642,7 +657,7 @@ def DeleteDepartment(request,id):
     return redirect('library:department',pk=object.library_id)
 
 
-def media(request,pk):
+def media_mp3(request,pk):
 
     pk=pk
     media = Media.objects.filter(library=pk)
@@ -650,14 +665,28 @@ def media(request,pk):
     context = {
     'pk':pk,
     'media':media,
+    'library' : Library.objects.get(id=pk)
 
     }
-    return render(request,'media/media.html',context)
+    return render(request,'media/mp3.html',context)
 
-class UpdateMedia(LoginRequiredMixin,UpdateView):
+def media_video(request,pk):
+
+    pk=pk
+    media = Media.objects.filter(library=pk)
+
+    context = {
+    'pk':pk,
+    'media':media,
+    'library' : Library.objects.get(id=pk)
+
+    }
+    return render(request,'media/video.html',context)
+
+class UpdateMp3(LoginRequiredMixin,UpdateView):
 
     model = Media
-    template_name = 'media/add_media.html'
+    template_name = 'media/add_mp3.html'
     form_class  = UpdateMedia
     pk  =   'object.pk'
 
@@ -667,22 +696,54 @@ class UpdateMedia(LoginRequiredMixin,UpdateView):
         context["pk"] = con
         return context
 
-def add_media(request,pk):
+
+class UpdateVideo(LoginRequiredMixin,UpdateView):
+
+    model = Media
+    template_name = 'media/add_video.html'
+    form_class  = UpdateMedia
+    pk  =   'object.pk'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        con = self.object.pk
+        context["pk"] = con
+        return context
+
+def add_mp3(request,pk):
     pk=pk
     if request.method == 'POST':
-        form    =   AddMediaForm(request.POST,request.FILES)
+        form    =   AddMp3Form(request.POST,request.FILES)
         if form.is_valid():
             media = form.save(commit=False)
             media.library_id = pk
             media.save()
-            return redirect('library:media',pk=pk)
-    form = AddMediaForm()
+            return redirect('library:media_mp3',pk=pk)
+    form = AddMp3Form()
     context = {
     'form':form,
     'pk':pk,
+    'library' : Library.objects.get(id=pk)
+    }
+    return render(request,'media/add_mp3.html',context)
+
+def add_video(request,pk):
+    pk=pk
+    if request.method == 'POST':
+        form    =   AddVideoForm(request.POST,request.FILES)
+        if form.is_valid():
+            media = form.save(commit=False)
+            media.library_id = pk
+            media.save()
+            return redirect('library:media_video',pk=pk)
+    form = AddVideoForm()
+    context = {
+    'form':form,
+    'pk':pk,
+    'library' : Library.objects.get(id=pk)
 
     }
-    return render(request,'media/add_media.html',context)
+    return render(request,'media/add_video.html',context)
 
 def DeleteMedia(request,id):
 
@@ -693,10 +754,13 @@ def DeleteMedia(request,id):
 
 
 def plan(request,pk):
+    library = Library.objects.get(id=pk)
     context = {
         'pk':pk,
         'premium':'premium',
-        'gold':'gold'
+        'gold':'gold',
+        'basic':'basic',
+        'library':library
     }
     return render(request,'plans/plan.html',context)
 
@@ -718,12 +782,16 @@ def process_subscription(request,plan,pk):
     #     price = "10"
     #     billing_cycle = 1
     #     billing_cycle_unit = "M"
+    if plan == 'basic':
+        price = "12"
+        billing_cycle = 1
+        billing_cycle_unit = "M"
     if plan == 'premium':
-        price = "50"
+        price = "30"
         billing_cycle = 1
         billing_cycle_unit = "M"
     elif plan == 'gold':
-        price = "100"
+        price = "150"
         billing_cycle = 1
         billing_cycle_unit = "M"
 
@@ -760,3 +828,54 @@ def process_subscription(request,plan,pk):
 
     }
     return render(request,'plans/process_subscription.html',ctx)
+
+
+def event(request,pk):
+
+    pk=pk
+    media = Event.objects.filter(library=pk)
+
+    context = {
+    'pk':pk,
+    'event':event,
+    'library' : Library.objects.get(id=pk)
+
+    }
+    return render(request,'event/event.html',context)
+
+# class UpdateEvent(LoginRequiredMixin,UpdateView):
+
+#     model = Media
+#     template_name = 'media/add_media.html'
+#     form_class  = UpdateMedia
+#     pk  =   'object.pk'
+
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         con = self.object.pk
+#         context["pk"] = con
+#         return context
+
+def add_event(request,pk):
+    pk=pk
+    if request.method == 'POST':
+        form    =   AddMediaForm(request.POST,request.FILES)
+        if form.is_valid():
+            media = form.save(commit=False)
+            media.library_id = pk
+            media.save()
+            return redirect('library:event',pk=pk)
+    form = AddMediaForm()
+    context = {
+    'form':form,
+    'pk':pk,
+
+    }
+    return render(request,'event/add_event.html',context)
+
+def DeleteEvent(request,id):
+
+    object  =   get_object_or_404(Event,id=id)
+    object.delete()
+    # messages.success(request,f'Deleted successfully')
+    return redirect('library:event',pk=object.library_id)

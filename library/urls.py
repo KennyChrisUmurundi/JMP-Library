@@ -92,10 +92,19 @@ urlpatterns = [
 
 
     # Media
-    path('media/<int:pk>',views.media,name='media'),
-    path('add_media/<int:pk>/',views.add_media,name='add_media'),
-    path('update_media/<int:pk>/',views.UpdateMedia.as_view(),name='update_media'),
-    path('delete_dmedia/<int:id>/',views.DeleteMedia,name='delete_media'),
+    path('media_mp3/<int:pk>',views.media_mp3,name='media_mp3'),
+    path('media_video/<int:pk>',views.media_video,name='media_video'),
+    path('add_mp3/<int:pk>/',views.add_mp3,name='add_mp3'),
+    path('add_video/<int:pk>/',views.add_video,name='add_video'),
+    path('update_mp3/<int:pk>/',views.UpdateMp3.as_view(),name='update_mp3'),
+    path('update_video/<int:pk>/',views.UpdateVideo.as_view(),name='update_video'),
+    path('delete_media/<int:id>/',views.DeleteMedia,name='delete_media'),
+
+    # Event
+    path('event/<int:pk>',views.event,name='event'),
+    path('add_event/<int:pk>/',views.add_event,name='add_event'),
+    # path('update_event/<int:pk>/',views.UpdateMedia.as_view(),name='update_event'),
+    # path('delete_event/<int:id>/',views.DeleteMedia,name='delete_event'),
 
     # Plans
 

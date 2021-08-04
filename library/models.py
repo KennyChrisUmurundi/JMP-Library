@@ -222,6 +222,23 @@ class Media(models.Model):
 
     library             =   models.ForeignKey(Library,on_delete=models.CASCADE)
     title               =   models.CharField(max_length=200)
+    artist              =   models.CharField(max_length=200)
+    description         =   models.TextField(null=True,blank=True)
+    thumbnail           =   models.ImageField(upload_to='images/media',default="images/thumbnail.png",null=True,blank=True)
+    mp3                 =   models.FileField(upload_to='music/',null=True,blank=True)
+    video               =   models.FileField(upload_to='videos/',null=True,blank=True)
+
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('library:media_mp3',kwargs={'pk':self.library.pk})
+
+class Event(models.Model):
+
+    library             =   models.ForeignKey(Library,on_delete=models.CASCADE)
+    title               =   models.CharField(max_length=200)
     description         =   models.TextField(null=True,blank=True)
     image               =   models.ImageField(upload_to='images/media',null=True,blank=True)
 
@@ -229,4 +246,5 @@ class Media(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('library:media',kwargs={'pk':self.library.pk})
+        return reverse('library:event',kwargs={'pk':self.library.pk})
+

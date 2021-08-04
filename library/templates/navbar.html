@@ -40,6 +40,31 @@
                     </li>
 
                     <li class="nav-item ">
+                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#entertainment" aria-controls="submenu-1">
+                          <i class="fa fa-fw fa-music"></i>Entertainment</a>
+                        <div id="entertainment" class="collapse submenu" style="">
+                            <ul class="nav flex-column">
+
+                                <li class="nav-item">
+
+                                    <a class="nav-link" href="{% url 'library:media_mp3' pk%}"><i class="fa fa-fw fa-music"></i>Mp3's</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'library:media_video' pk%}"><i class="fa fa-fw fa-video"></i>Videos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'library:event' pk%}"><i class="fa fa-fw fa-align-justify"></i>Event</a>
+                                </li>
+
+                                <!-- <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'library:authors' pk%}"><i class="fa fa-fw fa-user"></i>Authors</a>
+                                </li> -->
+
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item ">
                         <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-1">
                           <i class="fa fa-fw fa-sync"></i>Circulations </a>
                         <div id="submenu-2" class="collapse submenu" style="">

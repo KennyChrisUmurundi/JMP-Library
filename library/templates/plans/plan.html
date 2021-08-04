@@ -42,19 +42,24 @@
                                 <h4 class="mb-0 text-white"> Basic</h4>
                             </div>
                             <div class="card-body text-center">
-                                <h1 class="mb-1">$0</h1>
+                                <h1 class="mb-1">$12</h1>
                                 <p>Per Month Plateform</p>
                             </div>
                             <div class="card-body border-top">
                                 <ul class="list-unstyled bullet-check font-14">
-                                    <li>Up to 10 Records for free</li>
-                                    <li><strike>Change Library Logo</strike></li>
+                                    <li>Up to 200 Records</li>
+                                    <li>Change Library Logo</li>
+                                    <li><strike>Library added on the discover page</strike></li>
                                     <li><strike>Fedex Printing Feature</strike></li>
                                     <li><strike>Ebook file Download</strike></li>
                                     <li><strike>Technical Suport</strike></li>
-                                    <li><strike>Library added on the discover page</strike></li>
+                                    
                                 </ul>
-                                <a href="#" name="basic" class="btn btn-outline-secondary btn-block btn-lg">Default</a>
+                                <form method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="basic" value="basic">
+                                <a href="{% url 'library:process_subscription' basic pk %}" type="submit" name="basic" value="basic" class="btn btn-outline-secondary btn-block btn-lg">Subscribe</a>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -64,17 +69,18 @@
                                 <h4 class="mb-0 text-white">Premium</h4>
                             </div>
                             <div class="card-body text-center">
-                                <h1 class="mb-1">$40</h1>
+                                <h1 class="mb-1">$30</h1>
                                 <p>Per Month Plateform</p>
                             </div>
                             <div class="card-body border-top">
                                 <ul class="list-unstyled bullet-check font-14">
                                     <li>Up to 1000 Records</li>
                                     <li>Change Library Logo</li>
+                                    <li>Library added on the discover page</li>
                                     <li>Fedex Printing Feature</li>
                                     <li>Ebook file Download</li>
-                                    <li>Technical Suport</li>
-                                    <li>Library added on the discover page</li>
+                                    <li><strike>Technical Suport</strike></li>
+                                    
                                 </ul>
                                 <form method="POST">
                                 {% csrf_token %}
@@ -90,7 +96,7 @@
                                 <h4 class="mb-0 text-white">Gold</h4>
                             </div>
                             <div class="card-body text-center">
-                                <h1 class="mb-1">$100</h1>
+                                <h1 class="mb-1">$200</h1>
                                 <p>Per Month Plateform</p>
                             </div>
                             <div class="card-body border-top">

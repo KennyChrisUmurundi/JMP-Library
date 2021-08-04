@@ -11,11 +11,11 @@
                     </div>
                     <div class="header-top-right mt-10">
                         <div class="header-link">
-                            <a class="notice" href="notice.html">Notice</a>
+                            {% comment %} <a class="notice" href="notice.html">Notice</a> {% endcomment %}
                             {% if user.is_authenticated%}
                             <a class="login" href="{% url 'account:entity_logout' path=request.path %}">Logout</a>
                             {% endif %}
-                            <a class="register" href="register.html">Register</a>
+                            {% comment %} <a class="register" href="register.html">Register</a> {% endcomment %}
                         </div>
                     </div>
                 </div>
@@ -37,10 +37,16 @@
                         <nav class="nav-menus-wrapper">
                             <ul class="nav-menu">
                                 <li><a href="{% url 'entities:lib' pk %}">Home</a></li>
-                                <li><a href="{% url 'entities:items' pk%}">Catalogues</a></li>
-                                <li><a href="{% url 'entities:ebooks' pk%}">Ebooks</a></li>
-                                {% if user.is_authenticated %}
-                                <li><a href="{% url 'entities:my_book' pk%}">My books</a></li>
+                                {% if library.library_type == 'Entertainment'%}
+                                    <li><a href="{% url 'entities:music' pk%}">Music Mp3</a></li>
+                                    <li><a href="{% url 'entities:video' pk%}">Videos</a></li>
+                                    {% comment %} <li><a href="{% url 'entities:items' pk%}">Events</a></li> {% endcomment %}
+                                {% else %}
+                                    <li><a href="{% url 'entities:items' pk%}">Catalogues</a></li>
+                                    <li><a href="{% url 'entities:ebooks' pk%}">Ebooks</a></li>
+                                    {% if user.is_authenticated %}
+                                    <li><a href="{% url 'entities:my_book' pk%}">My books</a></li>
+                                    {% endif %}
                                 {% endif %}
                                 <!-- <li><a href="#">Blog</a></li> -->
                                 

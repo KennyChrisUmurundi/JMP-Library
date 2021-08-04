@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .utilities import get_library
-from library.models import Member, Library, Catalog, Ebook
+from library.models import Member, Library, Catalog, Ebook, Media, Event
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.urls import reverse
 from django.db.models import Q
@@ -76,11 +76,13 @@ def lib(request, pk):
     library = Library.objects.filter(id=pk)
     catalogs = Catalog.objects.filter(library_id=pk)[0:4]
     ebook = Ebook.objects.filter(library_id=pk)[0:4]
+    media = Media.objects.filter(library_id=pk)[0:4]
     context = {
         "pk": pk,
         "libraries": library,
         "catalogs": catalogs,
         "ebook": ebook,
+        "media":media
     }
 
     return render(request, "lib/home.html", context)
@@ -278,3 +280,112 @@ def my_books(request,pk):
     return render(request,'lib/my_books.html',ctx)
 
 
+def mp3(request, pk):
+
+    pk = pk
+    library = Library.objects.get(id=pk)
+    mp3 = Media.objects.filter(library_id=pk)
+    query = request.GET.get("search")
+    library = Library.objects.filter(id=pk)
+    if query:
+
+        queryset = (
+            Q(title__icontains=query)
+            | Q(author__icontains=query)
+            | Q(publisher__icontains=query)
+        )
+        result = Media.objects.filter(queryset, library_id=pk).distinct()
+        page = request.GET.get("page")
+        paginator = Paginator(result, 20)
+        page_obj = paginator.get_page(page)
+        try:
+            items = paginator.page(page)
+        except PageNotAnInteger:
+            items = paginator.page(1)
+        except EmptyPage:
+            items = paginator.page(paginator.num_pages)
+
+        context = {
+            "items": items,
+            "query": query,
+            "pk": pk,
+            "library": library,
+            # 'catalogs':catalogs,
+            "paginator": page_obj,
+        }
+        return render(request, "lib/mp3.html", context)
+    else:
+
+        page = request.GET.get("page")
+        paginator = Paginator(mp3, 20)
+        page_obj = paginator.get_page(page)
+        try:
+            items = paginator.page(page)
+        except PageNotAnInteger:
+            items = paginator.page(1)
+        except EmptyPage:
+            items = paginator.page(paginator.num_pages)
+
+        context = {
+            "items": items,
+            "pk": pk,
+            "library": library,
+            # 'catalogs':catalogs,
+            "paginator": page_obj,
+        }
+        return render(request, "lib/mp3.html", context)
+
+def video(request, pk):
+
+    pk = pk
+    library = Library.objects.get(id=pk)
+    mp3 = Media.objects.filter(library_id=pk)
+    query = request.GET.get("search")
+    library = Library.objects.filter(id=pk)
+    if query:
+
+        queryset = (
+            Q(title__icontains=query)
+            | Q(author__icontains=query)
+            | Q(publisher__icontains=query)
+        )
+        result = Media.objects.filter(queryset, library_id=pk).distinct()
+        page = request.GET.get("page")
+        paginator = Paginator(result, 20)
+        page_obj = paginator.get_page(page)
+        try:
+            items = paginator.page(page)
+        except PageNotAnInteger:
+            items = paginator.page(1)
+        except EmptyPage:
+            items = paginator.page(paginator.num_pages)
+
+        context = {
+            "items": items,
+            "query": query,
+            "pk": pk,
+            "library": library,
+            # 'catalogs':catalogs,
+            "paginator": page_obj,
+        }
+        return render(request, "lib/video.html", context)
+    else:
+
+        page = request.GET.get("page")
+        paginator = Paginator(mp3, 20)
+        page_obj = paginator.get_page(page)
+        try:
+            items = paginator.page(page)
+        except PageNotAnInteger:
+            items = paginator.page(1)
+        except EmptyPage:
+            items = paginator.page(paginator.num_pages)
+
+        context = {
+            "items": items,
+            "pk": pk,
+            "library": library,
+            # 'catalogs':catalogs,
+            "paginator": page_obj,
+        }
+        return render(request, "lib/video.html", context)

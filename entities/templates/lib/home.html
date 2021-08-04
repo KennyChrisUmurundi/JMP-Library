@@ -21,7 +21,7 @@
     <!--====== Page Banner Ends ======-->
 
     <!--====== Campus Start ======-->
-
+{% if library.library_type == "Entertainment" %}
     <section class="campus-visit-area-2">
         <div class="container">
             <div class="row align-items-center">
@@ -54,6 +54,8 @@
             </div>
         </div>
     </section>
+
+    {% else %}
 
     <!--====== Campus Ends ======-->
 
@@ -291,5 +293,7 @@
 -->
 
     <!--====== Ends ======-->
+     {% endif %}
     {% endfor %}
+   
 {% endblock %}

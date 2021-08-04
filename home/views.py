@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from library.models import Library
+from django.http import HttpResponse
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -30,3 +32,8 @@ def discover(request):
     'libraries':library
     }
     return render(request,'home/discover.html',ctx)
+
+
+def ussd_adapter(request):
+    bank = '123123123'
+    return JsonResponse({'bank':bank})
