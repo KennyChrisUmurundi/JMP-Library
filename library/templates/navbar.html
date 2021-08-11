@@ -1,3 +1,4 @@
+{% load static %}
 <div class="nav-left-sidebar sidebar-dark">
     <div class="menu-list">
         <nav class="navbar navbar-expand-lg navbar-light">
@@ -107,7 +108,7 @@
 
                     <li class="nav-item ">
                         <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4">
-                          <i class="fa fa-fw fa-users"></i>Human Ressource </a>
+                          <i class="fa fa-fw fa-users"></i>Human Ressources </a>
                         <div id="submenu-4" class="collapse submenu" style="">
                             <ul class="nav flex-column">
 
@@ -152,6 +153,15 @@
                             </ul>
                         </div>
                     </li>
+
+                    <li class="nav-divider">
+                        Support
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% static 'dashboard/jmpusermanual.pdf' %}"><i class="fa fa-fw fa-question-circle"></i>User manual</a>
+                    </li>
+
 
                 </ul>
             </div>
