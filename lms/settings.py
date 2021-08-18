@@ -13,9 +13,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '+2-r!5r*sr31ac-3awm@e^%4+&5=dcvambg1e*e5-=5g$5w5lu'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["jmplibrary.com","localhost"]
 
 
 # Application definition
