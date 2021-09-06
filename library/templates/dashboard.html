@@ -1,0 +1,147 @@
+{% extends 'dash.html' %}
+{% block content %}
+{% include 'navbar.html' %}
+{% for library in libraries %}
+<div class="dashboard-wrapper">
+  <div class="alert alert-secondary" role="alert">
+    <i class="fas fa-exclamation-triangle"></i>&nbsp &nbsp &nbsp Please add more Items to your library to make it look presentable
+  </div>
+
+  <div class="alert alert-info" role="alert">
+    <i class="fas fa-info"></i>&nbsp &nbsp &nbsp Your audience can use this link <a href="{% url 'entities:lib' library.pk %}">http://jmplibrary.herokuapp.com/library/{{library.pk}}</a> to view your library
+  </div>
+
+  <div class="container-fluid dashboard-content">
+    <div class="row">
+
+          <!-- ============================================================== -->
+          <!-- four widgets   -->
+          <!-- ============================================================== -->
+          <!-- ============================================================== -->
+          <!-- total views   -->
+          <!-- ============================================================== -->
+          <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="card">
+                  <div class="card-body">
+                      <div class="d-inline-block">
+                          <h5 class="text-muted">Catalogs</h5>
+                          <h2 class="mb-0"> {{library.catalog_set.all.count}}</h2>
+                      </div>
+                      <div class="float-right icon-circle-medium  icon-box-lg  bg-info-light mt-1">
+                          <i class="fa fa-book fa-fw fa-sm text-info"></i>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- ============================================================== -->
+          <!-- end total views   -->
+          <!-- ============================================================== -->
+          <!-- ============================================================== -->
+          <!-- total followers   -->
+          <!-- ============================================================== -->
+          <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="card">
+                  <div class="card-body">
+                      <div class="d-inline-block">
+                          <h5 class="text-muted">Members</h5>
+                          <h2 class="mb-0"> {{library.member_set.all.count}}</h2>
+                      </div>
+                      <div class="float-right icon-circle-medium  icon-box-lg  bg-primary-light mt-1">
+                          <i class="fa fa-user fa-fw fa-sm text-primary"></i>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- ============================================================== -->
+          <!-- end total followers   -->
+          <!-- ============================================================== -->
+          <!-- ============================================================== -->
+          <!-- partnerships   -->
+          <!-- ============================================================== -->
+          <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="card">
+                  <div class="card-body">
+                      <div class="d-inline-block">
+                          <h5 class="text-muted">Ebooks</h5>
+                          <h2 class="mb-0">{{library.ebook_set.all.count}}</h2>
+                      </div>
+                      <div class="float-right icon-circle-medium  icon-box-lg  bg-secondary-light mt-1">
+                          <i class="fa fa-file-pdf fa-fw fa-sm text-secondary"></i>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- ============================================================== -->
+          <!-- end partnerships   -->
+          <!-- ============================================================== -->
+          <!-- ============================================================== -->
+          <!-- total earned   -->
+          <!-- ============================================================== -->
+          <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="card">
+                  <div class="card-body">
+                      <div class="d-inline-block">
+                          <h5 class="text-muted">Your Plan</h5>
+                          <h2 class="mb-0"> Basic</h2>
+                      </div>
+                      <div class="float-right icon-circle-medium  icon-box-lg  bg-brand-light mt-1">
+                          <i class="fa fa-money-bill-alt fa-fw fa-sm text-brand"></i>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- ============================================================== -->
+          <!-- end total earned   -->
+          <!-- ============================================================== -->
+      </div>
+      <!-- ============================================================== -->
+      <!-- end widgets   -->
+      <!-- ============================================================== -->
+      <div class="row">
+                                      <!-- ============================================================== -->
+                                      <!-- body text  -->
+                                      <!-- ============================================================== -->
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="card" id="text">
+                  <h5 class="card-header">Tutorial: Jump Start In Minutes</h5>
+                      <div class="card-body">
+                          <p class="lead">Please follow the steps below to get started with your Library. It only takes couple of minutes.</p>
+                          <p>On the left side you can access different categories of menus organised in relation to the functionalities. By clicking, a sub menu will appear having a clickable item.</p>
+                      </div>
+              </div>
+          </div>
+        </div>
+                                      <!-- ============================================================== -->
+                                      <!-- end body text  -->
+                                      <!-- ============================================================== -->
+                                      <div class="row">
+                                                            <!-- ============================================================== -->
+                                                            <!-- blockquote  -->
+                                                            <!-- ============================================================== -->
+                                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                                <div class="card" id="blockquote">
+                                                                    <h5 class="card-header">Updates</h5>
+
+                                                                    {% comment %} <div class="card-body">
+                                                                        <blockquote class="blockquote">
+                                                                            <p class="mb-0">online printing feature to be added</p>
+                                                                        </blockquote>
+                                                                    </div> {% endcomment %}
+
+                                                                    <div class="card-body">
+                                                                        <blockquote class="blockquote">
+                                                                            <p class="mb-0">Upload using csv or excel feature to be added</p>
+                                                                        </blockquote>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                            <!-- ============================================================== -->
+                                                            <!-- end blockquote  -->
+                                                            <!-- ============================================================== -->
+                                                        </div>
+                                                    </div>
+      {% endfor %}
+
+
+{% endblock %}

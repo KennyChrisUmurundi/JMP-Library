@@ -1,0 +1,64 @@
+{% extends 'lib/lib.html' %}
+{% block content %}
+<header class="header-area">
+        <div class="header-top">
+            <div class="container">
+                <div class="header-top-wrapper d-flex flex-wrap justify-content-sm-between">
+                    <div class="header-top-left mt-10">
+                        <ul class="header-meta">
+                            <li><a href="mailto://infoedumate@example.com">{{library.library_email}}</a></li>
+                        </ul>
+                    </div>
+                    <div class="header-top-right mt-10">
+                        <div class="header-link">
+                            {% comment %} <a class="notice" href="notice.html">Notice</a> {% endcomment %}
+                            {% if user.is_authenticated%}
+                            <a class="login" href="{% url 'account:entity_logout' path=request.path %}">Logout</a>
+                            {% endif %}
+                            {% comment %} <a class="register" href="register.html">Register</a> {% endcomment %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="navigation" class="navigation navigation-landscape">
+            <div class="container position-relative">
+                <div class="row align-items-center">
+                    <div class="col-lg-3">
+                        <div class="header-logo">
+                            <a href="index.html">{% if library.library_logo %}<img src="{{library.library_logo.url}}"                                              style="width: 150px;
+                                                                          height: 70px;
+                                                                          object-fit: cover;"alt="">{% endif %}</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 position-static">
+                        <div class="nav-toggle"></div>
+                        <nav class="nav-menus-wrapper">
+                            <ul class="nav-menu">
+                                <li><a href="{% url 'entities:lib' pk %}">Home</a></li>
+                                    <li><a href="{% url 'entities:music' pk%}">Music Mp3</a></li>
+                                    <li><a href="{% url 'entities:video' pk%}">Videos</a></li>
+                                    {% comment %} <li><a href="{% url 'entities:items' pk%}">Events</a></li> {% endcomment %}
+                                    {% comment %} {% if user.is_authenticated %}
+                                    <li><a href="{% url 'entities:my_book' pk%}">My books</a></li>
+                                    {% endif %} {% endcomment %}
+                                {% comment %} {% endif %} {% endcomment %}
+                                <!-- <li><a href="#">Blog</a></li> -->
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                    {% comment %} <div class="col-lg-2 position-static">
+                        <div class="header-search">
+                            <form action="#">
+                                <input type="text" placeholder="Search">
+                                <button><i class="fas fa-search"></i></button>
+                            </form>
+                        </div>
+                    </div> {% endcomment %}
+                </div>
+            </div>
+        </div>
+    </header>
+    {% endblock %}

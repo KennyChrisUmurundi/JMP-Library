@@ -1,0 +1,74 @@
+{% extends 'lib/lib.html' %}
+{% load static %}
+{% block content %}
+{% include 'lib/navbar.html' %}
+<!--====== Shop Start ======-->
+    
+    <section class="shop-area">
+        <div class="container">
+            <div class="shop-bar">
+                <div class="row align-items-end">
+                    <div class="col-md-6">
+                        {% comment %} <div class="shop-showing">                            
+                            <p>Showing 1 - 16 of 36 results</p>
+                        </div> {% endcomment %}
+                    </div>
+                    <div class="col-md-6">
+                        {% comment %} <div class="shop-bar-form">                           
+                            <div class="shop-search">
+                                <form method="GET">
+                                    {% csrf_token %}
+                                    <div class="courses-search">
+                                        <div class='row'>
+                                        <input type="text" name="search" placeholder="Search Ebook">
+                                        <!-- <i type='submit'class="fas fa-search"></i> -->
+                                        <button class = 'btn btn-success mt-1 btn-sm' type='submit'>submit</button>
+                                        {% if query%}
+                                        <button class = 'btn btn-warning ml-1 btn-sm'>back</button>
+                                        {% endif%}
+                                        </div>
+                                    </div>
+                            </form>
+                                <i class="far fa-search"></i>
+                            </div>
+                        </div> {% endcomment %}
+                    </div>
+                </div>            
+            </div>    
+            <div class="shop-wrapper">
+                <div class="row">
+                    {% for ebook in my_book %}
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="single-library text-center mt-30">
+                            <div class="library-image">
+                                <img src="{{ebook.ebook.book_cover.url}}"style="height:320px;" alt=""></a> 
+
+                            </div>
+                            <div class="library-content">
+                                <h4 class="library-title">{{ebook.ebook.title}}</a></h4>
+                                <a href="{{ebook.ebook.book_pdf.url}}"><span class="badge badge-primary">Download Book</span></a></br>
+                                <a href="mailto:printandgo@fedex.com?subject={{ebook.ebook.title}}&body=To be printed&attachment={{ebook.ebook.book_pdf}}"><span class="badge badge-warning">Print with Fedex</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- <ul class="pagination-items text-center">
+                <li><a class="active" href="#">01</a></li>
+                <li><a href="#">02</a></li>
+                <li><a href="#">03</a></li>
+                <li><a href="#">04</a></li>
+                <li><a href="#">05</a></li>
+            </ul> -->
+        </div>
+    </section>
+
+  
+
+    <a href="#" class="back-to-top"><i class="fal fa-chevron-up"></i></a>
+
+   
+    
+{% endblock %}

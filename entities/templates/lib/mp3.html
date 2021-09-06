@@ -1,0 +1,90 @@
+{% extends 'lib/lib.html' %}
+{% load static %}
+{% block content %}
+{% include 'lib/entNavbar.html' %}
+<!--====== Shop Start ======-->
+    
+    <section class="shop-area">
+        <div class="container">
+            <div class="shop-bar">
+                <div class="row align-items-end">
+                    <!-- <div class="col-md-6">
+                        <div class="shop-showing">                            
+                            <p>Showing 1 - 16 of 36 results</p>
+                        </div>
+                    </div> -->
+                    <div class="col-md-6">
+                        <div class="shop-bar-form">                           
+                            <div class="shop-search">
+                                <form method="GET">
+                                    {% csrf_token %}
+                                    <div class="courses-search">
+                                        <div class='row'>
+                                        <input type="text" name="search" placeholder="Search Music">
+                                        <!-- <i type='submit'class="fas fa-search"></i> -->
+                                        <button class = 'btn btn-success mt-1 btn-sm' type='submit'>submit</button>
+                                        {% if query%}
+                                        <button class = 'btn btn-warning ml-1 btn-sm'>back</button>
+                                        {% endif%}
+                                        </div>
+                                    </div>
+                            </form>
+                                <i class="far fa-search"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>            
+            </div>    
+            <div class="shop-wrapper">
+                <div class="row">
+                
+                    {% for ebook in paginator %}
+                    {% if ebook.mp3 %}
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="single-library text-center mt-30">
+                            <div class="library-image">
+                                <a href="{% url 'entities:single_ebook' ebook.library_id ebook.id %}"><img src="{{ebook.thumbnail.url}}" style="height:230px;"alt=""></a>
+                                <!-- <span class="discount">-30%</span> -->
+                            </div>
+                            <div class="library-content">
+                                <h4 class="library-title"><a href="{% url 'entities:single_ebook' ebook.library_id ebook.id %}">{{ebook.title}}</a></h4>
+                                <audio controls style="width:250px;">
+                                    {% comment %} <source src="horse.ogg" type="audio/ogg"> {% endcomment %}
+                                    <source src="{{ebook.mp3.url}}" type="audio/mpeg">
+                                    Your browser does not support the audio element.
+                                </audio>
+
+                                <span class="price">Artist:{{ebook.artist}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                    
+                </div>
+            </div>
+
+            {% if items.has_other_pages %}
+            <ul class="pagination-items text-center">
+                {% if items.has_previous %}
+                    <li><a class="active"href="?page={{ users.previous_page_number }}"><i class="fa-solid fa-backward"></i></a></li>
+                {% endif %}
+                {% for i in items.paginator.page_range %}
+                    {% if items.number == i %}
+                        <li><a class="active"href="#">{{ i }}</a></li>
+                            {% else %}
+                        <li><a href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+    </section>
+
+  
+
+    <a href="#" class="back-to-top"><i class="fal fa-chevron-up"></i></a>
+
+   
+    
+{% endblock %}

@@ -1,0 +1,331 @@
+{% extends 'lib/lib.html'%}
+{% load static %}
+{% block content %}
+{% for library in libraries %}
+    {% include 'lib/navbar.html'%}
+
+    <!--====== Header Ends ======-->
+
+    <!--====== Page Banner Start ======-->
+
+    <!-- <section class="page-banner">
+        <div class="page-banner-bg bg_cover" style="background-image: url(assets/images/page-banner.jpg);">
+            <div class="container">
+                <div class="banner-content text-center">
+                    <h2 class="title">Our Courses</h2>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!--====== Page Banner Ends ======-->
+
+    <!--====== Campus Start ======-->
+{% if library.library_type == "Entertainment" %}
+    <section class="campus-visit-area-2">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5">
+                    <div class="about-content mt-40">
+                        <h2 class="about-title">{{library.library_name}} library</h2><span>Powered by JMP Library</span>
+                        <span class="line"></span>
+                        <p>{{library.description}}<br><!-- ibraries are full of ideas – perhaps the most dangerous and powerful of all weapons. --></p>
+                        <a href="{% url 'entities:music' pk%}" class="main-btn">Explore</a>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="campus-image-2 mt-50">
+                        {% comment %} <h4 class="campus-title-2">Image Gallery</h4> {% endcomment %}
+                        <div class="image-1">
+                            <img src="{{library.library_main_image.url}}" style="width: 600px;
+                                                                          height: 500px;
+                                                                          object-fit: cover;"
+                                                                          alt="campus">
+                        </div>
+                        <!-- <div class="image-2">
+                            <img src="{% static 'img/pexels-wallace-chuck-3744195.jpg'%}" alt="">
+                        </div> -->
+                        <div class="image-3">
+                            <img src="#" alt="">
+                        </div>
+                        {% comment %} <a href="gallery-masonry.html" class="more">View more <i class="fal fa-long-arrow-right"></i></a> {% endcomment %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% else %}
+
+    <!--====== Campus Ends ======-->
+
+    <!--====== Top Course Start ======-->
+    <section class="campus-visit-area-2">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5">
+                    <div class="about-content mt-40">
+                        <h2 class="about-title">{{library.library_name}} library</h2><span>Powered by JMP Library</span>
+                        <span class="line"></span>
+                        <p>{{library.description}}<br><!-- ibraries are full of ideas – perhaps the most dangerous and powerful of all weapons. --></p>
+                        <a href="{% url 'entities:items' pk %}" class="main-btn">Explore</a>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="campus-image-2 mt-50">
+                        {% comment %} <h4 class="campus-title-2">Image Gallery</h4> {% endcomment %}
+                        <div class="image-1">
+                            <img src="{{library.library_main_image.url}}" style="width: 600px;
+                                                                          height: 500px;
+                                                                          object-fit: cover;"
+                                                                          alt="campus">
+                        </div>
+                        <!-- <div class="image-2">
+                            <img src="{% static 'img/pexels-wallace-chuck-3744195.jpg'%}" alt="">
+                        </div> -->
+                        <div class="image-3">
+                            <img src="#" alt="">
+                        </div>
+                        {% comment %} <a href="gallery-masonry.html" class="more">View more <i class="fal fa-long-arrow-right"></i></a> {% endcomment %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="top-courses-area">
+    {% if ebook %}
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="section-title mt-40">
+                        <h2 class="title">Here is our <br> Top Ebooks</h2>
+                        <p>It's Cool to read on an ereader</p>
+                    </div>
+                </div>
+            </div>
+            <div class="courses-wrapper">
+                <div class="row">
+                    {% for ebook in ebook %}
+                    <div class="col-lg-3 col-sm-6 courses-col">
+                        <div class="single-courses-2 mt-30">
+                            <div class="courses-image">
+                                <a href="#"><img src="{{ebook.book_cover.url}}" style="height:300px;"alt="courses"></a>
+                            </div>
+                            <div class="courses-content">
+                                <a href="#" class="category">{{ebook.category}}</a>
+                                <h4 class="courses-title"><a href="#">{{ebook.title}}</a></h4>
+                                <div class="duration-rating">
+                                    <div class="duration-fee">
+                                        <p class="duration">Duration: <span> 4 year</span></p>
+                                        <p class="fee">Fee: <span> $540</span></p>
+                                    </div>
+                                </div>
+                                <div class="courses-link">
+                                    <a class="apply" href="#">Available</a>
+                                    <a class="more" href="#">Buy <i class="fal fa-chevron-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </section>
+
+    <!--====== Top Course Ends ======-->
+
+    <!--====== Counter Start ======-->
+
+    <div class="counter-area-2">
+        <div class="container">
+            <div class="counter-wrapper-2 bg_cover" style="background-image: url(assets/images/counter-bg-2.jpg);">
+                <div class="row">
+                    <div class="col-sm-3 col-6 counter-col">
+                        <div class="single-counter mt-30">
+                            <span class="counter-count"><span class="count">{{library.catalog_set.all.count}}</span> +</span>
+                            <p>Books</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-6 counter-col">
+                        <div class="single-counter mt-30">
+                            <span class="counter-count"><span class="count">{{library.ebook_set.all.count}}</span> +</span>
+                            <p>Ebooks</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-6 counter-col">
+                        <div class="single-counter mt-30">
+                            <span class="counter-count"><span class="count">{{library.member_set.all.count}}</span> +</span>
+                            <p>Members</p>
+                        </div>
+                    </div>
+                    {% comment %} <div class="col-sm-3 col-6 counter-col">
+                        <div class="single-counter mt-30">
+                            <span class="counter-count"><span class="count">30</span> +</span>
+                            <p>Awards win</p>
+                        </div>
+                    </div> {% endcomment %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--====== Counter Ends ======-->
+
+    <!--====== Top Courses Start ======-->
+    
+    <section class="top-courses-area">
+    {% if catalogs %}
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="section-title mt-40">
+                        <h2 class="title">Here is our <br> Top Books</h2>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <div class="courses-wrapper">
+                <div class="row">
+                {% for catalog in catalogs %}
+                    <div class="col-lg-3 col-sm-6 courses-col">
+                        <div class="single-courses mt-30">
+                            <a href="{% url 'entities:single_ebook' catalog.library_id catalog.id %}" class="category">{{catalog.category}}</a>
+                            <h4 class="courses-title"><a href="courses-details.html">{{catalog.title}}</a></h4>
+                            <div class="duration-fee">
+                                <p class="duration">Year: <span>{{catalog.year}}</span></p>
+                                <p class="fee">Author: <span>{{catalog.author}}</span></p>
+                            </div>
+                            {% comment %} <div class="rating">
+                                <span>Available</span>
+                                
+                            </div> {% endcomment %}
+                            <div class="courses-link">
+                                <a class="apply" href="#">Available</a>
+                                {% comment %} <a class="more" href="courses-details.html">Read more <i class="fal fa-chevron-right"></i></a> {% endcomment %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+    </section>
+    
+    <!--====== Top Courses Ends ======-->
+
+    <!--====== Newsletter Start ======-->
+
+    {% comment %} <section class="newsletter-area-2">
+        <div class="container">
+            <div class="newsletter-wrapper bg_cover" style="background-image: url(assets/images/newsletter-bg-1.jpg);">
+                <div class="row align-items-center">
+                    <div class="col-lg-5">
+                        <div class="section-title-2 mt-25">
+                            <h2 class="title">Subscribe our Newsletter</h2>
+                            <span class="line"></span>
+                            <p></p>
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="newsletter-form mt-30">
+                            <form action="#">
+                                <input type="text" placeholder="Enter your email here">
+                                <button class="main-btn main-btn-2">Subscribe now</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> {% endcomment %}
+
+    <!--====== Newsletter Ends ======-->
+
+    <!--====== Footer Start ======-->
+
+    
+<section class="footer-area footer-02 bg_cover mt-2" style="background-image: url(assets/images/counter-bg.jpg);">
+        <div class="footer-widget">
+            <div class="container">
+                <div class="row">
+                    
+                    <div class="col-md-3 col-sm-6">
+                        <div class="footer-link mt-45">
+                            <h4 class="footer-title">Contact Info</h4>
+                            <ul class="link-list">
+                                {% comment %} <li>
+                                    <p>{{library.library_country}}</p>
+                                </li> {% endcomment %}
+                                <li>
+                                    <p><a href="{{library.library_phone}}">{{library.library_phone}}</a></p>
+                                    {% comment %} <p><a href="tel:+32145857458">+32145 857 458</a></p> {% endcomment %}
+                                </li>
+                                <li>
+                                    <p><a href="mailto://{{library.library_email}}">{{library.library_email}}</a></p>
+                                    <p></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-widget-wrapper">
+                    <div class="footer-social">
+                        <ul class="social">
+                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-menu">
+                        <ul class="menu">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="{% url 'entities:items' pk %}">Catalogues</a></li>
+                            <li><a href="#">Ebooks</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% comment %} <div class="footer-copyright">
+            <div class="container">
+                <div class="copyright text-center">
+                    <p>&copy; Copyright all right reserved by <a href="https://hasthemes.com/">Hasthemes</a></p>
+                </div>
+            </div>
+        </div> {% endcomment %}
+    </section>
+
+    <!--====== Footer Ends ======-->
+
+    <!--====== BACK TOP TOP PART START ======-->
+
+    <a href="#" class="back-to-top"><i class="fal fa-chevron-up"></i></a>
+
+    <!--====== BACK TOP TOP PART ENDS ======-->
+
+    <!--====== Start ======-->
+
+<!--
+    <section class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-">
+
+                </div>
+            </div>
+        </div>
+    </section>
+-->
+
+    <!--====== Ends ======-->
+     {% endif %}
+    {% endfor %}
+   
+{% endblock %}
