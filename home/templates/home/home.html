@@ -18,6 +18,7 @@
         <a href="{% url 'account:logout'%}" class="scrollto">Logout</a>
       </div>
       {% else %}
+
       <div class="cta">
         <a href="{% url 'account:login' %}" class="scrollto">Login</a>
       </div>
@@ -39,17 +40,15 @@
       <nav class="nav-menu d-none d-lg-block">
         <ul>
           <li class="active"><a href="/">Home</a></li>
-          <li><a href="/">About</a></li>
-          <li><a href="/">F.A.Q</a></li>
-          <li><a href="/">Contact</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">F.A.Q</a></li>
+          <li><a href="#contact">Contact</a></li>
           <li><a href="{% url 'home:discover' %}">Discover</a></li>
           {% if user.is_authenticated %}
           <li class="drop-down"><a href="">Profile</a>
             <ul>
-              <li><a href="{% url 'home:libraries'%}">My Library</a></li>
-              
+              <li><a href="{% url 'home:libraries'%}">My Libraries</a></li>
               <li><a href="{% url 'library:create_library'%}">Create Library</a></li>
-              
               <li><a href="{% url 'account:logout'%}">Logout</a></li>
             </ul>
           </li>
@@ -167,6 +166,8 @@
               <h4 class="title"><a href="">Access from anywhere using any internet-enabled device</a></h4>
               <!-- p class="description">Explicabo est voluptatum asperiores consequatur magnam. Et veritatis odit. Sunt aut deserunt minus aut eligendi omnis</p> -->
             </div>
+
+            
 
           </div>
         </div>
