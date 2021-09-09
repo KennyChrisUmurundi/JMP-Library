@@ -51,7 +51,7 @@
           <li class="drop-down"><a href="">Profile</a>
             <ul>
               <li><a href="{% url 'home:libraries'%}">My Library</a></li>
-              {% if not libraries%}
+              {% if not libraries %}
               <li><a href="{% url 'library:create_library'%}">Create Library</a></li>
               {% endif %}
               <li><a href="{% url 'account:logout'%}">Logout</a></li>

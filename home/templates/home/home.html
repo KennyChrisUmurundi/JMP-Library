@@ -13,7 +13,7 @@
         </ul>
 
       </div>
-      {% if request.user.is_authenticated %}
+      {% if user.is_authenticated %}
       <div class="cta">
         <a href="{% url 'account:logout'%}" class="scrollto">Logout</a>
       </div>
@@ -43,7 +43,7 @@
           <li><a href="/">F.A.Q</a></li>
           <li><a href="/">Contact</a></li>
           <li><a href="{% url 'home:discover' %}">Discover</a></li>
-          {% if request.user.is_authenticated %}
+          {% if user.is_authenticated %}
           <li class="drop-down"><a href="">Profile</a>
             <ul>
               <li><a href="{% url 'home:libraries'%}">My Library</a></li>
