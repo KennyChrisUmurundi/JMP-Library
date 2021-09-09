@@ -10,7 +10,7 @@ def home(request):
     if request.user.is_authenticated:
         libraries = Library.objects.filter(library_admin=request.user)
     else:
-        library = None
+        libraries = None
     context = {"libraries": libraries}
     return render(request, "home/home.html", context)
 
