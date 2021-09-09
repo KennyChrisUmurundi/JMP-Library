@@ -7,12 +7,7 @@ from django.http import JsonResponse
 
 
 def home(request):
-    try:
-        libraries = Library.objects.filter(library_admin=request.user)
-    except Library.DoesNotExist:
-        libraries = None
-    context = {"libraries": libraries}
-    return render(request, "home/home.html", context)
+    return render(request, "home/home.html")
 
 
 def libraries(request):
