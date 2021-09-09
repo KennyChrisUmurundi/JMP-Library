@@ -18,7 +18,6 @@
         <a href="{% url 'account:logout'%}" class="scrollto">Logout</a>
       </div>
       {% else %}
-
       <div class="cta">
         <a href="{% url 'account:login' %}" class="scrollto">Login</a>
       </div>
@@ -66,7 +65,7 @@
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex flex-column justify-content-center align-items-center">
     <div class="container" data-aos="fade-in">
-      <h1>{% if request.user.is_authenticated %}<a href="{% url 'library:create_library' %}"> Open a free library</a>{% else %}Open a free library{% endif %}</h1>
+      <h1>{% if user.is_authenticated %}<a href="{% url 'library:create_library' %}"> Open a free library</a>{% else %}Open a free library{% endif %}</h1>
       <h2>We are an informational technology service that support family archiving opportunities, businesses, county governments and more</h2>
       <div class="d-flex align-items-center">
         <i class="bx bxs-right-arrow-alt get-started-icon"></i>
