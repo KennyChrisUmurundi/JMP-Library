@@ -43,15 +43,17 @@
       <nav class="nav-menu d-none d-lg-block">
         <ul>
           <li class="active"><a href="/">Home</a></li>
-          <li><a href=/>About</a></li>
+          <li><a href="/">About</a></li>
           <li><a href="/">F.A.Q</a></li>
           <li><a href="/">Contact</a></li>
           <li><a href="{% url 'home:discover' %}">Discover</a></li>
           {% if user.is_authenticated %}
           <li class="drop-down"><a href="">Profile</a>
             <ul>
-              <li><a href="{% url 'home:libraries'%}">My Libraries</a></li>
+              <li><a href="{% url 'home:libraries'%}">My Library</a></li>
+              {% if not libraries%}
               <li><a href="{% url 'library:create_library'%}">Create Library</a></li>
+              {% endif %}
               <li><a href="{% url 'account:logout'%}">Logout</a></li>
             </ul>
           </li>

@@ -40,15 +40,17 @@
       <nav class="nav-menu d-none d-lg-block">
         <ul>
           <li class="active"><a href="/">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">F.A.Q</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="/">About</a></li>
+          <li><a href="/">F.A.Q</a></li>
+          <li><a href="/">Contact</a></li>
           <li><a href="{% url 'home:discover' %}">Discover</a></li>
           {% if user.is_authenticated %}
           <li class="drop-down"><a href="">Profile</a>
             <ul>
-              <li><a href="{% url 'home:libraries'%}">My Libraries</a></li>
+              <li><a href="{% url 'home:libraries'%}">My Library</a></li>
+              {% if not libraries%}
               <li><a href="{% url 'library:create_library'%}">Create Library</a></li>
+              {% endif %}
               <li><a href="{% url 'account:logout'%}">Logout</a></li>
             </ul>
           </li>
@@ -164,12 +166,6 @@
             <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
               <div class="icon"><i class="bx bx-atom"></i></div>
               <h4 class="title"><a href="">Access from anywhere using any internet-enabled device</a></h4>
-              <!-- p class="description">Explicabo est voluptatum asperiores consequatur magnam. Et veritatis odit. Sunt aut deserunt minus aut eligendi omnis</p> -->
-            </div>
-
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
-              <div class="icon"><i class="bx bx-atom"></i></div>
-              <h4 class="title"><a href="">100% free for up to 10 titles or records.</a></h4>
               <!-- p class="description">Explicabo est voluptatum asperiores consequatur magnam. Et veritatis odit. Sunt aut deserunt minus aut eligendi omnis</p> -->
             </div>
 
