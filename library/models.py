@@ -9,6 +9,10 @@ import uuid
 
 
 class Library(models.Model):
+
+    BASIC = "basic"
+    PREMIUM = "premium"
+    PLAN = ((BASIC, "basic"), (PREMIUM, "premium"))
     # libray_url          =       models.CharField(max_length=10,unique=True) # this will be used to create a tenant
     library_admin = models.OneToOneField(User, on_delete=models.CASCADE)
     library_name = models.CharField(max_length=300, unique=True)
@@ -28,7 +32,9 @@ class Library(models.Model):
     library_logo = models.ImageField(
         upload_to="images/library/logo", null=True, blank=True
     )
-    plan = models.CharField(max_length=200, default="basic")
+    plan = models.CharField(max_length=200, default=BASIC, choices=PLAN)
+    paid_until = models.DateField(null=True, blank=True)
+    is_still_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.library_name
@@ -128,9 +134,14 @@ class Member(models.Model):
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
     member_no = models.CharField(
-        unique=True, default=uuid.uuid4().hex[:5].upper(), max_length=50, editable=False
+        unique=True,
+        default=uuid.uuid4().hex[:5].upper(),
+        max_length=50,
+        editable=False,
     )
-    image = models.ImageField(upload_to="images/profiles", null=True, blank=True)
+    image = models.ImageField(
+        upload_to="images/profiles", null=True, blank=True
+    )
     email = models.CharField(max_length=200)
     phone = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
@@ -223,7 +234,10 @@ class Employee(models.Model):
 
     library = models.ForeignKey(Library, on_delete=models.CASCADE)
     employee_no = models.CharField(
-        unique=True, default=uuid.uuid4().hex[:4].upper(), max_length=50, editable=False
+        unique=True,
+        default=uuid.uuid4().hex[:4].upper(),
+        max_length=50,
+        editable=False,
     )
     name = models.CharField(max_length=200)
     image = models.ImageField(upload_to="images", null=True, blank=True)
@@ -246,7 +260,10 @@ class Media(models.Model):
     artist = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
     thumbnail = models.ImageField(
-        upload_to="images/media", default="images/thumbnail.png", null=True, blank=True
+        upload_to="images/media",
+        default="images/thumbnail.png",
+        null=True,
+        blank=True,
     )
     mp3 = models.FileField(upload_to="music/", null=True, blank=True)
     video = models.FileField(upload_to="videos/", null=True, blank=True)

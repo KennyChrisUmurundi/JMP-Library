@@ -54,7 +54,8 @@
                                                 <tr>
                                                     <th>Url</th>
                                                     <th>Library Name</th>
-
+                                                    <th>Your Plan</th>
+                                                    <th>Plan Validity<th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -64,6 +65,8 @@
                                                 <tr>
                                                   <td><a href="{% url 'entities:lib' library.pk %}">https://jmplibrary.com/library/{{library.pk}}</a></td>
                                                   <td>{{library.library_name}}</td>
+                                                  <td>{{library.plan}}</td>
+                                                  <td>{{library.paid_untill}}</td>
                                                   <td><a href="{% url 'library:dashboard'  library.pk %}" class="btn btn-success btn-sm">Access Library</a></td>
                                                 </tr>
 

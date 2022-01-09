@@ -1,4 +1,5 @@
 from django.http.response import HttpResponse
+import datetime
 from django.shortcuts import (
     render,
     redirect,
@@ -64,9 +65,21 @@ from django.contrib.auth.decorators import user_passes_test
 
 
 def is_library_admin(user):
-    if Library.objects.get(library_admin=user):
-        return True
-    else:
+    try:
+        library = Library.objects.get(library_admin=user)
+        print(library, library.is_still_active, library.paid_until)
+        if (
+            library
+            and library.is_still_active
+            and library.paid_until >= datetime.date.today()
+        ):
+            return True
+        elif library and library.paid_until < datetime.date.today():
+            library.is_still_active = False
+            library.plan = library.BASIC
+            library.save()
+            return False
+    except Library.DoesNotExist:
         return False
 
 
@@ -118,6 +131,10 @@ class CreateLibrary(LoginRequiredMixin, CreateView):
             )
         else:
             form.instance.library_admin = self.request.user
+            date = datetime.date.today()
+            print(date)
+            print(date + datetime.timedelta(30))
+            form.instance.paid_until = date + datetime.timedelta(30)
             return super(CreateLibrary, self).form_valid(form)
 
 
@@ -139,7 +156,11 @@ def EbookItems(request, pk):
     pk = pk
     Ebooks = Ebook.objects.filter(library=pk)
 
-    context = {"pk": pk, "ebooks": Ebooks, "library": Library.objects.get(id=pk)}
+    context = {
+        "pk": pk,
+        "ebooks": Ebooks,
+        "library": Library.objects.get(id=pk),
+    }
     return render(request, "ebook/ebook_items.html", context)
 
 
@@ -288,7 +309,11 @@ def authors(request, pk):
     pk = pk
     authors = Author.objects.filter(library=pk)
 
-    context = {"pk": pk, "authors": authors, "library": Library.objects.get(id=pk)}
+    context = {
+        "pk": pk,
+        "authors": authors,
+        "library": Library.objects.get(id=pk),
+    }
     return render(request, "authors/authors.html", context)
 
 
@@ -396,7 +421,9 @@ def Borrow(request, pk):
         if form.is_valid():
             item = form.save(commit=False)
             item.library_id = pk
-            member = Member.objects.filter(member_no=item.member_no, library_id=pk)
+            member = Member.objects.filter(
+                member_no=item.member_no, library_id=pk
+            )
             if member.exists():
                 item.save()
                 return redirect("library:reports", pk=pk)
@@ -736,7 +763,9 @@ def media_mp3(request, pk):
     context = {
         "pk": pk,
         "media": media,
-        "library": get_object_or_404(Library, id=pk, library_admin=request.user),
+        "library": get_object_or_404(
+            Library, id=pk, library_admin=request.user
+        ),
     }
     return render(request, "media/mp3.html", context)
 
@@ -750,7 +779,9 @@ def media_video(request, pk):
     context = {
         "pk": pk,
         "media": media,
-        "library": get_object_or_404(Library, id=pk, library_admin=request.user),
+        "library": get_object_or_404(
+            Library, id=pk, library_admin=request.user
+        ),
     }
     return render(request, "media/video.html", context)
 
@@ -859,7 +890,7 @@ def process_subscription(request, plan, pk):
     if plan == "premium":
         price = "30"
         billing_cycle = 1
-        billing_cycle_unit = "M"
+        billing_cycle_unit = "Y"
     elif plan == "gold":
         price = "150"
         billing_cycle = 1
