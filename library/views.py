@@ -869,7 +869,7 @@ def plan(request, pk):
 @user_passes_test(is_library_admin)
 def process_subscription(request, plan, pk):
 
-    PAYPAL_RECEIVER_EMAIL = "jmplibrary@gmail.com"
+    PAYPAL_RECEIVER_EMAIL = "aliwigs@gmail.com"
     # subscription_plan = request.session.get('subscription_plan')
     host = request.get_host()
 
