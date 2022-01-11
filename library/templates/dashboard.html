@@ -3,8 +3,16 @@
 {% include 'navbar.html' %}
 {% for library in libraries %}
 <div class="dashboard-wrapper">
-  <div class="alert alert-secondary" role="alert">
-    <i class="fas fa-exclamation-triangle"></i>&nbsp &nbsp &nbsp Please add more Items to your library to make it look presentable
+  
+    {% if not library.is_still_active %}
+    <div class="alert alert-danger" role="alert">
+    <i class="fas fa-exclamation-triangle"></i>&nbsp &nbsp &nbsp You need to update your payment to continue using the platform 
+  </div>
+    {% endif %}
+    <div class="alert alert-info" role="alert">
+    {% if  library.is_still_active and library.paid_until %}
+    <i class="fas fa-info"></i>&nbsp &nbsp &nbsp All access to our platform untill <b>{{library.paid_until }}</b> 
+    {% endif %}
   </div>
 
   <div class="alert alert-info" role="alert">
@@ -82,7 +90,7 @@
                   <div class="card-body">
                       <div class="d-inline-block">
                           <h5 class="text-muted">Your Plan</h5>
-                          <h2 class="mb-0"> Basic</h2>
+                          <h2 class="mb-0"> {{library.plan}} </h2>
                       </div>
                       <div class="float-right icon-circle-medium  icon-box-lg  bg-brand-light mt-1">
                           <i class="fa fa-money-bill-alt fa-fw fa-sm text-brand"></i>

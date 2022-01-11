@@ -23,16 +23,16 @@ from account.forms import UserRegisterForm
 logger = logging.getLogger(__name__)
 
 
-
 class library_login(LoginView):
     template_name = "auth/login.html"
 
-def library_login(request,path):    
+
+def library_login(request, path):
     path = path
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        print(username,password)
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
+        print(username, password)
         user = authenticate(request, username=username, password=password)
         print("nakuonaaa")
         if user is not None:
@@ -46,9 +46,10 @@ def library_login(request,path):
             # messages.warning(request, 'Username or Password Incorrect!')
             return redirect(path)
 
-    return render(request,'auth/login.html',{'path':path})
+    return render(request, "auth/login.html", {"path": path})
 
-def account_register(request,path):
+
+def account_register(request, path):
     path = path
     if request.method == "POST":
         form = UserRegisterForm(request.POST)
@@ -68,8 +69,9 @@ def account_register(request,path):
             # messages.success(request, f'Your account has been created! You are now able to log in')
             return redirect(path)
     else:
-        form =  UserRegisterForm()
-    return render(request, "auth/register.html", {"form": form,'path':path})
+        form = UserRegisterForm()
+    return render(request, "auth/register.html", {"form": form, "path": path})
+
 
 def lib(request, pk):
     pk = pk
@@ -82,7 +84,7 @@ def lib(request, pk):
         "libraries": library,
         "catalogs": catalogs,
         "ebook": ebook,
-        "media":media
+        "media": media,
     }
 
     return render(request, "lib/home.html", context)
@@ -237,47 +239,45 @@ def single_ebook(request, pk, id):
 #         {"session_id": session.id, "stripe_public_key": settings.STRIPE_PUBLIC_KEY}
 #     )
 
+
 @csrf_exempt
 def paypal_webhook(request):
-    jsondata = request.body
+    jsondata = request.data
     data = json.loads(jsondata)
     # purchase = data.get("resource")
     # status = purchase["status"]
     # details = purchase["payer"]["email_address"]
     # print(details,'aaaaaaaaaaannnnnnnd','aaaaaaaaaaand',status)
     # print(book)
-    print("daaaaaaaataaaaaaaa",data)
+    print("daaaaaaaataaaaaaaa", data)
     logger.debug("Thissssssssss  :%s" % data)
     return HttpResponse(status=200)
 
+
 def complete_order(request):
     body = json.loads(request.body)
-    print('The Bodyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy',body)
+    print("The Bodyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy", body)
 
-    item = Ebook.objects.get(id=body['productId'])
-    library = Library.objects.get(id=body['library'])
+    item = Ebook.objects.get(id=body["productId"])
+    library = Library.objects.get(id=body["library"])
     bought_items.objects.create(
         buyer=request.user,
-        item = item.title,
+        item=item.title,
         item_file=item.book_pdf,
-        ebook = item,
-        library=library
-        )
-    return JsonResponse('Payment Complete',safe=False)
+        ebook=item,
+        library=library,
+    )
+    return JsonResponse("Payment Complete", safe=False)
 
 
-def my_books(request,pk):
+def my_books(request, pk):
     pk = pk
-    lib= Library.objects.get(id=pk)
+    lib = Library.objects.get(id=pk)
     libra = Library.objects.filter(id=pk)
-    my_book = bought_items.objects.filter(buyer=request.user,library=lib)
+    my_book = bought_items.objects.filter(buyer=request.user, library=lib)
 
-    ctx = {
-        'my_book':my_book,
-        'libraries':libra,
-        'pk':pk
-    }
-    return render(request,'lib/my_books.html',ctx)
+    ctx = {"my_book": my_book, "libraries": libra, "pk": pk}
+    return render(request, "lib/my_books.html", ctx)
 
 
 def mp3(request, pk):
@@ -334,6 +334,7 @@ def mp3(request, pk):
             "paginator": page_obj,
         }
         return render(request, "lib/mp3.html", context)
+
 
 def video(request, pk):
 

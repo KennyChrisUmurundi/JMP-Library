@@ -15,7 +15,12 @@ SECRET_KEY = "+2-r!5r*sr31ac-3awm@e^%4+&5=dcvambg1e*e5-=5g$5w5lu"
 DEBUG = True
 
 
-ALLOWED_HOSTS = ["jmplibrary.com", "www.jmplibrary.com", "localhost"]
+ALLOWED_HOSTS = [
+    "jmplibrary.com",
+    "www.jmplibrary.com",
+    "localhost",
+    "127.0.0.1",
+]
 
 
 # Application definition
@@ -145,7 +150,7 @@ STRIPE_PUBLIC_KEY = "pk_test_epUupxLsRwt7QNm2aiDE7Wa800fTNMCkBH"
 STRIPE_PRIVATE_KEY = "sk_test_pNre034ewYPh6rm8OK5MPUYm005DbF1Ivd"
 
 PAYPAL_TEST = False
-PAYPAL_RECEIVER_EMAIL = "aliwigs@gmail.com"
+PAYPAL_RECEIVER_EMAIL = "vrepublics@gmail.com"
 
 fedex_test_key = "3kWyadILwhnan9fW"
 Test_FedEx_Office_Integrator_ID = 123

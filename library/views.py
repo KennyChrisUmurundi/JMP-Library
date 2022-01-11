@@ -68,22 +68,29 @@ def is_library_admin(user):
     try:
         library = Library.objects.get(library_admin=user)
         print(library, library.is_still_active, library.paid_until)
-        if (
-            library
-            and library.is_still_active
-            and library.paid_until >= datetime.date.today()
-        ):
-            return True
-        elif library and library.paid_until < datetime.date.today():
-            library.is_still_active = False
-            library.plan = library.BASIC
-            library.save()
-            return False
+        if library and library.paid_until:
+            if (
+                library
+                and library.is_still_active
+                and library.paid_until >= datetime.date.today()
+            ):
+                return True
+            elif library and library.paid_until < datetime.date.today():
+                library.is_still_active = False
+                library.plan = library.BASIC
+                library.save()
+                return False
+        else:
+            if library and library.is_still_active:
+                return True
+            else:
+                return False
+
     except Library.DoesNotExist:
         return False
 
 
-@user_passes_test(is_library_admin)
+# @user_passes_test(is_library_admin)
 def dashboard(request, pk):
     catalogs = Catalog.objects.filter(library=pk)
     libraries = Library.objects.filter(id=pk)
@@ -853,7 +860,7 @@ def DeleteMedia(request, id):
     return redirect("library:media", pk=object.library_id)
 
 
-@user_passes_test(is_library_admin)
+# @user_passes_test(is_library_admin)
 def plan(request, pk):
     library = get_object_or_404(Library, id=pk, library_admin=request.user)
     context = {
@@ -866,10 +873,10 @@ def plan(request, pk):
     return render(request, "plans/plan.html", context)
 
 
-@user_passes_test(is_library_admin)
+# @user_passes_test(is_library_admin)
 def process_subscription(request, plan, pk):
 
-    PAYPAL_RECEIVER_EMAIL = "aliwigs@gmail.com"
+    PAYPAL_RECEIVER_EMAIL = "vrepublics@gmail.com"
     # subscription_plan = request.session.get('subscription_plan')
     host = request.get_host()
 
