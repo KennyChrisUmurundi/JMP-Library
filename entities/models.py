@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from library.models import Ebook, Library
+from django.contrib.postgres.fields import JSONField
 
 
 class bought_items(models.Model):
@@ -17,5 +18,5 @@ class bought_items(models.Model):
         return self.item
 
 
-# class paypal_data(models.Model):
-#     data = models.JSONField()
+class paypal_data(models.Model):
+    data = JSONField()

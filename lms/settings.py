@@ -9,18 +9,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "+2-r!5r*sr31ac-3awm@e^%4+&5=dcvambg1e*e5-=5g$5w5lu"
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
 
-ALLOWED_HOSTS = [
-    "jmplibrary.com",
-    "www.jmplibrary.com",
-    "localhost",
-    "127.0.0.1",
-]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -90,12 +85,12 @@ WSGI_APPLICATION = "lms.wsgi.application"
 #    }
 # }
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -133,12 +128,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 # STATIC_URL = "/static/"
-STATIC_URL = "/staticfiles/"
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+# STATIC_URL = "/staticfiles/"
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+# STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
-MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
@@ -149,11 +142,14 @@ STRIPE_PUBLIC_KEY = "pk_test_epUupxLsRwt7QNm2aiDE7Wa800fTNMCkBH"
 
 STRIPE_PRIVATE_KEY = "sk_test_pNre034ewYPh6rm8OK5MPUYm005DbF1Ivd"
 
-PAYPAL_TEST = False
-PAYPAL_RECEIVER_EMAIL = "vrepublics@gmail.com"
 
 fedex_test_key = "3kWyadILwhnan9fW"
 Test_FedEx_Office_Integrator_ID = 123
 Test_Client_Product_ID = "TEST"
 
 Test_Client_Product_Version = 9999
+
+try:
+    from .local_settings import *
+except ImportError as e:
+    pass

@@ -1,4 +1,5 @@
 from django.http.response import HttpResponse
+from django.conf import settings
 import datetime
 from django.shortcuts import (
     render,
@@ -62,6 +63,8 @@ from django.contrib.auth.decorators import user_passes_test
 
 # from entities.models import Entity
 # Create your views here.
+
+PAYPAL_EMAIL = getattr(settings, "PAYPAL_RECEIVER_EMAIL", "")
 
 
 def is_library_admin(user):
@@ -876,7 +879,7 @@ def plan(request, pk):
 # @user_passes_test(is_library_admin)
 def process_subscription(request, plan, pk):
 
-    PAYPAL_RECEIVER_EMAIL = "vrepublics@gmail.com"
+    PAYPAL_RECEIVER_EMAIL = PAYPAL_EMAIL
     # subscription_plan = request.session.get('subscription_plan')
     host = request.get_host()
 
@@ -981,3 +984,9 @@ def DeleteEvent(request, id):
     object.delete()
     # messages.success(request,f'Deleted successfully')
     return redirect("library:event", pk=object.library_id)
+
+
+# def entry_not_found(request, exception, template_name="404.html"):
+#     return render(request, template_name)
+def handler404(request, exception):
+    return render(request, "500.html", status=500)

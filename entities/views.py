@@ -14,6 +14,7 @@ from .models import bought_items
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import authenticate, login
 from account.forms import UserRegisterForm
+from .models import paypal_data
 
 # Create your views here.
 
@@ -250,6 +251,7 @@ def paypal_webhook(request):
     # print(details,'aaaaaaaaaaannnnnnnd','aaaaaaaaaaand',status)
     # print(book)
     print("daaaaaaaataaaaaaaa", data)
+    saving_data = paypal_data.objects.create(data=data)
     logger.debug("Thissssssssss  :%s" % data)
     return HttpResponse(status=200)
 
