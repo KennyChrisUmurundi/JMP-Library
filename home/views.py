@@ -2,12 +2,24 @@ from django.shortcuts import render
 from library.models import Library
 from django.http import HttpResponse
 from django.http import JsonResponse
+from django.conf import settings
 
 # Create your views here.
 
+host = settings.ALLOWED_HOSTS
+
 
 def home(request):
-    return render(request, "home/home.html")
+    jmp = "jmplibrary.com"
+    county = "county.solutions"
+    hosting = None
+    print(host)
+    if jmp in host:
+        hosting = "family archiving opportunities, businesses,and more"
+    elif county in host:
+        hosting = "county governments"
+
+    return render(request, "home/home.html", {"aliwigs": hosting})
 
 
 def libraries(request):
