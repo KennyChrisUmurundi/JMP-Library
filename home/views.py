@@ -48,3 +48,7 @@ def discover(request):
 def ussd_adapter(request):
     bank = "123123123"
     return JsonResponse({"bank": bank})
+
+
+def saasperson(request):
+    return render(request, "home/saasgerant.html")
